@@ -178,6 +178,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   horizontal: {
+    marginTop: 20,
     flexDirection: "row",
   },
 });

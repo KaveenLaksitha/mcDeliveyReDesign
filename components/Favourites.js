@@ -54,10 +54,7 @@ function Favourites({ navigation }) {
 
 
 
-            {/* <Button
-                title="Go to next comp"
-                onPress={() => navigation.navigate("FoodMenu")}
-            /> */}
+          
         </View>
     );
 }

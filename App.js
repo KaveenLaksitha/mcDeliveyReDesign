@@ -11,6 +11,12 @@ import Favourites from "./components/Favourites"
 import FoodMenu from './components/foodMenu';
 import Cart from './components/Cart';
 import Menu from './components/Menu';
+import Login from './components/Login';
+import NewUser from './components/NewUser';
+import ResetpasswordEmail from './components/ResetpasswordEmail';
+import ResetpasswordMobile from './components/ResetpasswordMobile';
+import Register from './components/Register';
+import TrackOrder from './components/TrackOrder';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -67,6 +73,7 @@ function TabNav() {
       <Tab.Screen name="Favourites" component={Favourites} />
       <Tab.Screen name="Cart" component={Cart} />
       <Tab.Screen name="Menu" component={Menu} />
+      <Tab.Screen name="Login" component={Login} />
     </Tab.Navigator>
   );
 }
@@ -83,6 +90,13 @@ function App() {
         {/* <Stack.Screen name="Home" component={Home} /> */}
         <Stack.Screen name="Favourites" component={Favourites} />
         <Stack.Screen name="FoodMenu" component={FoodMenu} />
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="NewUser" component={NewUser} />
+        <Stack.Screen name="Register" component={Register} />
+        <Stack.Screen name="ResetpasswordEmail" component={ResetpasswordEmail} />
+        <Stack.Screen name="ResetpasswordMobile" component={ResetpasswordMobile} />
+        <Stack.Screen name="Cart" component={Cart} />
+        <Stack.Screen name="TrackOrder" component={TrackOrder} />
       </Stack.Navigator>
     </NavigationContainer>
   );
