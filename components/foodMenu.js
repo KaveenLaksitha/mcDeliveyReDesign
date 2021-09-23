@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import {Image, SafeAreaView, StyleSheet,TextInput, Text, View } from 'react-native';
 
-export default function FoodMenu() {
+export default function FoodMenu({ navigation }) {
   return (
     <SafeAreaView style={styles.container} >
      
@@ -69,9 +69,10 @@ export default function FoodMenu() {
   <View style={styles.cat3}>
     
     <Image style={styles.cat1}  source={{uri: "https://i.ibb.co/7Jb39z5/brett-jordan-zee1ge-Zy6-H0-unsplash.jpg"}}>
-        
+    
       </Image>
       <Text style={styles.textcat4} > HAPPY MEALS </Text>
+      
       
       
   </View>  
