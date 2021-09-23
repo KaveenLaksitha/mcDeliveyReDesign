@@ -20,7 +20,8 @@ const defaultTheme = {
   colors: {
     ...DefaultTheme.colors,
     card: '#FF3131',
-    text: 'white'
+    text: 'white',
+    background: 'white'
   },
 };
 
