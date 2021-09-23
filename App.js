@@ -1,7 +1,7 @@
 // In App.js in a new project
 
 import * as React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -15,6 +15,15 @@ import Menu from './components/Menu';
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
+const defaultTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    card: '#FF3131',
+    text: 'white'
+  },
+};
+
 function TabNav() {
   return (
     <Tab.Navigator
@@ -24,6 +33,7 @@ function TabNav() {
       // }}
 
       screenOptions={({ route }) => ({
+        tabBarStyle: { backgroundColor: '#FF3131' },
         tabBarShowLabel: false,
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
@@ -47,7 +57,7 @@ function TabNav() {
           return <Ionicons name={iconName} size={size} color={color} />;
         },
         tabBarActiveTintColor: '#FFC300',
-        tabBarInactiveTintColor: 'gray',
+        tabBarInactiveTintColor: 'white',
       })
       }
     >
@@ -62,7 +72,7 @@ function TabNav() {
 
 function App() {
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={defaultTheme}>
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen
           name="TabNav"
