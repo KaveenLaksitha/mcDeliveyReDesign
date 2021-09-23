@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
   image1:{
 
    width: 450,
-   height: 200,
+   height: 192,
 
    //backgroundColor : "red",
    //marginLeft: 150,
@@ -167,11 +167,11 @@ const styles = StyleSheet.create({
 
   },
   cat1:{
-    width:180,
+    width:190,
     height:140,
     marginTop: 15,
     borderRadius:10,
-    marginLeft: 5,
+    marginLeft: 6,
     
     
     
@@ -218,7 +218,7 @@ const styles = StyleSheet.create({
     height:140,
     marginTop: -140,
     borderRadius:10,
-    marginLeft: 210,
+    marginLeft: 205,
     
     
   },
