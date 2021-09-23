@@ -11,6 +11,7 @@ import Favourites from "./components/Favourites"
 import FoodMenu from './components/foodMenu';
 import Cart from './components/Cart';
 import Menu from './components/Menu';
+import TrackOrder from './components/TrackOrder';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -83,6 +84,8 @@ function App() {
         {/* <Stack.Screen name="Home" component={Home} /> */}
         <Stack.Screen name="Favourites" component={Favourites} />
         <Stack.Screen name="FoodMenu" component={FoodMenu} />
+        <Stack.Screen name="Cart" component={Cart} />
+        <Stack.Screen name="TrackOrder" component={TrackOrder} />
       </Stack.Navigator>
     </NavigationContainer>
   );
