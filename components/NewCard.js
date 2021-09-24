@@ -15,6 +15,11 @@ function NewCard({ navigation }) {
 
             <View style={styles.contentody} >
                 <View style={[styles.cardDisplay, styles.shadow]}>
+                    <Image style={styles.visa}
+                        source={{
+                            uri: "https://i.ibb.co/PmDYwrP/visa.jpg"
+                        }}></Image>
+
                     <Text style={styles.cardNo}>XXXX  XXXX  XXXX  1425</Text>
                     <Text style={styles.cardHolder}>Card Holder</Text>
                     <Text style={styles.Name}>Andrew Wilson</Text>
@@ -84,13 +89,16 @@ const styles = StyleSheet.create({
     },
 
     cardDisplay: {
-        backgroundColor: "#FFC300",
-        borderRadius: 5,
+        backgroundColor: "#F8F4F4",
+        opacity: 1,
+        borderRadius: 10,
         padding: 5,
         marginTop: 10,
-        marginLeft: 25,
-        width: 320,
-        height: 180
+        marginLeft: 10,
+        width: 360,
+        height: 180,
+        borderColor: 'blue',
+        borderWidth: 3
 
     },
 
@@ -101,13 +109,13 @@ const styles = StyleSheet.create({
     },
 
     cardInsert: {
-        marginTop: 30,
-        backgroundColor: "white",
+        marginTop: 10,
+        backgroundColor: "#F8F4F4",
         borderRadius: 10,
         padding: 0,
         marginTop: 30,
-        marginLeft: 25,
-        width: 320,
+        marginLeft: 20,
+        width: 346,
         height: 340
 
     },
@@ -118,35 +126,47 @@ const styles = StyleSheet.create({
         paddingBottom: 10,
     },
 
+    visa: {
+        width: 110,
+        height: 60,
+        marginTop: 0,
+        marginLeft: 10,
+    },
+
     cardNo: {
         position: "absolute",
-        marginTop: 60,
-        marginLeft: 40,
-        fontSize: 20
+        marginTop: 70,
+        marginLeft: 65,
+        fontSize: 20,
+        fontWeight: 'bold'
     },
     cardHolder: {
         position: "absolute",
         marginTop: 115,
         marginLeft: 20,
-        fontSize: 14
+        fontSize: 14,
+        fontWeight: 'bold'
     },
     Name: {
         position: "absolute",
         marginTop: 140,
         marginLeft: 16,
-        fontSize: 14
+        fontSize: 14,
+        fontWeight: 'bold'
     },
     validThru: {
         position: "absolute",
         marginTop: 115,
-        marginLeft: 230,
-        fontSize: 14
+        marginLeft: 260,
+        fontSize: 14,
+        fontWeight: 'bold'
     },
     date: {
         position: "absolute",
         marginTop: 140,
-        marginLeft: 243,
-        fontSize: 14
+        marginLeft: 275,
+        fontSize: 14,
+        fontWeight: 'bold'
     },
     textValue: {
         marginTop: 8,
@@ -177,8 +197,8 @@ const styles = StyleSheet.create({
         position: "absolute",
         width: 150,
         height: 45,
-        marginTop: 630,
-        marginLeft: 120,
+        marginTop: 580,
+        marginLeft: 130,
         backgroundColor: "#FF3133",
         borderRadius: 10,
         shadowOffset: {
@@ -188,7 +208,7 @@ const styles = StyleSheet.create({
         shadowColor: 'black',
         shadowOpacity: 3,
         shadowRadius: 3,
-        elevation: 15,
+        elevation: 5,
 
     },
     submitText: {

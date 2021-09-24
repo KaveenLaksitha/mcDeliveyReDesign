@@ -30,6 +30,8 @@ const SecurityPassword = () => {
                     value={newPwd}
                     placeholder="New Password"
                     keyboardType="visible-password"
+                    maxLength={10}
+                    minLength={6}
                 />
 
 
@@ -38,6 +40,8 @@ const SecurityPassword = () => {
                     value={rePwd}
                     placeholder="Re enter Password"
                     keyboardType="visible-password"
+                    maxLength={10}
+                    minLength={6}
                 />
 
                 <Text style={styles.condition}>Password must be 6-10 charcters with 1 numeric digit </Text>
@@ -131,7 +135,7 @@ const styles = StyleSheet.create({
         shadowColor: 'black',
         shadowOpacity: 3,
         shadowRadius: 3,
-        elevation: 15,
+        elevation: 5,
 
     },
     submitText: {

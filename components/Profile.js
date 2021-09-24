@@ -1,6 +1,6 @@
-
 import React, { useState } from 'react'
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/Entypo';
 import { StyleSheet, Text, View, SafeAreaView, Button, Image, CheckBox, Alert, TextInput, TouchableOpacity, TouchableHighlight } from 'react-native';
 
 
@@ -25,7 +25,7 @@ function Profile({ navigation }) {
 
                 <View style={[styles.cardInsert, styles.shadowguestUser]}>
                     <Text style={styles.position}>
-                        <Ionicons name="wallet" size={30} color="black" />
+                        <Ionicons name="md-wallet-outline" size={30} color="black" />
 
                     </Text>
                     <TouchableOpacity style={styles.card}
@@ -35,7 +35,7 @@ function Profile({ navigation }) {
                 </View>
                 <View style={[styles.cardInsert2, styles.shadowguestUser]}>
                     <Text style={styles.position}>
-                        <Ionicons name="location" size={30} color="black" />
+                        <Icon name="location" size={30} color="black" />
                     </Text>
                     <TouchableOpacity style={styles.card2}
                         onPress={() => navigation.navigate('Delivery Address Book')}>
@@ -44,7 +44,7 @@ function Profile({ navigation }) {
                 </View>
                 <View style={[styles.cardInsert3, styles.shadowguestUser]}>
                     <Text style={styles.position}>
-                        <Ionicons name="ios-person" size={30} color="#900" />
+                        <Ionicons name="ios-person-outline" size={30} color="#FF3133" />
                     </Text>
                     <TouchableOpacity style={styles.card3}
                         onPress={() => navigation.navigate('Profile')}>
@@ -118,14 +118,13 @@ function Profile({ navigation }) {
                     <Text style={styles.submitText}>Save Changes </Text>
                 </TouchableHighlight>
                 <View style={styles.checkboxContainer}>
-                    <Text>
-                        <CheckBox
-                            value={isSelected}
-                            onValueChange={setSelection}
-                            style={styles.checkbox}
-                        />
-                        <Text style={styles.label}>I want to delete my account and hereby take all the consequences of deleteing the account</Text>
-                    </Text>
+
+                    <CheckBox
+                        value={isSelected}
+                        onValueChange={setSelection}
+                        style={styles.checkbox}
+                    />
+                    <Text style={styles.label}>I want to delete my account and hereby take all the consequences of deleteing the account</Text>
                 </View>
 
 
@@ -156,8 +155,8 @@ const styles = StyleSheet.create({
 
     cardInsert: {
         marginTop: 30,
-        backgroundColor: "white",
-        borderRadius: 10,
+        backgroundColor: "#F8F4F4",
+        borderRadius: 20,
         padding: 0,
         marginTop: 150,
         marginLeft: 15,
@@ -167,8 +166,8 @@ const styles = StyleSheet.create({
     },
     cardInsert2: {
         marginTop: 30,
-        backgroundColor: "white",
-        borderRadius: 10,
+        backgroundColor: "#F8F4F4",
+        borderRadius: 20,
         padding: 0,
         marginTop: -80,
         marginLeft: 115,
@@ -178,8 +177,8 @@ const styles = StyleSheet.create({
     },
     cardInsert3: {
         marginTop: 30,
-        backgroundColor: "white",
-        borderRadius: 10,
+        backgroundColor: "#F8F4F4",
+        borderRadius: 20,
         padding: 0,
         marginTop: -80,
         marginLeft: 215,
@@ -189,8 +188,8 @@ const styles = StyleSheet.create({
     },
     cardInsert4: {
         marginTop: 30,
-        backgroundColor: "white",
-        borderRadius: 10,
+        backgroundColor: "#F8F4F4",
+        borderRadius: 20,
         padding: 0,
         marginTop: -80,
         marginLeft: 315,
@@ -219,6 +218,7 @@ const styles = StyleSheet.create({
         height: 20,
         marginTop: 50,
         marginLeft: 18,
+        backgroundColor: "#F8F4F4"
     },
     card2: {
         position: "absolute",
@@ -226,6 +226,7 @@ const styles = StyleSheet.create({
         height: 20,
         marginTop: 50,
         marginLeft: 12,
+        backgroundColor: "#F8F4F4"
     },
     card3: {
         position: "absolute",
@@ -233,6 +234,7 @@ const styles = StyleSheet.create({
         height: 20,
         marginTop: 50,
         marginLeft: 18,
+        backgroundColor: "#F8F4F4"
     },
     card4: {
         position: "absolute",
@@ -240,18 +242,20 @@ const styles = StyleSheet.create({
         height: 20,
         marginTop: 50,
         marginLeft: 12,
+        backgroundColor: "#F8F4F4"
     },
     cardText: {
         fontWeight: 'bold',
         fontSize: 16,
-        textAlign: "justify"
+        textAlign: "justify",
+        backgroundColor: "#F8F4F4"
     },
     square2: {
         marginTop: -50,
         marginLeft: 0,
-        height: 430,
-        width: 393,
-        backgroundColor: "#FFFFFF",
+        height: 480,
+        width: 412,
+        backgroundColor: "white",
         borderRadius: 30
     },
 
@@ -262,6 +266,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 18,
         fontStyle: 'italic',
+
 
     },
 
@@ -288,7 +293,7 @@ const styles = StyleSheet.create({
         position: "absolute",
         width: 333,
         height: 35,
-        marginTop: 110,
+        marginTop: 120,
         marginLeft: 40,
         //backgroundColor: "orange"
     },
@@ -297,7 +302,7 @@ const styles = StyleSheet.create({
         position: "absolute",
         width: 333,
         height: 35,
-        marginTop: 155,
+        marginTop: 165,
         marginLeft: 40,
         //backgroundColor: "orange"
     },
@@ -306,7 +311,7 @@ const styles = StyleSheet.create({
         position: "absolute",
         width: 333,
         height: 35,
-        marginTop: 200,
+        marginTop: 210,
         marginLeft: 40,
         //backgroundColor: "orange"
     },
@@ -315,7 +320,7 @@ const styles = StyleSheet.create({
         position: "absolute",
         width: 333,
         height: 35,
-        marginTop: 245,
+        marginTop: 255,
         marginLeft: 40,
         //backgroundColor: "orange"
     },
@@ -323,7 +328,7 @@ const styles = StyleSheet.create({
         position: "absolute",
         width: 333,
         height: 35,
-        marginTop: 290,
+        marginTop: 300,
         marginLeft: 40,
         //backgroundColor: "orange"
     },
@@ -332,7 +337,7 @@ const styles = StyleSheet.create({
         position: "absolute",
         width: 200,
         height: 45,
-        marginTop: 370,
+        marginTop: 355,
         marginLeft: 110,
         backgroundColor: "#FF3133",
         borderRadius: 10,
@@ -343,7 +348,7 @@ const styles = StyleSheet.create({
         shadowColor: 'black',
         shadowOpacity: 3,
         shadowRadius: 3,
-        elevation: 15,
+        elevation: 5,
 
     },
 
@@ -361,7 +366,9 @@ const styles = StyleSheet.create({
         padding: 6,
         fontSize: 14,
         color: "black",
+        fontStyle: 'italic'
     },
+
 
     input: {
         marginTop: -45,
@@ -370,7 +377,8 @@ const styles = StyleSheet.create({
         margin: 12,
         padding: 6,
         borderBottomWidth: 1,
-        borderColor: "grey"
+        borderColor: "grey",
+
     },
     submitText: {
         marginTop: 5,
@@ -402,6 +410,7 @@ const styles = StyleSheet.create({
         marginLeft: 35,
         fontSize: 14,
         color: "black",
+        fontStyle: 'italic'
     },
 
     inputs: {
@@ -423,8 +432,7 @@ const styles = StyleSheet.create({
     checkboxContainer: {
         flexDirection: "row",
         marginLeft: 20,
-        marginTop: 340,
-
+        marginTop: 300
 
     },
 

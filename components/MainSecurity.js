@@ -28,12 +28,9 @@ function MainSecurity() {
                     <Image
                         style={styles.mcImage}
                         source={{
-                            uri: "https://i.ibb.co/smnnGpk/Daco-5018553.png"
+                            uri: "https://i.ibb.co/x3shm4R/mcWhite.png"
                         }}
                     />
-                    <View style={styles.newdiv}>
-                        <Text style={styles.love}>I’m loving it</Text>
-                    </View>
                     <View style={styles.underlinelogin}>
                         <TouchableOpacity
                             onPress={() => setIndex(1)}>
@@ -81,30 +78,12 @@ const styles = StyleSheet.create({
     },
 
     mcImage: {
-        width: 140,
-        height: 115,
-        marginTop: 180,
-        marginLeft: 132,
+        width: 210,
+        height: 200,
+        marginTop: 150,
+        marginLeft: 100,
         justifyContent: 'center',
         alignItems: 'center',
-
-    },
-
-    love: {
-        marginTop: 0,
-        textAlign: 'center',
-        fontSize: 18,
-        color: "white",
-        letterSpacing: 4,
-
-    },
-
-
-    newdiv: {
-        marginTop: 0,
-        height: 125,
-        width: 340,
-        marginLeft: 30,
 
     },
 
@@ -112,7 +91,7 @@ const styles = StyleSheet.create({
         borderBottomWidth: 4,
         borderColor: 'yellow',
         marginLeft: 40,
-        marginTop: -16,
+        marginTop: 54,
         width: 130,
     },
 
@@ -120,7 +99,7 @@ const styles = StyleSheet.create({
         borderBottomWidth: 4,
         borderColor: 'yellow',
         marginLeft: 248,
-        marginTop: -22,
+        marginTop: -25,
         width: 130,
 
 

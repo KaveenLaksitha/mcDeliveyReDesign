@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, SafeAreaView, Button, Image, SafeAreaViewBase, Alert, TextInput, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, Button, ImageBackground, SafeAreaViewBase, Alert, TextInput, TouchableHighlight } from 'react-native';
 
 export default function AddressForm({ navigation }) {
     const [deliveryAddress, onChangeDeliveryAddres] = React.useState(null);
@@ -106,7 +106,11 @@ export default function AddressForm({ navigation }) {
                 <Text style={styles.submitText}>Reset</Text>
             </TouchableHighlight>
 
+            <ImageBackground source={{
+                uri: "https://i.ibb.co/cC9bKMK/Nice-Png-ronald-mcdonald-face-png-4130175.png",
+            }} style={styles.image}>
 
+            </ImageBackground>
 
 
         </SafeAreaView >
@@ -122,6 +126,15 @@ const styles = StyleSheet.create({
     contentody: {
         padding: 10,
         marginTop: 0
+    },
+
+    image: {
+        marginTop: 80,
+        width: 412,
+        height: 445,
+        opacity: 0.15,
+        position: 'absolute',
+        zIndex: -9999,
     },
 
     textValue: {
@@ -165,7 +178,7 @@ const styles = StyleSheet.create({
         shadowColor: 'black',
         shadowOpacity: 3,
         shadowRadius: 3,
-        elevation: 15,
+        elevation: 3,
 
     },
     submitButton2: {
@@ -183,7 +196,7 @@ const styles = StyleSheet.create({
         shadowColor: 'black',
         shadowOpacity: 3,
         shadowRadius: 3,
-        elevation: 15,
+        elevation: 5,
 
     },
     submitText: {
