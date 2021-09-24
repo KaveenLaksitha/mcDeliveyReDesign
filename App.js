@@ -12,6 +12,10 @@ import FoodMenu from './components/foodMenu';
 import Cart from './components/Cart';
 import Menu from './components/Menu';
 import TrackOrder from './components/TrackOrder';
+import CheckoutCOD from './components/CheckoutCOD';
+import GreetCOD from './components/GreetCOD';
+
+
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -86,6 +90,8 @@ function App() {
         <Stack.Screen name="FoodMenu" component={FoodMenu} />
         <Stack.Screen name="Cart" component={Cart} />
         <Stack.Screen name="TrackOrder" component={TrackOrder} />
+        <Stack.Screen name="Checkout" component={CheckoutCOD} />
+        <Stack.Screen name="ThankYou" component={GreetCOD} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

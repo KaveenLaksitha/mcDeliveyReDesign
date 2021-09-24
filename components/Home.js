@@ -1,9 +1,18 @@
-import React from "react";
-import { View, Text, Image, StyleSheet, ScrollView } from "react-native";
+import React, { useState } from "react";
+import { View, Text, Image, StyleSheet, ScrollView, RefreshControl, ToastAndroid } from "react-native";
 
 function Home({ navigation }) {
+
+  const [refreshState, setRefreshState] = useState(false)
+
+  const refresh = () => {
+    setRefreshState(true);
+    ToastAndroid.show("Refreshing...", ToastAndroid.SHORT);
+    setTimeout(function () { setRefreshState(false) }, 2000)
+  }
+
   return (
-    <View>
+    <ScrollView refreshControl={<RefreshControl onRefresh={refresh} refreshing={refreshState} />}>
       <ScrollView horizontal={true}>
         <Image
           source={{ uri: "https://i.ibb.co/6tdp6v1/1259171629786046593.jpg" }}
@@ -23,7 +32,7 @@ function Home({ navigation }) {
       <View style={[styles.dateTime, styles.elevation]}>
         <Text>Here's info as at HH:MM PM, Today</Text>
       </View>
-      <View style={{ marginLeft: 20, marginRight: 20, marginTop: 10 }}>
+      <View style={{ marginLeft: 20, marginRight: 20, marginTop: 10, marginBottom: 20 }}>
         <View>
           <Text style={styles.headers}>Top Categories</Text>
           <View style={styles.headerLine}></View>
@@ -97,7 +106,7 @@ function Home({ navigation }) {
           </View>
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
@@ -152,7 +161,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   img1: {
-    marginTop: 7,
+    marginTop: 2,
     marginRight: 5,
     width: 120,
     height: 120,
@@ -161,7 +170,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   img2: {
-    marginTop: 7,
+    marginTop: 2,
     marginRight: 5,
     width: 120,
     height: 120,
@@ -170,7 +179,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   img3: {
-    marginTop: 7,
+    marginTop: 2,
     width: 120,
     height: 120,
     resizeMode: "stretch",
@@ -178,7 +187,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   horizontal: {
-    marginTop: 20,
+    marginTop: 5,
     flexDirection: "row",
   },
 });
