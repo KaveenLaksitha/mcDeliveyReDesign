@@ -1,7 +1,6 @@
 import React from 'react'
 
 import { View, Text, Button } from 'react-native'
-
 function Menu({ navigation }) {
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -32,3 +31,5 @@ function Menu({ navigation }) {
 }
 
 export default Menu
+
+

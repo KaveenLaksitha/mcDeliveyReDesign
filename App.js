@@ -1,7 +1,7 @@
 // In App.js in a new project
 
 import * as React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -19,9 +19,25 @@ import AddressForm from './components/AddressForm';
 import FeedBack from './components/FeedBack';
 import MyCards from './components/CardList';
 import AddressBook from './components/DeliveryAddressBook';
+import Login from './components/Login';
+import NewUser from './components/NewUser';
+import ResetpasswordEmail from './components/ResetpasswordEmail';
+import ResetpasswordMobile from './components/ResetpasswordMobile';
+import Register from './components/Register';
+import TrackOrder from './components/TrackOrder';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
+
+const defaultTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    card: '#FF3131',
+    text: 'white',
+    background: 'white'
+  },
+};
 
 function TabNav() {
   return (
@@ -32,6 +48,7 @@ function TabNav() {
       // }}
 
       screenOptions={({ route }) => ({
+        tabBarStyle: { backgroundColor: '#FF3131' },
         tabBarShowLabel: false,
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
@@ -55,7 +72,7 @@ function TabNav() {
           return <Ionicons name={iconName} size={size} color={color} />;
         },
         tabBarActiveTintColor: '#FFC300',
-        tabBarInactiveTintColor: 'gray',
+        tabBarInactiveTintColor: 'white',
       })
       }
     >
@@ -71,7 +88,7 @@ function TabNav() {
 
 function App() {
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={defaultTheme}>
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen
           name="TabNav"
@@ -90,6 +107,13 @@ function App() {
         <Stack.Screen name="Make A Review" component={FeedBack} />
         <Stack.Screen name="My Cards" component={MyCards} />
         <Stack.Screen name="Delivery Address Book" component={AddressBook} />
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="NewUser" component={NewUser} />
+        <Stack.Screen name="Register" component={Register} />
+        <Stack.Screen name="ResetpasswordEmail" component={ResetpasswordEmail} />
+        <Stack.Screen name="ResetpasswordMobile" component={ResetpasswordMobile} />
+        <Stack.Screen name="Cart" component={Cart} />
+        <Stack.Screen name="TrackOrder" component={TrackOrder} />
       </Stack.Navigator>
     </NavigationContainer>
   );
