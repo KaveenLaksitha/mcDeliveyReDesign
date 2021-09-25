@@ -1,10 +1,11 @@
 import React from 'react'
-import { View, StyleSheet, Text, Image, TouchableHighlight } from 'react-native'
+import { View, StyleSheet, Text, Image, TouchableHighlight, StatusBar } from 'react-native'
 
 
 function DeliveryOptions({ navigation }) {
     return (
         <View style={styles.body}>
+            <StatusBar backgroundColor={'red'} />
             <TouchableHighlight underlayColor='none' onPress={() => navigation.navigate("Select Option")}>
                 <View style={[styles.listItem, styles.elevation]}>
                     <Image source={{ uri: 'https://images.unsplash.com/photo-1585759071429-1646f76ab8c7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80' }}

@@ -2,6 +2,7 @@ import * as React from 'react';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import TabNavigation from './components/navigation/TabNavigation';
 
+
 const defaultTheme = {
   ...DefaultTheme,
   // dark: false,

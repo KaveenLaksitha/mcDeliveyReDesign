@@ -44,10 +44,10 @@ function TabNavigation() {
             }
         >
             <Tab.Screen name="Home" component={StackNavigator} options={{ headerShown: false }} />
-            <Tab.Screen name="FoodMenu" component={FoodMenu} />
-            <Tab.Screen name="Favourites" component={Favourites} />
-            <Tab.Screen name="Cart" component={Cart} />
-            <Tab.Screen name="Menu" component={Menu} />
+            <Tab.Screen name="FoodMenu" component={FoodMenu} options={{ headerTitleAlign: 'center' }} />
+            <Tab.Screen name="Favourites" component={Favourites} options={{ headerTitleAlign: 'center' }} />
+            <Tab.Screen name="Cart" component={Cart} options={{ headerTitleAlign: 'center' }} />
+            <Tab.Screen name="Menu" component={Menu} options={{ headerTitleAlign: 'center' }} />
         </Tab.Navigator>
     )
 }
