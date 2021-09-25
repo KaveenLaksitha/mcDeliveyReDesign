@@ -9,11 +9,7 @@ function Favourites({ navigation }) {
 
             <Button
                 title="Go to next comp"
-<<<<<<< HEAD
-                onPress={() => navigation.navigate("Home")}
-=======
                 onPress={() => navigation.navigate("FoodMenu")}
->>>>>>> 43513c5a7166dda6bd5ad62a1b9421950bad843e
             />
         </View>
     )
