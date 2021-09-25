@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   img1: {
-    marginTop: 7,
+    marginTop: 2,
     marginRight: 5,
     width: 120,
     height: 120,
@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   img2: {
-    marginTop: 7,
+    marginTop: 2,
     marginRight: 5,
     width: 120,
     height: 120,
@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   img3: {
-    marginTop: 7,
+    marginTop: 2,
     width: 120,
     height: 120,
     resizeMode: "stretch",
@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   horizontal: {
-    marginTop: 20,
+    marginTop: 5,
     flexDirection: "row",
   },
 });

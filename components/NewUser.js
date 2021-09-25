@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View, SafeAreaView, Button, Image, SafeAreaViewBase, Alert, TextInput , TouchableHighlight} from 'react-native';
 
-export default function RegDashboard({navigation}) {
+export default function Register({navigation}) {
   return (
     <SafeAreaView style={styles.container}>
      <StatusBar hidden/>  

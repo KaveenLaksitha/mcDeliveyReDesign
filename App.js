@@ -73,7 +73,6 @@ function TabNav() {
       <Tab.Screen name="Favourites" component={Favourites} />
       <Tab.Screen name="Cart" component={Cart} />
       <Tab.Screen name="Menu" component={Menu} />
-      <Tab.Screen name="Login" component={Login} />
     </Tab.Navigator>
   );
 }
