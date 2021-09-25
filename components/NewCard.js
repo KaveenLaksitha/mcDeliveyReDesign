@@ -1,70 +1,121 @@
-import React from 'react';
-import { StyleSheet, Text, View, SafeAreaView, Button, Image, SafeAreaViewBase, Alert, TextInput, TouchableHighlight } from 'react-native';
+import React, { useState } from 'react';
+import { Picker } from '@react-native-picker/picker';
+
+
+import { StyleSheet, Text, View, SafeAreaView, Button, Image, SafeAreaViewBase, Alert, TextInput, TouchableHighlight, ScrollView } from 'react-native';
 
 
 function NewCard({ navigation }) {
 
-    const [cardType, onChangeCardType] = React.useState(null);
+    const [cardType, onChangeCardType] = useState("Visa");
     const [cardNumber, onChangeCardNumber] = React.useState(null);
     const [nameOnCard, onChangeNameOnCard] = React.useState(null);
     const [ExpiryDate, onChangeExpiryDate] = React.useState(null);
+    const [date, setDate] = useState(new Date())
+    const [open, setOpen] = useState(false)
+
 
 
     return (
         <SafeAreaView style={styles.container}>
 
             <View style={styles.contentody} >
-                <View style={[styles.cardDisplay, styles.shadow]}>
-                    <Image style={styles.visa}
-                        source={{
-                            uri: "https://i.ibb.co/PmDYwrP/visa.jpg"
-                        }}></Image>
+                <ScrollView vertical={true}>
+                    <View style={[styles.cardDisplay, styles.shadow]}>
+                        <Image style={styles.visa}
+                            source={{
+                                uri: "https://i.ibb.co/PmDYwrP/visa.jpg"
+                            }}></Image>
 
-                    <Text style={styles.cardNo}>XXXX  XXXX  XXXX  1425</Text>
-                    <Text style={styles.cardHolder}>Card Holder</Text>
-                    <Text style={styles.Name}>Andrew Wilson</Text>
-                    <Text style={styles.validThru}>Valid Thru</Text>
-                    <Text style={styles.date}>10/24</Text>
-                </View>
-                <View style={[styles.cardInsert, styles.shadowguestUser]}>
+                        <Text style={styles.cardNo}>XXXX  XXXX  XXXX  1425</Text>
+                        <Text style={styles.cardHolder}>Card Holder</Text>
+                        <Text style={styles.Name}>Andrew Wilson</Text>
+                        <Text style={styles.validThru}>Valid Thru</Text>
+                        <Text style={styles.date}>10/24</Text>
+                    </View>
 
-                    <Text style={styles.textValue}>Card Type </Text>
-                    <TextInput style={styles.input}
-                        onChangeText={onChangeCardType}
-                        value={cardType}
-                        placeholder="Visa/Master"
-                        keyboardType="default"
-                    />
+                    <View style={[styles.cardInsert, styles.shadowguestUser]}>
 
-
-                    <Text style={styles.textValue}>Card Number </Text>
-                    <TextInput style={styles.input}
-                        onChangeText={onChangeCardNumber}
-                        value={cardNumber}
-                        placeholder="xxxx xxxx xxxx xxxx"
-                        keyboardType="numeric"
-                    />
+                        <Text style={styles.textValue}>Card Type </Text>
+                        <Picker style={styles.pickerinput}
+                            selectedValue={cardType}
+                            onValueChange={(itemValue, itemIndex) => onChangeCardType(itemValue)}
+                        >
+                            <Picker.Item label="Visa" value="Visa" />
+                            <Picker.Item label="Master" value="Master" />
+                            <Picker.Item label="American Express" value="American Express" />
+                        </Picker>
 
 
-                    <Text style={styles.textValue}>Name on Card </Text>
-                    <TextInput style={styles.input}
-                        onChangeText={onChangeNameOnCard}
-                        value={nameOnCard}
-                        placeholder="Andrew Wilson"
-                        keyboardType="default"
-                    />
+                        <Text style={styles.textValue}>Card Number </Text>
+                        <TextInput style={styles.input}
+                            onChangeText={onChangeCardNumber}
+                            value={cardNumber}
+                            placeholder="xxxx xxxx xxxx xxxx"
+                            keyboardType="numeric"
+                        />
 
 
-                    <Text style={styles.textValue}>Expiry Date </Text>
-                    <TextInput style={styles.input}
-                        onChangeText={onChangeExpiryDate}
-                        value={ExpiryDate}
-                        placeholder="2021/10/14"
-                        keyboardType="decimal-pad"
-                    />
+                        <Text style={styles.textValue}>Name on Card </Text>
+                        <TextInput style={styles.input}
+                            onChangeText={onChangeNameOnCard}
+                            value={nameOnCard}
+                            placeholder="Andrew Wilson"
+                            keyboardType="default"
+                        />
 
 
-                </View>
+                        <Text style={styles.textValue}>Expiry Date </Text>
+                        <TextInput style={styles.input}
+                            onChangeText={onChangeExpiryDate}
+                            value={ExpiryDate}
+                            placeholder="2021/10/14"
+                            keyboardType="decimal-pad"
+                        />
+                        {/* <DatePicker
+                            style={{ width: 200 }}
+                            date={ExpiryDate}
+                            mode="date"
+                            placeholder="select date"
+                            format="YYYY-MM-DD"
+                            minDate="2016-05-01"
+                            maxDate="2016-06-01"
+                            confirmBtnText="Confirm"
+                            cancelBtnText="Cancel"
+                            customStyles={{
+                                dateIcon: {
+                                    position: 'absolute',
+                                    left: 0,
+                                    top: 4,
+                                    marginLeft: 0
+                                },
+                                dateInput: {
+                                    marginLeft: 36
+                                }
+                                // ... You can check the source to find the other keys.
+                            }}
+                            onDateChange={() => { onChangeExpiryDate }}
+                        /> */}
+                        {/* <DatePicker
+                            modal
+                            open={open}
+                            date={ExpiryDate}
+                            onConfirm={(date) => {
+
+                                setOpen(false)
+                                //setDate(date)
+
+                            }}
+                            onCancel={() => {
+                                setOpen(false)
+                            }}
+                            onChange={(e) => {
+                                onChangeExpiryDate(e.target.value)
+                            }} */}
+                        {/* /> */}
+
+                    </View>
+                </ScrollView>
                 <TouchableHighlight style={styles.submitButton}
                     onPress={() => navigation.navigate('My Cards')}>
                     <Text style={styles.submitText}>Save Card</Text>
@@ -173,7 +224,7 @@ const styles = StyleSheet.create({
         width: 320,
         padding: 6,
         marginLeft: 10,
-        fontSize: 14,
+        fontSize: 16,
         color: "black",
     },
 
@@ -186,6 +237,15 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderColor: "grey"
     },
+
+    pickerinput: {
+        marginTop: 5,
+        marginLeft: 10,
+        height: 35,
+        borderBottomWidth: 1,
+        borderColor: "grey"
+    },
+
     submitText: {
         marginTop: 5,
         padding: 5,

@@ -1,80 +1,102 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, SafeAreaView, Button, ImageBackground, SafeAreaViewBase, Alert, TextInput, TouchableHighlight, TouchableOpacity } from 'react-native';
+import { Picker } from '@react-native-picker/picker';
+import { Rating, AirbnbRating } from 'react-native-ratings';
+import { StyleSheet, Text, View, SafeAreaView, Button, ImageBackground, Alert, TextInput, TouchableHighlight, TouchableOpacity, ScrollView } from 'react-native';
 
 
 
 export default function FeedBack({ navigation }) {
     const [orderId, onChangeOrderId] = React.useState(null);
-    const [reviewOn, onChangeReviewOn] = React.useState(null);
+    const [reviewOn, onChangeReviewOn] = useState("Food");
     const [suggestion, onChangeSuggestion] = React.useState(null);
     const [complaint, onChangeComplaint] = React.useState(null);
     const [rate, onChangeRate] = React.useState(null);
-
+    const [none, setNone] = useState(false);
     return (
 
         <SafeAreaView style={styles.container}>
-
-
 
 
             <View style={styles.square1}>
                 <ImageBackground source={{ uri: "https://i.ibb.co/RSDmDS8/food.jpg" }} resizeMode="cover" style={styles.Reviewimage} />
             </View>
 
-            <View style={styles.square2}>
-                <Text style={styles.MakeAReviewHeadLine}>Make A Review</Text>
+            <ScrollView vertical={true}>
+                <View style={styles.square2}>
 
-                <View style={styles.orderIdView}>
-                    <Text style={styles.textValue}>Order Id </Text>
-                    <TextInput style={styles.input}
-                        onChangeText={onChangeOrderId}
-                        value={orderId}
-                    />
-                </View>
-                <View style={styles.reviewView}>
-                    <Text style={styles.textValue}>Review On </Text>
-                    <TextInput style={styles.input}
-                        onChangeText={onChangeReviewOn}
-                        value={reviewOn}
-                    />
-                </View>
-                <View style={styles.suggestView}>
-                    <Text style={styles.textValue}>Suggestions </Text>
-                    <TextInput style={styles.input}
-                        onChangeText={onChangeSuggestion}
-                        value={suggestion}
-                    />
-                </View>
-                <View style={styles.complaintView}>
-                    <Text style={styles.textValue}>Complaints </Text>
-                    <TextInput style={styles.input}
-                        onChangeText={onChangeComplaint}
-                        value={complaint}
-                    />
-                </View>
-                <View style={styles.rateView}>
-                    <Text style={styles.textValue}>Rate Order </Text>
-                    <TextInput style={styles.input}
-                        onChangeText={onChangeRate}
-                        value={rate}
-                    />
-                </View>
-                <TouchableHighlight style={styles.submitButton}
-                    onPress={() => Alert.alert('Submit Pressed to make a review!')}>
-                    <Text style={styles.submitText}>Submit </Text>
-                </TouchableHighlight>
-                <View style={styles.link}>
-                    <Text style={styles.text1}>For furthur inquiries</Text>
-                    <TouchableOpacity style={styles.text2}
-                        onPress={() => navigation.navigate('ContactUs')}>
-                        <Text style={{
-                            fontSize: 14, color: "#CCCC00", fontWeight: 'bold'
-                        }} >SupportServices </Text>
-                    </TouchableOpacity>
-                </View>
+                    <Text style={styles.MakeAReviewHeadLine}>Make A Review</Text>
 
-            </View>
+                    <View style={styles.square3}>
 
+                        <View style={styles.box}>
+                            <Text style={styles.textValue}>Order Id </Text>
+                            <TextInput style={styles.input}
+                                onChangeText={onChangeOrderId}
+                                value={orderId}
+                            />
+                        </View>
+                        <View style={styles.box}>
+                            <Text style={styles.textValue}>Review On </Text>
+                            <Picker style={styles.pickerinput}
+                                selectedValue={reviewOn}
+                                onValueChange={(itemValue, itemIndex) => onChangeReviewOn(itemValue)}
+                            >
+                                <Picker.Item style={{ fontSize: 14 }} label="Food" value="Food" />
+                                <Picker.Item style={{ fontSize: 14 }} label="Delivery" value="Delivery" />
+                            </Picker>
+                        </View>
+
+                        <View style={styles.box}>
+                            <Text style={styles.textValue}>Suggestions </Text>
+                            <TextInput style={styles.input}
+                                onChangeText={onChangeSuggestion}
+                                value={suggestion}
+                                multiline={true}
+                                numberOfLines={2}
+                            />
+                        </View>
+                        <View style={styles.box}>
+                            <Text style={styles.textValue}>Complaints </Text>
+                            <TextInput style={styles.input}
+                                onChangeText={onChangeComplaint}
+                                value={complaint}
+                                multiline={true}
+                                numberOfLines={2}
+                            />
+                        </View>
+                        <View style={styles.box}>
+                            <Text style={styles.textValue}>Order Rating </Text>
+                            <Text style={styles.rateinput}>
+                                <AirbnbRating
+                                    ratingcount={5}
+                                    // reviews={["Bad", "Meh", "OK", "Good", "Amazing"]}
+                                    // defaultRating={5}
+                                    showRating={none}
+                                    onFinishRating={onChangeRate}
+                                    size={20}
+                                />
+                            </Text>
+
+                        </View>
+
+                    </View>
+
+                    <TouchableHighlight style={styles.submitButton}
+                        onPress={() => Alert.alert('Submit Pressed to make a review!')}>
+                        <Text style={styles.submitText}>Submit </Text>
+                    </TouchableHighlight>
+                    <View style={styles.link}>
+                        <Text style={styles.text1}>For furthur inquiries</Text>
+                        <TouchableOpacity style={styles.text2}
+                            onPress={() => navigation.navigate('ContactUs')}>
+                            <Text style={{
+                                fontSize: 14, color: "#CCCC00", fontWeight: 'bold'
+                            }} >SupportServices </Text>
+                        </TouchableOpacity>
+                    </View>
+
+                </View>
+            </ScrollView>
 
         </SafeAreaView>
 
@@ -94,24 +116,43 @@ const styles = StyleSheet.create({
     square1: {
         marginTop: -120,
         marginLeft: 0,
-        backgroundColor: "#FF3133",
-        height: 450,
+        //backgroundColor: "#FF3133",
+        height: 350,
         width: 393,
         borderRadius: 20
     },
 
     square2: {
-        marginTop: -50,
+        marginTop: 50,
         marginLeft: 0,
-        height: 430,
+        height: 380,
         width: 412,
-        backgroundColor: "#FFFFFF",
-        borderRadius: 30
+        backgroundColor: "white",
+        borderRadius: 30,
+        opacity: 0.9
+    },
+
+    square3: {
+        marginTop: 50,
+        marginLeft: 35,
+        height: 250,
+        width: 345,
+        //backgroundColor: "yellow",
+
+
+    },
+    box: {
+        marginLeft: 0,
+        marginTop: 6,
+        marginLeft: 5,
+        marginRight: 5,
+        padding: 3,
+
     },
 
     Reviewimage: {
         width: 420,
-        height: 330,
+        height: 325,
         position: "absolute",
         marginTop: 120,
         marginLeft: -2,
@@ -134,51 +175,6 @@ const styles = StyleSheet.create({
         marginLeft: 50,
         fontSize: 16,
         textAlign: "justify"
-    },
-
-    orderIdView: {
-        position: "absolute",
-        width: 340,
-        height: 35,
-        marginTop: 65,
-        marginLeft: 40,
-        //backgroundColor: "orange"
-    },
-
-    reviewView: {
-        position: "absolute",
-        width: 340,
-        height: 35,
-        marginTop: 110,
-        marginLeft: 40,
-        //backgroundColor: "orange"
-    },
-
-    suggestView: {
-        position: "absolute",
-        width: 340,
-        height: 35,
-        marginTop: 155,
-        marginLeft: 40,
-        //backgroundColor: "orange"
-    },
-
-    complaintView: {
-        position: "absolute",
-        width: 340,
-        height: 35,
-        marginTop: 200,
-        marginLeft: 40,
-        //backgroundColor: "orange"
-    },
-
-    rateView: {
-        position: "absolute",
-        width: 340,
-        height: 35,
-        marginTop: 245,
-        marginLeft: 40,
-        //backgroundColor: "orange"
     },
 
     submitButton: {
@@ -210,20 +206,38 @@ const styles = StyleSheet.create({
     },
 
     textValue: {
-        marginTop: 8,
-        padding: 6,
+        marginTop: 1,
+        marginLeft: 5,
         fontSize: 14,
         color: "black",
     },
 
     input: {
-        marginTop: -45,
+        marginTop: -35,
         marginLeft: 100,
-        height: 38,
         margin: 12,
         padding: 6,
         borderBottomWidth: 1,
         borderColor: "grey"
+    },
+
+    rateinput: {
+        marginTop: -30,
+        marginLeft: 100,
+        height: 38,
+        margin: 12,
+        padding: 6,
+        height: 20,
+        width: 200
+    },
+
+    pickerinput: {
+        marginTop: -29,
+        marginLeft: 100,
+        height: 38,
+        margin: 12,
+        padding: 6,
+
     },
     submitText: {
         marginTop: 5,

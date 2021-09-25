@@ -1,58 +1,60 @@
 import React from 'react';
-import { StyleSheet, Text, View, SafeAreaView, Button, Image, ImageBackground, SafeAreaViewBase, Alert, TextInput, TouchableHighlight, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, Button, Image, ImageBackground, SafeAreaViewBase, Alert, TextInput, TouchableHighlight, TouchableOpacity, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/Entypo';
 
 function AddressBook({ navigation }) {
     return (
+
         <SafeAreaView style={styles.container}>
 
 
 
             <View style={styles.contentody} >
+                <ScrollView vertical={true}>
 
+                    <Text style={styles.textValue}>Select your address or add new Address : </Text>
 
-                <Text style={styles.textValue}>Select your address or add new Address : </Text>
+                    <View style={[styles.listItem, styles.elevation]}>
+                        <View style={styles.horizontal}>
+                            <Text style={styles.sendTo}>SEND TO</Text>
 
-                <View style={[styles.listItem, styles.elevation]}>
-                    <View style={styles.horizontal}>
-                        <Text style={styles.sendTo}>SEND TO</Text>
-
-                        <Image style={styles.building}
-                            source={{
-                                uri: "https://i.ibb.co/qrqtPbL/building.jpg"
-                            }}></Image>
-                        <Text style={styles.address}>My Office</Text>
-                        <TouchableOpacity
-                            onPress={() => navigation.navigate('Address Form')}>
-                            <Icon style={styles.pencil} name="pencil" color="#FF3133" size={30} />
-                        </TouchableOpacity>
+                            <Image style={styles.building}
+                                source={{
+                                    uri: "https://i.ibb.co/qrqtPbL/building.jpg"
+                                }}></Image>
+                            <Text style={styles.address}>My Office</Text>
+                            <TouchableOpacity
+                                onPress={() => navigation.navigate('Address Form')}>
+                                <Icon style={styles.pencil} name="pencil" color="#FF3133" size={30} />
+                            </TouchableOpacity>
+                        </View>
                     </View>
-                </View>
-                <View style={[styles.listItem2, styles.elevation]}>
+                    <View style={[styles.listItem2, styles.elevation]}>
 
-                    <View style={styles.horizontal}>
-                        <Text style={styles.sendTo}>SEND TO</Text>
-                        <Text style={styles.default}>default</Text>
-                        <Icon style={styles.home} name="home" size={50} />
-                        <Text style={styles.address}>My Home</Text>
-                        <TouchableOpacity
-                            onPress={() => navigation.navigate('Address Form')}>
-                            <Icon style={styles.pencil} name="pencil" color="#FF3133" size={30} />
-                        </TouchableOpacity>
+                        <View style={styles.horizontal}>
+                            <Text style={styles.sendTo}>SEND TO</Text>
+                            <Text style={styles.default}>default</Text>
+                            <Icon style={styles.home} name="home" size={50} />
+                            <Text style={styles.address}>My Home</Text>
+                            <TouchableOpacity
+                                onPress={() => navigation.navigate('Address Form')}>
+                                <Icon style={styles.pencil} name="pencil" color="#FF3133" size={30} />
+                            </TouchableOpacity>
+                        </View>
                     </View>
-                </View>
-                <View style={[styles.listItem, styles.elevation]}>
+                    <View style={[styles.listItem, styles.elevation]}>
 
-                    <View style={styles.horizontal}>
-                        <Text style={styles.address2}>No 149/6A, Mirihana Road,
-                            Embuldeniya,
-                            Jayawardhanepura, Kotte</Text>
-                        <TouchableOpacity
-                            onPress={() => navigation.navigate('Address Form')}>
-                            <Icon style={styles.pencil} name="pencil" color="#FF3133" size={30} />
-                        </TouchableOpacity>
+                        <View style={styles.horizontal}>
+                            <Text style={styles.address2}>No 149/6A, Mirihana Road,
+                                Embuldeniya,
+                                Jayawardhanepura, Kotte</Text>
+                            <TouchableOpacity
+                                onPress={() => navigation.navigate('Address Form')}>
+                                <Icon style={styles.pencil} name="pencil" color="#FF3133" size={30} />
+                            </TouchableOpacity>
+                        </View>
                     </View>
-                </View>
+                </ScrollView>
             </View>
             <TouchableHighlight style={styles.submitButton}
                 onPress={() => navigation.navigate('Address Form')}>
@@ -69,6 +71,7 @@ function AddressBook({ navigation }) {
 
 
         </SafeAreaView >
+
     )
 }
 

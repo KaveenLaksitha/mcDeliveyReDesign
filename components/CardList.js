@@ -1,55 +1,56 @@
 import React from 'react';
-import { StyleSheet, Text, View, SafeAreaView, Button, Image, ImageBackground, TextInput, TouchableHighlight, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, Button, Image, ImageBackground, TextInput, TouchableHighlight, TouchableOpacity, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/Entypo';
 function MyCards({ navigation }) {
     return (
+
         <SafeAreaView style={styles.container}>
 
 
 
             <View style={styles.contentody} >
+                <ScrollView vertical={true} >
 
+                    <Text style={styles.textValue}>Select your card or add new Card : </Text>
 
-                <Text style={styles.textValue}>Select your card or add new Card : </Text>
+                    <View style={[styles.listItem2, styles.elevation]}>
+                        <View style={styles.horizontal}>
+                            <Text style={styles.cardNo}>XXXX XXXX XXXX XXXX</Text>
+                            <Text style={styles.default}>default</Text>
+                            <Image style={styles.visa}
+                                source={{
+                                    uri: "https://i.ibb.co/PmDYwrP/visa.jpg"
+                                }}></Image>
+                            <Text style={styles.name}>Andrew Wilson</Text>
+                            <Text style={styles.date}>10/24</Text>
 
-                <View style={[styles.listItem2, styles.elevation]}>
-                    <View style={styles.horizontal}>
-                        <Text style={styles.cardNo}>XXXX XXXX XXXX XXXX</Text>
-                        <Text style={styles.default}>default</Text>
-                        <Image style={styles.visa}
-                            source={{
-                                uri: "https://i.ibb.co/PmDYwrP/visa.jpg"
-                            }}></Image>
-                        <Text style={styles.name}>Andrew Wilson</Text>
-                        <Text style={styles.date}>10/24</Text>
-
+                        </View>
                     </View>
-                </View>
-                <View style={[styles.listItem, styles.elevation]}>
-                    <View style={styles.horizontal}>
-                        <Text style={styles.cardNo}>XXXX XXXX XXXX XXXX</Text>
-                        <Image style={styles.master}
-                            source={{
-                                uri: "https://i.ibb.co/0KNQFf0/58482354cef1014c0b5e49c0.png"
-                            }}></Image>
-                        <Text style={styles.name}>Andrew Wilson</Text>
-                        <Text style={styles.date}>10/24</Text>
+                    <View style={[styles.listItem, styles.elevation]}>
+                        <View style={styles.horizontal}>
+                            <Text style={styles.cardNo}>XXXX XXXX XXXX XXXX</Text>
+                            <Image style={styles.master}
+                                source={{
+                                    uri: "https://i.ibb.co/0KNQFf0/58482354cef1014c0b5e49c0.png"
+                                }}></Image>
+                            <Text style={styles.name}>Andrew Wilson</Text>
+                            <Text style={styles.date}>10/24</Text>
 
+                        </View>
                     </View>
-                </View>
-                <View style={[styles.listItem, styles.elevation]}>
-                    <View style={styles.horizontal}>
-                        <Text style={styles.cardNo}>XXXX XXXX XXXX XXXX</Text>
-                        <Image style={styles.american}
-                            source={{
-                                uri: "https://i.ibb.co/wzYRpWW/am.png"
-                            }}></Image>
-                        <Text style={styles.name}>Andrew Wilson</Text>
-                        <Text style={styles.date}>10/24</Text>
+                    <View style={[styles.listItem, styles.elevation]}>
+                        <View style={styles.horizontal}>
+                            <Text style={styles.cardNo}>XXXX XXXX XXXX XXXX</Text>
+                            <Image style={styles.american}
+                                source={{
+                                    uri: "https://i.ibb.co/wzYRpWW/am.png"
+                                }}></Image>
+                            <Text style={styles.name}>Andrew Wilson</Text>
+                            <Text style={styles.date}>10/24</Text>
 
+                        </View>
                     </View>
-                </View>
-
+                </ScrollView>
             </View>
             <TouchableHighlight style={styles.submitButton}
                 onPress={() => navigation.navigate('Add New Card')}>
@@ -64,6 +65,7 @@ function MyCards({ navigation }) {
 
 
         </SafeAreaView >
+
     )
 }
 

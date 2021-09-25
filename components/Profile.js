@@ -1,14 +1,15 @@
 import React, { useState } from 'react'
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Icon from 'react-native-vector-icons/Entypo';
-import { StyleSheet, Text, View, SafeAreaView, Button, Image, CheckBox, Alert, TextInput, TouchableOpacity, TouchableHighlight } from 'react-native';
+import { Picker } from '@react-native-picker/picker';
+import { StyleSheet, Text, View, SafeAreaView, CheckBox, Alert, TextInput, TouchableOpacity, TouchableHighlight, ScrollView } from 'react-native';
 
 
 
 function Profile({ navigation }) {
 
     const [userName, onChangeUserName] = React.useState(null);
-    const [salutation, onChangeSalutation] = React.useState(null);
+    const [salutation, onChangeSalutation] = useState("Mr");
     const [name, onChangeName] = React.useState(null);
     const [contactNo, onChangeContactNo] = React.useState(null);
     const [dob, onChangeDob] = React.useState(null);
@@ -63,75 +64,82 @@ function Profile({ navigation }) {
 
             </View>
 
-            <View style={styles.square2}>
-                <Text style={styles.MakeAReviewHeadLine}>Personal Information</Text>
+            <ScrollView vertical={true} backgroundColor="red">
+                <View style={styles.square2}>
 
-                <Text style={styles.textValues}>UserName :</Text>
-                <TextInput style={styles.inputs}
-                    onChangeText={onChangeUserName}
-                    value={userName}
-                    keyboardType="default"
-                />
+                    <Text style={styles.MakeAReviewHeadLine}>Personal Information</Text>
 
-                <View style={styles.reviewView}>
-                    <Text style={styles.textValue}>Salutation </Text>
-                    <TextInput style={styles.input}
-                        onChangeText={onChangeSalutation}
-                        value={salutation}
+                    <Text style={styles.textValues}>UserName :</Text>
+                    <TextInput style={styles.inputs}
+                        onChangeText={onChangeUserName}
+                        value={userName}
                         keyboardType="default"
                     />
+
+                    <View style={styles.reviewView}>
+                        <Text style={styles.textValue}>Salutation </Text>
+                        <Picker style={styles.pickerinput}
+                            selectedValue={salutation}
+                            onValueChange={(itemValue, itemIndex) => onChangeSalutation(itemValue)}
+                        >
+                            <Picker.Item label="Mr" value="Mr" />
+                            <Picker.Item label="Mrs" value="Mrs" />
+                            <Picker.Item label="Miss" value="Miss" />
+                        </Picker>
+                    </View>
+                    <View style={styles.suggestView}>
+                        <Text style={styles.textValue}>Name</Text>
+                        <TextInput style={styles.input}
+                            onChangeText={onChangeName}
+                            value={name}
+                            keyboardType="default"
+                        />
+                    </View>
+                    <View style={styles.complaintView}>
+                        <Text style={styles.textValue}>Contact No </Text>
+                        <TextInput style={styles.input}
+                            onChangeText={onChangeContactNo}
+                            value={contactNo}
+                            keyboardType="numeric"
+                        />
+                    </View>
+                    <View style={styles.rateView}>
+                        <Text style={styles.textValue}>Date Of Birth </Text>
+                        <TextInput style={styles.input}
+                            onChangeText={onChangeDob}
+                            value={dob}
+                        />
+                    </View>
+                    <View style={styles.email}>
+                        <Text style={styles.textValue}>Email Address </Text>
+                        <TextInput style={styles.input}
+                            onChangeText={onChangeEmail}
+                            value={email}
+                        //keyboardType="abc123@gmail.com"
+
+
+                        />
+                    </View>
+
+                    <TouchableHighlight style={styles.submitButton}
+                        onPress={() => Alert.alert('Saved The Changes!')}>
+                        <Text style={styles.submitText}>Save Changes </Text>
+                    </TouchableHighlight>
+                    <View style={styles.checkboxContainer}>
+
+                        <CheckBox
+                            value={isSelected}
+                            onValueChange={setSelection}
+                            style={styles.checkbox}
+                        />
+                        <Text style={styles.label}>I want to delete my account and hereby take all the consequences of deleteing the account</Text>
+                    </View>
+
+
                 </View>
-                <View style={styles.suggestView}>
-                    <Text style={styles.textValue}>Name</Text>
-                    <TextInput style={styles.input}
-                        onChangeText={onChangeName}
-                        value={name}
-                        keyboardType="default"
-                    />
-                </View>
-                <View style={styles.complaintView}>
-                    <Text style={styles.textValue}>Contact No </Text>
-                    <TextInput style={styles.input}
-                        onChangeText={onChangeContactNo}
-                        value={contactNo}
-                        keyboardType="numeric"
-                    />
-                </View>
-                <View style={styles.rateView}>
-                    <Text style={styles.textValue}>Date Of Birth </Text>
-                    <TextInput style={styles.input}
-                        onChangeText={onChangeDob}
-                        value={dob}
-                    />
-                </View>
-                <View style={styles.email}>
-                    <Text style={styles.textValue}>Email Address </Text>
-                    <TextInput style={styles.input}
-                        onChangeText={onChangeEmail}
-                        value={email}
-                        keyboardType="email-address"
-                    />
-                </View>
-
-                <TouchableHighlight style={styles.submitButton}
-                    onPress={() => Alert.alert('Saved The Changes!')}>
-                    <Text style={styles.submitText}>Save Changes </Text>
-                </TouchableHighlight>
-                <View style={styles.checkboxContainer}>
-
-                    <CheckBox
-                        value={isSelected}
-                        onValueChange={setSelection}
-                        style={styles.checkbox}
-                    />
-                    <Text style={styles.label}>I want to delete my account and hereby take all the consequences of deleteing the account</Text>
-                </View>
 
 
-            </View>
-
-
-
+            </ScrollView>
 
         </SafeAreaView>
     )
@@ -149,7 +157,7 @@ const styles = StyleSheet.create({
     square1: {
         marginTop: -120,
         marginLeft: 0,
-        height: 300,
+        height: 250,
         width: 412,
     },
 
@@ -251,7 +259,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#F8F4F4"
     },
     square2: {
-        marginTop: -50,
+        marginTop: -15,
         marginLeft: 0,
         height: 480,
         width: 412,
@@ -372,6 +380,16 @@ const styles = StyleSheet.create({
 
     input: {
         marginTop: -45,
+        marginLeft: 100,
+        height: 38,
+        margin: 12,
+        padding: 6,
+        borderBottomWidth: 1,
+        borderColor: "grey",
+
+    },
+    pickerinput: {
+        marginTop: -35,
         marginLeft: 100,
         height: 38,
         margin: 12,

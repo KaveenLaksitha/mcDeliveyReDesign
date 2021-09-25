@@ -48,7 +48,7 @@ function Menu({ navigation }) {
                     <Ionicons name="log-out-outline" size={30} color="black" />
                 </Text>
                 <TouchableOpacity style={styles.text}
-                    onPress={() => navigation.navigate('Profile')}>
+                    onPress={() => navigation.navigate('Login')}>
                     <Text style={{ fontSize: 16 }}>Log Out</Text></TouchableOpacity>
 
             </View>
