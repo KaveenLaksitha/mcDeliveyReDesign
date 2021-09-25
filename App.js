@@ -5,6 +5,8 @@ import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import Animated from 'react-native-reanimated';
 
 import Home from "./components/Home";
 import Favourites from "./components/Favourites"
@@ -27,11 +29,18 @@ import Register from './components/Register';
 import TrackOrder from './components/TrackOrder';
 import CheckoutCOD from './components/CheckoutCOD';
 import GreetCOD from './components/GreetCOD';
+import MenuAll from './components/MenuAll';
+import Salads from './components/MenuItems/Salads';
+import Desserts from './components/MenuItems/Desserts';
+import AlaCarte from './components/MenuItems/AlaCarte';
+
+
 
 
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
+const TopTab = createMaterialTopTabNavigator();
 
 const defaultTheme = {
   ...DefaultTheme,
@@ -42,6 +51,17 @@ const defaultTheme = {
     background: 'white'
   },
 };
+
+function TopTabNav(){
+  return(
+    <TopTab.Navigator>
+       < TopTab.Screen name="Home" component={HomeScreen} />
+        <TopTab.Screen name="Settings" component={SettingsScreen} />
+       <TopTab.Screen name="Profile" component={ProfileScreen} />
+
+    </TopTab.Navigator>
+  )
+}
 
 function TabNav() {
   return (
@@ -121,6 +141,7 @@ function App() {
         <Stack.Screen name="TrackOrder" component={TrackOrder} />
         <Stack.Screen name="Checkout" component={CheckoutCOD} />
         <Stack.Screen name="ThankYou" component={GreetCOD} options={{ headerShown: false }} />
+        <Stack.Screen name="MenuAll" component={MenuAll} />
       </Stack.Navigator>
     </NavigationContainer>
   );

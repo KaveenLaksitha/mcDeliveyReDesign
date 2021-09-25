@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import {Image, SafeAreaView, StyleSheet,TextInput, Text, View } from 'react-native';
+import {Image, SafeAreaView, StyleSheet,TextInput, Text, View, TouchableHighlight } from 'react-native';
 
 export default function FoodMenu({ navigation }) {
   return (
@@ -26,6 +26,8 @@ export default function FoodMenu({ navigation }) {
       
     </View>
 
+  <TouchableHighlight  onPress={() => navigation.navigate('MenuAll')}>
+
   <View style={styles.cat1}>
     
     <Image style={styles.cat1}  source={{uri: "https://i.ibb.co/tX7xqvX/likemeat-73-ob-A0-IB-0-unsplash.jpg"}}>
@@ -35,6 +37,7 @@ export default function FoodMenu({ navigation }) {
       <Text style={styles.textcat2} >OTHER MEALS</Text>
       
   </View>  
+  </TouchableHighlight>
 
   <View style={styles.cat2}>
     
