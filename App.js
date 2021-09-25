@@ -25,6 +25,10 @@ import ResetpasswordEmail from './components/ResetpasswordEmail';
 import ResetpasswordMobile from './components/ResetpasswordMobile';
 import Register from './components/Register';
 import TrackOrder from './components/TrackOrder';
+import CheckoutCOD from './components/CheckoutCOD';
+import GreetCOD from './components/GreetCOD';
+
+
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -114,6 +118,8 @@ function App() {
         <Stack.Screen name="ResetpasswordMobile" component={ResetpasswordMobile} />
         <Stack.Screen name="Cart" component={Cart} />
         <Stack.Screen name="TrackOrder" component={TrackOrder} />
+        <Stack.Screen name="Checkout" component={CheckoutCOD} />
+        <Stack.Screen name="ThankYou" component={GreetCOD} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

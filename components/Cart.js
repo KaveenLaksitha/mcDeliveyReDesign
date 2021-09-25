@@ -40,13 +40,13 @@ function Cart({ navigation }) {
                     </View>
                 </View>
                 <View style={{ marginTop: 270, flexDirection: 'row' }}>
-                    <TouchableHighlight>
+                    <TouchableHighlight underlayColor='none' onPress={() => navigation.navigate("Home")}>
                         <View style={[styles.buttonRed, styles.elevation]}>
                             <Text style={{ fontSize: 16, color: 'white' }}>Cancel</Text>
                         </View>
                     </TouchableHighlight>
 
-                    <TouchableHighlight onPress={() => navigation.navigate("TrackOrder")}>
+                    <TouchableHighlight underlayColor='none' onPress={() => navigation.navigate("Checkout")}>
                         <View style={[styles.buttonYellow, styles.elevation]}>
                             <Text style={{ fontSize: 16, color: 'black' }}>Checkout</Text>
                         </View>
