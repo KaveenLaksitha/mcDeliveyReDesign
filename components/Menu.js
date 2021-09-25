@@ -24,7 +24,7 @@ function Menu({ navigation }) {
                     <Icon name="location" size={30} color="black" />
                 </Text>
                 <TouchableOpacity style={styles.text}
-                    onPress={() => navigation.navigate('Profile')}>
+                    onPress={() => navigation.navigate('My Orders')}>
                     <Text style={{ fontSize: 16 }}>My Orders</Text></TouchableOpacity>
                 <Text style={styles.Icon}>
                     <Ionicons name="md-wallet-outline" size={30} color="black" />

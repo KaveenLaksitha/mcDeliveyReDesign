@@ -1,63 +1,47 @@
-//import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, SafeAreaView, Button, Image, SafeAreaViewBase, Alert, TextInput , TouchableHighlight, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 
 const Login = () => {
+
   const navigation = useNavigation();
+
   return (
     <SafeAreaView style={styles.container}>
-     {/* <StatusBar hidden/>   */}
-      {/* <View style={styles.square1}>   
-         <Image 
-          style={styles.mcImage}
-          source={{
-          uri: "https://i.ibb.co/x3shm4R/mcWhite.png"
-        }}  
-        />
+      
+      <View style={styles.contentody} >
         
-        <View style={styles.underlinelogin}>
-          <Text style={styles.login} 
-            onPress={() => navigation.navigate("Login")}>
-            Login
-          </Text>
-        </View> 
-        <View  style={styles.underlineregister}>
-          <Text style={styles.reg}  
-             onPress={() => navigation.navigate("NewUser")} >
-              I'am New
-          </Text> 
+        <View style={styles.emailaddressdiv}>
+          
+          <Text style={styles.emailaddress}>Email Address</Text>
+        
         </View>
-        </View>  */}
-        <View style={styles.contentody} >
-         
-          <View style={styles.emailaddressdiv}>
-            
-            <Text style={styles.emailaddress}>Email Address</Text>
-         
-          </View>
-           
-            <TextInput  style={styles.inputemail} ></TextInput>
-          <View style={styles.passworddiv}>
-             <Text style={styles.password}>Password</Text>
-          </View>
-              <TextInput  style={styles.inputpassword} ></TextInput>
+        
+          <TextInput style={styles.inputemail} ></TextInput>
+        <View style={styles.passworddiv}>
+          <Text style={styles.password}>Password</Text>
+        </View>
+        
+        <TextInput style={styles.inputpassword} ></TextInput>
 
-          <View style={styles.forgetdiv}>
-            <TouchableOpacity 
-               onPress={() => navigation.navigate('ResetpasswordEmail')}>
-                    <Text style={styles.forget}   >Forgot password?</Text>
-         
-             </TouchableOpacity>
-           </View>
-          <TouchableHighlight style={styles.loginbutton}
+        <View style={styles.forgetdiv}>
+          
+          <Text style={styles.forget} onPress={() => navigation.navigate("ResetpasswordEmail")}>Forgot password?</Text>
+        
+        </View>
+        
+        <TouchableHighlight style={styles.loginbutton}
               onPress={() => Alert.alert('Login Successfully')}>
+              
               <Text style={styles.logintext}>Login</Text>
-          </TouchableHighlight>
-        </View>       
+        
+        </TouchableHighlight>
+      
+      </View>
+    
     </SafeAreaView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -70,7 +54,7 @@ const styles = StyleSheet.create({
     marginLeft: 0,
     backgroundColor: "#FF3133",
     height: 400,
-    width:412,
+    width: 412,
     borderRadius: 50,
     shadowOffset: {
       width: 0,
@@ -82,21 +66,29 @@ const styles = StyleSheet.create({
     elevation: 20,
   },
 
+
    mcImage: {
     width: 210,
     height: 200,
     marginTop:150,
     marginLeft: 100,
-    justifyContent: 'center',
-    alignItems: 'center',
-    
-  },
+   },
+
+  // mcImage: {
+  //   width: 140,
+  //   height: 115,
+  //   marginTop: 180,
+  //   marginLeft: 140,
+  //   justifyContent: 'center',
+  //   alignItems: 'center',
+
+  // },
 
   love: {
     marginTop: 0,
     marginLeft: 105,
     fontSize: 18,
-    color:"white",
+    color: "white",
     letterSpacing: 4,
 
   },
@@ -104,36 +96,36 @@ const styles = StyleSheet.create({
   contentody: {
     //backgroundColor: "pink",
     height: 400,
-    width : 350,
-    marginTop:40,
-    marginLeft:22,
+    width: 350,
+    marginTop: 40,
+    marginLeft: 22,
     justifyContent: 'center',
     alignItems: 'center'
- },
+  },
 
- newdiv: {
-   marginTop: 0,
-   height: 125,
-   width: 340,
-   marginLeft: 30,
-   
- },
+  newdiv: {
+    marginTop: 0,
+    height: 125,
+    width: 340,
+    marginLeft: 30,
 
- underlinelogin: {
+  },
+
+  underlinelogin: {
     borderBottomWidth: 2,
     borderColor: 'yellow',
     marginLeft: 45,
     marginTop: -50,
     height: 100,
     width: 90,
- },
+  },
 
- login: {
+  login: {
     marginTop: 70,
     marginLeft: 17,
     height: 30,
     width: 70,
-    color:"white",
+    color: "white",
     fontSize: 18,
   },
 
@@ -143,7 +135,7 @@ const styles = StyleSheet.create({
     marginLeft: 273,
     marginTop: -28,
     width: 90,
-  
+
   },
 
   reg: {
@@ -151,7 +143,7 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 18,
     width: 80,
-    paddingBottom : 2,
+    paddingBottom: 2,
   },
 
   emailaddressdiv: {
@@ -166,14 +158,14 @@ const styles = StyleSheet.create({
     color: "#707070"
   },
 
-    inputemail: {
+  inputemail: {
     height: 40,
     width: 310,
     margin: 12,
-    marginLeft:28,
+    marginLeft: 28,
     borderBottomWidth: 1,
     padding: 10,
-    borderColor: '#707070'  
+    borderColor: '#707070'
   },
 
   passworddiv: {
@@ -192,10 +184,10 @@ const styles = StyleSheet.create({
     height: 40,
     width: 310,
     margin: 12,
-    marginLeft:28,
+    marginLeft: 28,
     borderBottomWidth: 1,
     padding: 10,
-    borderColor: '#707070'  
+    borderColor: '#707070'
   },
 
   forgetdiv: {
@@ -236,6 +228,7 @@ const styles = StyleSheet.create({
     color: "white",
     textAlign: 'center',
   },
-  
+
 });
+
 export default Login;
