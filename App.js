@@ -27,6 +27,7 @@ import Register from './components/Register';
 import TrackOrder from './components/TrackOrder';
 import CheckoutCOD from './components/CheckoutCOD';
 import GreetCOD from './components/GreetCOD';
+import Loginfragment from './components/Loginfragment';
 
 
 
@@ -114,6 +115,7 @@ function App() {
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="NewUser" component={NewUser} />
         <Stack.Screen name="Register" component={Register} />
+        <Stack.Screen name="Loginfragment" component={Loginfragment} />
         <Stack.Screen name="ResetpasswordEmail" component={ResetpasswordEmail} />
         <Stack.Screen name="ResetpasswordMobile" component={ResetpasswordMobile} />
         <Stack.Screen name="Cart" component={Cart} />

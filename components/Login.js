@@ -1,23 +1,21 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View, SafeAreaView, Button, Image, SafeAreaViewBase, Alert, TextInput , TouchableHighlight} from 'react-native';
+//import { StatusBar } from 'expo-status-bar';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, View, SafeAreaView, Button, Image, SafeAreaViewBase, Alert, TextInput , TouchableHighlight, TouchableOpacity} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 
-
-export default function Login({navigation}) {
+const Login = () => {
+  const navigation = useNavigation();
   return (
     <SafeAreaView style={styles.container}>
-     <StatusBar hidden/>  
-      <View style={styles.square1}>   
+     {/* <StatusBar hidden/>   */}
+      {/* <View style={styles.square1}>   
          <Image 
           style={styles.mcImage}
           source={{
-          uri: "https://i.ibb.co/smnnGpk/Daco-5018553.png"
+          uri: "https://i.ibb.co/x3shm4R/mcWhite.png"
         }}  
         />
         
-        <View style={styles.newdiv}>
-          <Text style={styles.love}>I’m loving it</Text>
-        </View>
         <View style={styles.underlinelogin}>
           <Text style={styles.login} 
             onPress={() => navigation.navigate("Login")}>
@@ -30,11 +28,15 @@ export default function Login({navigation}) {
               I'am New
           </Text> 
         </View>
-        </View> 
+        </View>  */}
         <View style={styles.contentody} >
+         
           <View style={styles.emailaddressdiv}>
+            
             <Text style={styles.emailaddress}>Email Address</Text>
+         
           </View>
+           
             <TextInput  style={styles.inputemail} ></TextInput>
           <View style={styles.passworddiv}>
              <Text style={styles.password}>Password</Text>
@@ -42,15 +44,17 @@ export default function Login({navigation}) {
               <TextInput  style={styles.inputpassword} ></TextInput>
 
           <View style={styles.forgetdiv}>
-             <Text style={styles.forget}   onPress={() => navigation.navigate("ResetpasswordEmail")}>Forgot password?</Text>
-          </View>
+            <TouchableOpacity 
+               onPress={() => navigation.navigate('ResetpasswordEmail')}>
+                    <Text style={styles.forget}   >Forgot password?</Text>
+         
+             </TouchableOpacity>
+           </View>
           <TouchableHighlight style={styles.loginbutton}
               onPress={() => Alert.alert('Login Successfully')}>
               <Text style={styles.logintext}>Login</Text>
           </TouchableHighlight>
-        </View>
-     
-           
+        </View>       
     </SafeAreaView>
   );
 }
@@ -79,10 +83,10 @@ const styles = StyleSheet.create({
   },
 
    mcImage: {
-    width: 140,
-    height: 115,
-    marginTop:180,
-    marginLeft: 140,
+    width: 210,
+    height: 200,
+    marginTop:150,
+    marginLeft: 100,
     justifyContent: 'center',
     alignItems: 'center',
     
@@ -119,7 +123,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 2,
     borderColor: 'yellow',
     marginLeft: 45,
-    marginTop: -120,
+    marginTop: -50,
     height: 100,
     width: 90,
  },
@@ -234,4 +238,4 @@ const styles = StyleSheet.create({
   },
   
 });
-
+export default Login;

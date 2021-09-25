@@ -18,13 +18,13 @@ export default function ResetpasswordEmail({navigation}) {
         </View>
         <View style={styles.underlinelogin}>
           <Text style={styles.login} 
-            onPress={() => navigation.navigate("Login")}>
+            onPress={() => navigation.navigate("Loginfragment")}>
             Login
           </Text>
         </View> 
         <View  style={styles.underlineregister}>
           <Text style={styles.reg}  
-            onPress={() => navigation.navigate("NewUser")} >
+            onPress={() => navigation.navigate("Loginfragment")} >
               I'am New
           </Text> 
         </View>

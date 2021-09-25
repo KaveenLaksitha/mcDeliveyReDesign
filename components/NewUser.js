@@ -1,12 +1,16 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, SafeAreaView, Button, Image, SafeAreaViewBase, Alert, TextInput , TouchableHighlight} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 
-export default function Register({navigation}) {
+function NewUser (){
+
+ const navigation = useNavigation();
+
   return (
     <SafeAreaView style={styles.container}>
      <StatusBar hidden/>  
-      <View style={styles.square1}>   
+      {/* <View style={styles.square1}>   
          <Image 
           style={styles.mcImage}
           source={{
@@ -28,7 +32,7 @@ export default function Register({navigation}) {
               I'am New
           </Text> 
         </View>
-        </View> 
+        </View>  */}
         <View style={styles.contentody} >
           
           <View style={[styles.passwordMobileresetdiv , styles.shadow]}>
@@ -51,8 +55,7 @@ export default function Register({navigation}) {
                 </TouchableHighlight>
           </View>  
         </View>
-     
-           
+             
     </SafeAreaView>
   );
 }
@@ -283,3 +286,5 @@ guestUsertext: {
 },
   
 });
+
+export default NewUser;
