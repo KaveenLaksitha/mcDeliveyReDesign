@@ -28,6 +28,8 @@ import TrackOrder from './components/TrackOrder';
 import CheckoutCOD from './components/CheckoutCOD';
 import GreetCOD from './components/GreetCOD';
 import DeliveryOptions from './components/DeliveryOptions';
+import PastOrders from './components/PastOrders';
+
 
 
 
@@ -119,6 +121,7 @@ function App() {
         <Stack.Screen name="Checkout" component={CheckoutCOD} />
         <Stack.Screen name="ThankYou" component={GreetCOD} options={{ headerShown: false }} />
         <Stack.Screen name="Select Option" component={DeliveryOptions} />
+        <Stack.Screen name="My Orders" component={PastOrders} />
       </Stack.Navigator>
     </NavigationContainer>
   );
