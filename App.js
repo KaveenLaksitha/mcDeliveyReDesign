@@ -29,10 +29,15 @@ import Register from './components/Register';
 import TrackOrder from './components/TrackOrder';
 import CheckoutCOD from './components/CheckoutCOD';
 import GreetCOD from './components/GreetCOD';
-import MenuAll from './components/MenuAll';
+
 import Salads from './components/MenuItems/Salads';
 import Desserts from './components/MenuItems/Desserts';
 import AlaCarte from './components/MenuItems/AlaCarte';
+import HappyMeals from './components/MenuItems/HappyMeals';
+import Beverages from './components/MenuItems/Beverage';
+import BundleMeals from './components/MenuItems/BundleMeals';
+import { ScrollView } from 'react-native';
+
 
 
 
@@ -52,14 +57,26 @@ const defaultTheme = {
   },
 };
 
-function TopTabNav(){
-  return(
-    <TopTab.Navigator>
-       < TopTab.Screen name="Home" component={HomeScreen} />
-        <TopTab.Screen name="Settings" component={SettingsScreen} />
-       <TopTab.Screen name="Profile" component={ProfileScreen} />
+function TopTabNav() {
+  return (
 
-    </TopTab.Navigator>
+    <ScrollView horizontal={true}>
+
+      <TopTab.Navigator tabBarOptions={{
+        style: { width: "auto" },
+        indicatorStyle: { flex: 1, width: 50 }
+      }}>
+        <TopTab.Screen name="AlaCarte" component={AlaCarte} />
+        <TopTab.Screen name="Desserts" component={Desserts} />
+        <TopTab.Screen name="Salads" component={Salads} />
+        <TopTab.Screen name="Beverages" component={Beverages} />
+        <TopTab.Screen name="HappyMeals" component={HappyMeals} />
+        <TopTab.Screen name="Promotions & Bundle Meals" component={BundleMeals} />
+
+
+      </TopTab.Navigator>
+
+    </ScrollView >
   )
 }
 
@@ -105,7 +122,7 @@ function TabNav() {
       <Tab.Screen name="Favourites" component={Favourites} />
       <Tab.Screen name="Cart" component={Cart} />
       <Tab.Screen name="Menu" component={Menu} />
-      
+
     </Tab.Navigator>
 
   );
@@ -115,10 +132,19 @@ function App() {
   return (
     <NavigationContainer theme={defaultTheme}>
       <Stack.Navigator initialRouteName="Home">
+
+
+
         <Stack.Screen
           name="TabNav"
           component={TabNav}
           options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="TopTabNav"
+          component={TopTabNav}
+
+
         />
         {/* <Stack.Screen name="Home" component={Home} /> */}
         <Stack.Screen name="Favourites" component={Favourites} />
@@ -141,7 +167,7 @@ function App() {
         <Stack.Screen name="TrackOrder" component={TrackOrder} />
         <Stack.Screen name="Checkout" component={CheckoutCOD} />
         <Stack.Screen name="ThankYou" component={GreetCOD} options={{ headerShown: false }} />
-        <Stack.Screen name="MenuAll" component={MenuAll} />
+
       </Stack.Navigator>
     </NavigationContainer>
   );
