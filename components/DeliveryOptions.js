@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     listItem: {
         alignItems: "center",
         backgroundColor: "#FFC300",
-        marginTop: 20,
+        marginTop: 30,
         width: 370,
         borderRadius: 10,
         paddingBottom: 10,
