@@ -29,6 +29,10 @@ import Register from './components/Register';
 import TrackOrder from './components/TrackOrder';
 import CheckoutCOD from './components/CheckoutCOD';
 import GreetCOD from './components/GreetCOD';
+import DeliveryOptions from './components/DeliveryOptions';
+import PastOrders from './components/PastOrders';
+
+
 
 import Salads from './components/MenuItems/Salads';
 import Desserts from './components/MenuItems/Desserts';
@@ -36,7 +40,7 @@ import AlaCarte from './components/MenuItems/AlaCarte';
 import HappyMeals from './components/MenuItems/HappyMeals';
 import Beverages from './components/MenuItems/Beverage';
 import BundleMeals from './components/MenuItems/BundleMeals';
-import { ScrollView } from 'react-native';
+import { FlatList, ScrollView } from 'react-native';
 
 
 
@@ -60,34 +64,49 @@ const defaultTheme = {
 function TopTabNav() {
   return (
 
-    <ScrollView horizontal={true}>
+    // <ScrollView horizontal={true}>
 
-      <TopTab.Navigator tabBarOptions={{
-        style: { width: "auto" },
-        indicatorStyle: { flex: 1, width: 50 }
-      }}>
-        <TopTab.Screen name="AlaCarte" component={AlaCarte} />
-        <TopTab.Screen name="Desserts" component={Desserts} />
-        <TopTab.Screen name="Salads" component={Salads} />
-        <TopTab.Screen name="Beverages" component={Beverages} />
-        <TopTab.Screen name="HappyMeals" component={HappyMeals} />
-        <TopTab.Screen name="Promotions & Bundle Meals" component={BundleMeals} />
+    <TopTab.Navigator
+
+      tabBarOptions={{
+        scrollEnabled: true,
+        style: {
+
+          height: 50,
+          width: 412
+        },
+
+        // tabStyle: {
+        //   width: 150,
+
+        // },
+        indicatorStyle: {
+
+          backgroundColor: "#FFC300"
+        }
+      }}
+    >
+
+      <TopTab.Screen name="AlaCarte" component={AlaCarte} />
+      <TopTab.Screen name="Desserts" component={Desserts} />
+      <TopTab.Screen name="Salads" component={Salads} />
+      <TopTab.Screen name="Beverages" component={Beverages} />
+      <TopTab.Screen name="HappyMeals" component={HappyMeals} />
+      <TopTab.Screen name="Promotions & Bundle Meals" component={BundleMeals} />
 
 
-      </TopTab.Navigator>
 
-    </ScrollView >
+    </TopTab.Navigator >
+
+
+
+    // </ScrollView >
   )
 }
 
 function TabNav() {
   return (
     <Tab.Navigator
-
-      // tabBarOptions={{
-      //   showLabel: false,
-      // }}
-
       screenOptions={({ route }) => ({
         tabBarStyle: { backgroundColor: '#FF3131' },
         tabBarShowLabel: false,
@@ -131,12 +150,9 @@ function TabNav() {
 function App() {
   return (
     <NavigationContainer theme={defaultTheme}>
-      <Stack.Navigator initialRouteName="Home">
-
-
-
+      <Stack.Navigator initialRouteName="Login">
         <Stack.Screen
-          name="TabNav"
+          name="Home"
           component={TabNav}
           options={{ headerShown: false }}
         />
@@ -146,6 +162,7 @@ function App() {
 
 
         />
+        {/* <Stack.Screen name="Home" component={Home} /> */}
         {/* <Stack.Screen name="Home" component={Home} /> */}
         <Stack.Screen name="Favourites" component={Favourites} />
         <Stack.Screen name="FoodMenu" component={FoodMenu} />
@@ -167,7 +184,8 @@ function App() {
         <Stack.Screen name="TrackOrder" component={TrackOrder} />
         <Stack.Screen name="Checkout" component={CheckoutCOD} />
         <Stack.Screen name="ThankYou" component={GreetCOD} options={{ headerShown: false }} />
-
+        <Stack.Screen name="Select Option" component={DeliveryOptions} />
+        <Stack.Screen name="My Orders" component={PastOrders} />
       </Stack.Navigator>
     </NavigationContainer>
   );
