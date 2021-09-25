@@ -108,15 +108,7 @@ const styles = StyleSheet.create({
     padding: 10,
   },
 
-  square :{
-    marginTop: -120,
-    marginLeft: 0,
-    backgroundColor: "#FF3133",
-    height: 400,
-    width:393,
-
-    borderRadius: 50,
-  },
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
 
   image1:{
 
