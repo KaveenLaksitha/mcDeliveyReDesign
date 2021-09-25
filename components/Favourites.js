@@ -12,7 +12,6 @@ function Favourites({ navigation }) {
 
                 onPress={() => navigation.navigate("Home")}
                 onPress={() => navigation.navigate("FoodMenu")}
-
             />
         </View>
     )
