@@ -1,8 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View, SafeAreaView, Button, Image, ImageBackground, SafeAreaViewBase, Alert, TextInput, TouchableHighlight, TouchableOpacity, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/Entypo';
+import BuildingIcon from 'react-native-vector-icons/FontAwesome5'
+import { RadioButton } from 'react-native-paper';
+
+let index = 0;
+
+const setBorderColor = (choice) => {
+    index = choice;
+}
 
 function AddressBook({ navigation }) {
+
+
+    const [checked, setChecked] = useState('first');
+
     return (
 
         <SafeAreaView style={styles.container}>
@@ -14,26 +26,41 @@ function AddressBook({ navigation }) {
 
                     <Text style={styles.textValue}>Select your address or add new Address : </Text>
 
-                    <View style={[styles.listItem, styles.elevation]}>
+                    <View style={[styles.listItem3, styles.elevation, { borderColor: index === 1 ? '#F79E1B' : 'white' }]}>
                         <View style={styles.horizontal}>
                             <Text style={styles.sendTo}>SEND TO</Text>
 
-                            <Image style={styles.building}
-                                source={{
-                                    uri: "https://i.ibb.co/qrqtPbL/building.jpg"
-                                }}></Image>
+                            <BuildingIcon style={styles.building} name="building" size={50} />
                             <Text style={styles.address}>My Office</Text>
+                            <Text style={styles.radio1}>
+                                <RadioButton
+                                    value="first"
+                                    color={'#FF3131'}
+                                    uncheckedColor={'#FF3131'}
+                                    status={checked === 'first' ? 'checked' : 'unchecked'}
+                                    onPress={() => { setChecked('first'); setBorderColor(1) }}
+                                />
+                            </Text>
                             <TouchableOpacity
                                 onPress={() => navigation.navigate('Address Form')}>
-                                <Icon style={styles.pencil} name="pencil" color="#FF3133" size={30} />
+                                <Icon style={styles.pencil1} name="pencil" color="#FF3133" size={30} />
                             </TouchableOpacity>
                         </View>
                     </View>
-                    <View style={[styles.listItem2, styles.elevation]}>
+                    <View style={[styles.listItem2, styles.elevation, { borderColor: index === 2 ? '#F79E1B' : 'white' }]}>
 
                         <View style={styles.horizontal}>
                             <Text style={styles.sendTo}>SEND TO</Text>
                             <Text style={styles.default}>default</Text>
+                            <Text style={styles.radio}>
+                                <RadioButton
+                                    value="second"
+                                    color={'#FF3131'}
+                                    uncheckedColor={'#FF3131'}
+                                    status={checked === 'second' ? 'checked' : 'unchecked'}
+                                    onPress={() => { setChecked('second'); setBorderColor(2) }}
+                                />
+                            </Text>
                             <Icon style={styles.home} name="home" size={50} />
                             <Text style={styles.address}>My Home</Text>
                             <TouchableOpacity
@@ -42,15 +69,24 @@ function AddressBook({ navigation }) {
                             </TouchableOpacity>
                         </View>
                     </View>
-                    <View style={[styles.listItem, styles.elevation]}>
+                    <View style={[styles.listItem, styles.elevation, , { borderColor: index === 3 ? '#F79E1B' : 'white' }]}>
 
                         <View style={styles.horizontal}>
+
+                            <RadioButton
+                                value="third"
+                                color={'#FF3131'}
+                                uncheckedColor={'#FF3131'}
+                                status={checked === 'third' ? 'checked' : 'unchecked'}
+                                onPress={() => { setChecked('third'); setBorderColor(3) }}
+                            />
+
                             <Text style={styles.address2}>No 149/6A, Mirihana Road,
                                 Embuldeniya,
                                 Jayawardhanepura, Kotte</Text>
                             <TouchableOpacity
                                 onPress={() => navigation.navigate('Address Form')}>
-                                <Icon style={styles.pencil} name="pencil" color="#FF3133" size={30} />
+                                <Icon style={styles.pencil3} name="pencil" color="#FF3133" size={30} />
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -104,6 +140,8 @@ const styles = StyleSheet.create({
         paddingRight: 10,
         paddingBottom: 20,
         paddingLeft: 10,
+        borderColor: '#F79E1B',
+        borderWidth: 2
     },
     elevation: {
         shadowColor: "#52006A",
@@ -114,6 +152,20 @@ const styles = StyleSheet.create({
         alignItems: "center",
     },
     listItem2: {
+        opacity: 0.7,
+        backgroundColor: "white",
+        marginTop: 20,
+        marginLeft: 12,
+        width: 370,
+        borderRadius: 10,
+        paddingTop: 20,
+        paddingRight: 10,
+        paddingBottom: 20,
+        paddingLeft: 10,
+        borderColor: '#F79E1B',
+        borderWidth: 2
+    },
+    listItem3: {
         opacity: 0.7,
         backgroundColor: "white",
         marginTop: 20,
@@ -138,7 +190,21 @@ const styles = StyleSheet.create({
         width: 50,
         height: 50,
         marginTop: 6,
-        marginLeft: -45,
+        marginLeft: 5,
+    },
+    radio: {
+        width: 35,
+        height: 35,
+
+        marginTop: 6,
+        marginLeft: -75,
+    },
+    radio1: {
+        width: 35,
+        height: 35,
+
+        marginTop: 6,
+        marginLeft: -260,
     },
     sendTo: {
         width: 100,
@@ -153,6 +219,18 @@ const styles = StyleSheet.create({
         height: 30,
         marginTop: -5,
         marginLeft: 50,
+    },
+    pencil1: {
+        width: 30,
+        height: 30,
+        marginTop: -5,
+        marginLeft: 280,
+    },
+    pencil3: {
+        width: 30,
+        height: 30,
+        marginTop: -5,
+        marginLeft: 20,
     },
     address: {
         width: 150,

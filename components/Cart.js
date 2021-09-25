@@ -46,7 +46,7 @@ function Cart({ navigation }) {
                         </View>
                     </TouchableHighlight>
 
-                    <TouchableHighlight underlayColor='none' onPress={() => navigation.navigate("Checkout")}>
+                    <TouchableHighlight underlayColor='none' onPress={() => navigation.navigate("Select Option")}>
                         <View style={[styles.buttonYellow, styles.elevation]}>
                             <Text style={{ fontSize: 16, color: 'black' }}>Checkout</Text>
                         </View>

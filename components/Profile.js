@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Icon from 'react-native-vector-icons/Entypo';
 import { Picker } from '@react-native-picker/picker';
+import UserIcon from 'react-native-vector-icons/FontAwesome5'
 import { StyleSheet, Text, View, SafeAreaView, CheckBox, Alert, TextInput, TouchableOpacity, TouchableHighlight, ScrollView } from 'react-native';
-
 
 
 function Profile({ navigation }) {
@@ -45,7 +45,7 @@ function Profile({ navigation }) {
                 </View>
                 <View style={[styles.cardInsert3, styles.shadowguestUser]}>
                     <Text style={styles.position}>
-                        <Ionicons name="ios-person-outline" size={30} color="#FF3133" />
+                        <UserIcon name="user-cog" size={25} color="#FF3133" />
                     </Text>
                     <TouchableOpacity style={styles.card3}
                         onPress={() => navigation.navigate('Profile')}>
@@ -64,7 +64,7 @@ function Profile({ navigation }) {
 
             </View>
 
-            <ScrollView vertical={true} backgroundColor="red">
+            <ScrollView vertical={true} >
                 <View style={styles.square2}>
 
                     <Text style={styles.MakeAReviewHeadLine}>Personal Information</Text>

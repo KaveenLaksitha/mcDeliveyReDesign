@@ -73,7 +73,7 @@ export default function FeedBack({ navigation }) {
                                     // defaultRating={5}
                                     showRating={none}
                                     onFinishRating={onChangeRate}
-                                    size={20}
+                                    size={35}
                                 />
                             </Text>
 
@@ -224,7 +224,7 @@ const styles = StyleSheet.create({
     rateinput: {
         marginTop: -30,
         marginLeft: 100,
-        height: 38,
+        //height: 38,
         margin: 12,
         padding: 6,
         height: 20,

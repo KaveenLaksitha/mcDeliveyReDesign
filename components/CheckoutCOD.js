@@ -14,6 +14,7 @@ const setBorderColor = (choice) => {
 function CheckoutCOD({ navigation }) {
 
     const [checked, setChecked] = useState('first');
+
     // const [index, setIndex] = useState(0);
 
     return (

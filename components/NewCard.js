@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { Picker } from '@react-native-picker/picker';
-
-
 import { StyleSheet, Text, View, SafeAreaView, Button, Image, SafeAreaViewBase, Alert, TextInput, TouchableHighlight, ScrollView } from 'react-native';
-
+import { RadioButton } from 'react-native-paper';
 
 function NewCard({ navigation }) {
 

@@ -1,7 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View, SafeAreaView, Button, Image, ImageBackground, TextInput, TouchableHighlight, TouchableOpacity, ScrollView } from 'react-native';
-import Icon from 'react-native-vector-icons/Entypo';
+import { RadioButton } from 'react-native-paper';
+let index = 0;
+
+const setBorderColor = (card) => {
+    index = card;
+}
+
 function MyCards({ navigation }) {
+
+
+    const [checked, setChecked] = useState('first');
+
     return (
 
         <SafeAreaView style={styles.container}>
@@ -13,7 +23,7 @@ function MyCards({ navigation }) {
 
                     <Text style={styles.textValue}>Select your card or add new Card : </Text>
 
-                    <View style={[styles.listItem2, styles.elevation]}>
+                    <View style={[styles.listItem2, styles.elevation, { borderColor: index === 1 ? '#F79E1B' : 'white' }]}>
                         <View style={styles.horizontal}>
                             <Text style={styles.cardNo}>XXXX XXXX XXXX XXXX</Text>
                             <Text style={styles.default}>default</Text>
@@ -23,10 +33,18 @@ function MyCards({ navigation }) {
                                 }}></Image>
                             <Text style={styles.name}>Andrew Wilson</Text>
                             <Text style={styles.date}>10/24</Text>
-
+                            <Text style={styles.radio}>
+                                <RadioButton
+                                    value="first"
+                                    color={'#FF3131'}
+                                    uncheckedColor={'#FF3131'}
+                                    status={checked === 'first' ? 'checked' : 'unchecked'}
+                                    onPress={() => { setChecked('first'); setBorderColor(1) }}
+                                />
+                            </Text>
                         </View>
                     </View>
-                    <View style={[styles.listItem, styles.elevation]}>
+                    <View style={[styles.listItem, styles.elevation, { borderColor: index === 2 ? '#F79E1B' : 'white' }]}>
                         <View style={styles.horizontal}>
                             <Text style={styles.cardNo}>XXXX XXXX XXXX XXXX</Text>
                             <Image style={styles.master}
@@ -35,10 +53,18 @@ function MyCards({ navigation }) {
                                 }}></Image>
                             <Text style={styles.name}>Andrew Wilson</Text>
                             <Text style={styles.date}>10/24</Text>
-
+                            <Text style={styles.radio}>
+                                <RadioButton
+                                    value="second"
+                                    color={'#FF3131'}
+                                    uncheckedColor={'#FF3131'}
+                                    status={checked === 'second' ? 'checked' : 'unchecked'}
+                                    onPress={() => { setChecked('second'); setBorderColor(2) }}
+                                />
+                            </Text>
                         </View>
                     </View>
-                    <View style={[styles.listItem, styles.elevation]}>
+                    <View style={[styles.listItem, styles.elevation, { borderColor: index === 3 ? '#F79E1B' : 'white' }]}>
                         <View style={styles.horizontal}>
                             <Text style={styles.cardNo}>XXXX XXXX XXXX XXXX</Text>
                             <Image style={styles.american}
@@ -47,7 +73,15 @@ function MyCards({ navigation }) {
                                 }}></Image>
                             <Text style={styles.name}>Andrew Wilson</Text>
                             <Text style={styles.date}>10/24</Text>
-
+                            <Text style={styles.radio}>
+                                <RadioButton
+                                    value="third"
+                                    color={'#FF3131'}
+                                    uncheckedColor={'#FF3131'}
+                                    status={checked === 'third' ? 'checked' : 'unchecked'}
+                                    onPress={() => { setChecked('third'); setBorderColor(3) }}
+                                />
+                            </Text>
                         </View>
                     </View>
                 </ScrollView>
@@ -87,6 +121,13 @@ const styles = StyleSheet.create({
         marginLeft: 40,
         fontSize: 16,
         color: "black",
+    },
+    radio: {
+
+        width: 35,
+        height: 35,
+        marginTop: 6,
+        marginLeft: -5,
     },
 
     image: {
@@ -151,6 +192,8 @@ const styles = StyleSheet.create({
         paddingRight: 10,
         paddingBottom: 20,
         paddingLeft: 10,
+        borderColor: '#F79E1B',
+        borderWidth: 2
     },
     elevation: {
         shadowColor: "#52006A",
@@ -207,7 +250,8 @@ const styles = StyleSheet.create({
         marginTop: -50,
         marginLeft: 120,
         fontWeight: 'bold',
-        fontSize: 16
+        fontSize: 16,
+        //backgroundColor: "red"
     },
 
     name: {
