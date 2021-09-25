@@ -27,6 +27,8 @@ import Register from './components/Register';
 import TrackOrder from './components/TrackOrder';
 import CheckoutCOD from './components/CheckoutCOD';
 import GreetCOD from './components/GreetCOD';
+import DeliveryOptions from './components/DeliveryOptions';
+
 
 
 
@@ -46,11 +48,6 @@ const defaultTheme = {
 function TabNav() {
   return (
     <Tab.Navigator
-
-      // tabBarOptions={{
-      //   showLabel: false,
-      // }}
-
       screenOptions={({ route }) => ({
         tabBarStyle: { backgroundColor: '#FF3131' },
         tabBarShowLabel: false,
@@ -93,12 +90,13 @@ function TabNav() {
 function App() {
   return (
     <NavigationContainer theme={defaultTheme}>
-      <Stack.Navigator initialRouteName="Home">
+      <Stack.Navigator initialRouteName="Login">
         <Stack.Screen
-          name="TabNav"
+          name="Home"
           component={TabNav}
           options={{ headerShown: false }}
         />
+        {/* <Stack.Screen name="Home" component={Home} /> */}
         {/* <Stack.Screen name="Home" component={Home} /> */}
         <Stack.Screen name="Favourites" component={Favourites} />
         <Stack.Screen name="FoodMenu" component={FoodMenu} />
@@ -120,6 +118,7 @@ function App() {
         <Stack.Screen name="TrackOrder" component={TrackOrder} />
         <Stack.Screen name="Checkout" component={CheckoutCOD} />
         <Stack.Screen name="ThankYou" component={GreetCOD} options={{ headerShown: false }} />
+        <Stack.Screen name="Select Option" component={DeliveryOptions} />
       </Stack.Navigator>
     </NavigationContainer>
   );
