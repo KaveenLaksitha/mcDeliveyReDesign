@@ -15,43 +15,43 @@ function Menu({ navigation }) {
                 </Text>
                 <TouchableOpacity style={styles.text}
                     onPress={() => navigation.navigate('Profile')}>
-                    <Text style={{ fontSize: 16 }}>Profile</Text></TouchableOpacity>
+                    <Text style={{ fontSize: 20 }}>Profile</Text></TouchableOpacity>
                 <Text style={styles.Icon}>
                     <Icon name="location" size={30} color="black" />
                 </Text>
                 <TouchableOpacity style={styles.text}
                     onPress={() => navigation.navigate('Delivery Address Book')}>
-                    <Text style={{ fontSize: 16 }} >Delivery Address Book</Text></TouchableOpacity>
+                    <Text style={{ fontSize: 20 }} >Delivery Address Book</Text></TouchableOpacity>
                 <Text style={styles.Icon}>
                     <ShopIcon name="shopping-bag" size={30} color="black" />
                 </Text>
                 <TouchableOpacity style={styles.text}
                     onPress={() => navigation.navigate('My Orders')}>
-                    <Text style={{ fontSize: 16 }}>My Orders</Text></TouchableOpacity>
+                    <Text style={{ fontSize: 20 }}>My Orders</Text></TouchableOpacity>
                 <Text style={styles.Icon}>
                     <Ionicons name="md-wallet-outline" size={30} color="black" />
                 </Text>
                 <TouchableOpacity style={styles.text}
                     onPress={() => navigation.navigate('My Cards')}>
-                    <Text style={{ fontSize: 16 }}>My Cards</Text></TouchableOpacity>
+                    <Text style={{ fontSize: 20 }}>My Cards</Text></TouchableOpacity>
                 <Text style={styles.Icon}>
                     <AntDesignIcon name="customerservice" size={30} color="black" />
                 </Text>
                 <TouchableOpacity style={styles.text}
                     onPress={() => navigation.navigate('ContactUs')}>
-                    <Text style={{ fontSize: 16 }}>Support Services</Text></TouchableOpacity>
+                    <Text style={{ fontSize: 20 }}>Support Services</Text></TouchableOpacity>
                 <Text style={styles.Icon}>
                     <Ionicons name="star-outline" size={30} color="black" />
                 </Text>
                 <TouchableOpacity style={styles.text}
                     onPress={() => navigation.navigate('Make A Review')}>
-                    <Text style={{ fontSize: 16 }}>Make A Review</Text></TouchableOpacity>
+                    <Text style={{ fontSize: 20 }}>Make A Review</Text></TouchableOpacity>
                 <Text style={styles.Icon}>
                     <Ionicons name="power" size={30} color="black" />
                 </Text>
                 <TouchableOpacity style={styles.text}
                     onPress={() => navigation.navigate('Profile')}>
-                    <Text style={{ fontSize: 16 }}>Log Out</Text></TouchableOpacity>
+                    <Text style={{ fontSize: 20 }}>Log Out</Text></TouchableOpacity>
 
             </View>
         </View>
@@ -75,7 +75,6 @@ const styles = StyleSheet.create({
     text: {
         marginTop: -52,
         marginLeft: 80,
-        fontSize: 16,
         padding: 10,
         marginBottom: 5
     },
