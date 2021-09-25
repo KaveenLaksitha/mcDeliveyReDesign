@@ -1,6 +1,7 @@
 import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
+
 import Home from "../Home";
 import Favourites from "../Favourites"
 import FoodMenu from '../foodMenu';
@@ -24,6 +25,7 @@ import CheckoutCOD from '../CheckoutCOD';
 import GreetCOD from '../GreetCOD';
 import DeliveryOptions from '../DeliveryOptions';
 import PastOrders from '../PastOrders';
+import TopTabNavigation from './TopTabNavigation';
 
 const Stack = createNativeStackNavigator();
 
@@ -31,6 +33,7 @@ function StackNavigator() {
     return (
         <Stack.Navigator initialRouteName="Login">
             <Stack.Screen name="Home" component={Home} />
+            <Stack.Screen name="TopTabNav" component={TopTabNavigation} />
             <Stack.Screen name="Favourites" component={Favourites} />
             <Stack.Screen name="FoodMenu" component={FoodMenu} />
             <Stack.Screen name="Profile" component={Profile} />
