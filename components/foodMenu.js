@@ -26,75 +26,139 @@ export default function FoodMenu({ navigation }) {
 
       </View>
 
-      <TouchableHighlight underlayColor='none' onPress={() => navigation.navigate('TopTabNav')}>
+      <View style={{ padding: 10, width: 300 }}>
 
-        <View style={styles.cat1}>
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
 
-          <Image style={styles.cat1} source={{ uri: "https://i.ibb.co/tX7xqvX/likemeat-73-ob-A0-IB-0-unsplash.jpg" }}>
+          <TouchableHighlight underlayColor='none' onPress={() =>
 
-          </Image>
-          <Text style={styles.textcat1} >ALA CARTE &</Text>
-          <Text style={styles.textcat2} >OTHER MEALS</Text>
+            navigation.navigate('All Food Categories', {
+              screen: 'AlaCarte',
+              initial: true,
+            })
+          }>
+
+            <View style={styles.cat1}>
+
+              <Image style={styles.img1} source={{ uri: "https://i.ibb.co/tX7xqvX/likemeat-73-ob-A0-IB-0-unsplash.jpg" }}>
+
+              </Image>
+              <Text style={styles.textcat1} >ALA CARTE &</Text>
+              <Text style={styles.textcat2} >OTHER MEALS</Text>
+
+            </View>
+          </TouchableHighlight>
+
+          <TouchableHighlight underlayColor='none' onPress={() =>
+            navigation.navigate('All Food Categories', {
+              screen: 'Salads',
+              initial: true,
+            })
+
+          }>
+
+            <View style={styles.cat1}>
+
+              <Image style={styles.img1} source={{ uri: "https://i.ibb.co/4R9ZLcx/mak-tpai-Poi-AMMU-unsplash.jpg" }}>
+
+              </Image>
+              <Text style={styles.textcat3} >SALADS</Text>
+
+
+            </View>
+          </TouchableHighlight>
 
         </View>
-      </TouchableHighlight>
-
-      <View style={styles.cat2}>
-
-        <Image style={styles.cat1} source={{ uri: "https://i.ibb.co/4R9ZLcx/mak-tpai-Poi-AMMU-unsplash.jpg" }}>
-
-        </Image>
-        <Text style={styles.textcat3} >SALADS</Text>
 
 
-      </View>
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
 
-      <View style={styles.cat3}>
+          <TouchableHighlight underlayColor='none' onPress={() =>
 
-        <Image style={styles.cat1} source={{ uri: "https://i.ibb.co/BZBmnwP/slashio-photography-ARf-Bt51-WG2s-unsplash.jpg" }}>
+            navigation.navigate('All Food Categories', {
+              screen: 'Desserts',
+              initial: true,
+            })
+          }>
 
-        </Image>
-        <Text style={styles.textcat3} > DESSERTS </Text>
+            <View style={styles.cat1}>
 
+              <Image style={styles.img1} source={{ uri: "https://i.ibb.co/BZBmnwP/slashio-photography-ARf-Bt51-WG2s-unsplash.jpg" }}>
 
-      </View>
+              </Image>
+              <Text style={styles.textcat3} > DESSERTS </Text>
 
-      <View style={styles.cat2}>
+            </View>
+          </TouchableHighlight>
 
-        <Image style={styles.cat1} source={{ uri: "https://i.ibb.co/MspD0M5/natalie-toombs-Kw-Ca-IGKdlps-unsplash.jpg" }}>
+          <TouchableHighlight underlayColor='none' onPress={() =>
 
-        </Image>
-        <Text style={styles.textcat3} >BEVERAGES</Text>
+            navigation.navigate('All Food Categories', {
+              screen: 'Beverages',
+              initial: true,
+            })
+          }>
 
+            <View style={styles.cat1}>
 
-      </View>
+              <Image style={styles.img1} source={{ uri: "https://i.ibb.co/MspD0M5/natalie-toombs-Kw-Ca-IGKdlps-unsplash.jpg" }}>
 
-      <View style={styles.cat3}>
-
-        <Image style={styles.cat1} source={{ uri: "https://i.ibb.co/7Jb39z5/brett-jordan-zee1ge-Zy6-H0-unsplash.jpg" }}>
-
-        </Image>
-        <Text style={styles.textcat4} > HAPPY MEALS </Text>
-
-
-
-      </View>
-
-      <View style={styles.cat2}>
-
-        <Image style={styles.cat1} source={{ uri: "https://i.ibb.co/CPMHTMw/karsten-winegeart-mft-VVfd-Xomc-unsplash.jpg" }}>
-
-        </Image>
-        <Text style={styles.textcat1} >PROMOTIONS &</Text>
-        <Text style={styles.textcat2} >BUNDLE MEALS</Text>
+              </Image>
+              <Text style={styles.textcat3} >BEVERAGES</Text>
 
 
-      </View>
+            </View>
+          </TouchableHighlight>
+
+        </View>
+
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
+
+          <TouchableHighlight underlayColor='none' onPress={() =>
+
+            navigation.navigate('All Food Categories', {
+              screen: 'HappyMeals',
+              initial: true,
+            })
+          }>
+
+            <View style={styles.cat1}>
+
+              <Image style={styles.img1} source={{ uri: "https://i.ibb.co/7Jb39z5/brett-jordan-zee1ge-Zy6-H0-unsplash.jpg" }}>
+
+              </Image>
+              <Text style={styles.textcat4} > HAPPY MEALS </Text>
+
+            </View>
+          </TouchableHighlight>
+
+          <TouchableHighlight underlayColor='none' onPress={() =>
+
+            navigation.navigate('All Food Categories', {
+              screen: 'Promotions & Bundle Meals',
+              initial: true,
+            })
+          }>
+
+            <View style={styles.cat1}>
+
+              <Image style={styles.img1} source={{ uri: "https://i.ibb.co/CPMHTMw/karsten-winegeart-mft-VVfd-Xomc-unsplash.jpg" }}>
+
+              </Image>
+              <Text style={styles.textcat1} >PROMOTIONS &</Text>
+              <Text style={styles.textcat2} >BUNDLE MEALS</Text>
+
+
+            </View>
+          </TouchableHighlight>
+
+        </View>
+      </View >
 
 
 
 
-    </SafeAreaView>
+    </SafeAreaView >
   );
 }
 
@@ -165,12 +229,27 @@ const styles = StyleSheet.create({
   cat1: {
     width: 190,
     height: 140,
+    backgroundColor: "white",
+    borderColor: "#D8D8D8",
     marginTop: 15,
+    marginRight: 10,
     borderRadius: 10,
-    marginLeft: 6,
+    borderWidth: 1
 
 
 
+  },
+
+  img1: {
+    // marginTop: 2,
+    // marginRight: 5,
+    // marginLeft: 5,
+    width: 190,
+    height: 140,
+    borderRadius: 10,
+    resizeMode: "cover",
+    // borderWidth: 2,
+    // borderRadius: 10,
   },
 
   textcat1: {

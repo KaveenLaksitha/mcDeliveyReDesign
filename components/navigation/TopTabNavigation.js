@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
 import Salads from '../../components/MenuItems/Salads';
@@ -9,9 +9,34 @@ import Beverages from '../../components/MenuItems/Beverage';
 import BundleMeals from '../../components/MenuItems/BundleMeals';
 
 const TopTab = createMaterialTopTabNavigator();
-function TopTabNavigation() {
+function TopTabNavigation({ route }) {
+
+
+
+
+
+
+
+    const [tab, setTab] = useState("");
+
+    useEffect(() => {
+
+        const { screen, initial } = route.params;
+        console.log("tab view data", screen, initial);
+
+        if (screen > 3) { }
+
+
+
+    }, [route.params])
+
+
+
+
+
     return (
         <TopTab.Navigator
+            initialRouteName="Beverages"
 
             tabBarOptions={{
                 scrollEnabled: true,

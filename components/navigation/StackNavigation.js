@@ -26,6 +26,8 @@ import GreetCOD from '../GreetCOD';
 import DeliveryOptions from '../DeliveryOptions';
 import PastOrders from '../PastOrders';
 import TopTabNavigation from './TopTabNavigation';
+import SingleFoodItem from '../SingleFoodItem';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -33,7 +35,7 @@ function StackNavigator() {
     return (
         <Stack.Navigator initialRouteName="Login">
             <Stack.Screen name="Home" component={Home} />
-            <Stack.Screen name="TopTabNav" component={TopTabNavigation} />
+            <Stack.Screen name="All Food Categories" component={TopTabNavigation} />
             <Stack.Screen name="Favourites" component={Favourites} />
             <Stack.Screen name="FoodMenu" component={FoodMenu} />
             <Stack.Screen name="Profile" component={Profile} />
@@ -56,6 +58,8 @@ function StackNavigator() {
             <Stack.Screen name="ThankYou" component={GreetCOD} options={{ headerShown: false }} />
             <Stack.Screen name="Select Option" component={DeliveryOptions} />
             <Stack.Screen name="My Orders" component={PastOrders} />
+            <Stack.Screen name="View Item" component={SingleFoodItem} />
+
         </Stack.Navigator>
     )
 }
