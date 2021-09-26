@@ -10,21 +10,21 @@ export default function ResetpasswordEmail({navigation}) {
          <Image 
           style={styles.mcImage}
           source={{
-          uri: "https://i.ibb.co/smnnGpk/Daco-5018553.png"
+          uri: "https://i.ibb.co/x3shm4R/mcWhite.png"
         }}  
         />
-        <View style={styles.newdiv}>
+        {/* <View style={styles.newdiv}>
           <Text style={styles.love}>I’m loving it</Text>
-        </View>
+        </View> */}
         <View style={styles.underlinelogin}>
           <Text style={styles.login} 
-            onPress={() => navigation.navigate("Loginfragment")}>
+            onPress={() => navigation.navigate("Login")}>
             Login
           </Text>
         </View> 
         <View  style={styles.underlineregister}>
           <Text style={styles.reg}  
-            onPress={() => navigation.navigate("Loginfragment")} >
+            onPress={() => navigation.navigate("Register")} >
               I'am New
           </Text> 
         </View>
@@ -44,7 +44,7 @@ export default function ResetpasswordEmail({navigation}) {
               <Text style={styles.submittext}>Submit</Text>
           </TouchableHighlight>
           <TouchableHighlight style={styles.resetbutton}
-              onPress={() => navigation.navigate("ResetpasswordMobile")}>
+              onPress={() => navigation.navigate("Reset Password Using Mobile")}>
               <Text style={styles.resettext}>Reset Using  Mobile</Text>
           </TouchableHighlight>
         </View>
@@ -78,10 +78,10 @@ const styles = StyleSheet.create({
   },
 
    mcImage: {
-    width: 140,
-    height: 115,
-    marginTop:180,
-    marginLeft: 140,
+    width: 210,
+    height: 200,
+    marginTop: 150,
+    marginLeft: 100,
     justifyContent: 'center',
     alignItems: 'center',
     
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 2,
     borderColor: 'yellow',
     marginLeft: 45,
-    marginTop: -120,
+    marginTop: -50,
     height: 100,
     width: 90,
  },

@@ -15,7 +15,7 @@ import AddressForm from '../AddressForm';
 import FeedBack from '../FeedBack';
 import MyCards from '../CardList';
 import AddressBook from '../DeliveryAddressBook';
-import Login from '../Login';
+// import Login from '../Login';
 import Register from '../Register';
 import ResetpasswordEmail from '../ResetpasswordEmail';
 import ResetpasswordMobile from '../ResetpasswordMobile';
@@ -23,7 +23,9 @@ import NewUser from '../NewUser';
 import Loginfragment from '../Loginfragment';
 import TrackOrder from '../TrackOrder';
 import CheckoutCOD from '../CheckoutCOD';
+import CheckoutTK from '../CheckoutTK';
 import GreetCOD from '../GreetCOD';
+import ThankYou from '../ThankYou';
 import DeliveryOptions from '../DeliveryOptions';
 import PastOrders from '../PastOrders';
 import TopTabNavigation from './TopTabNavigation';
@@ -32,7 +34,7 @@ const Stack = createNativeStackNavigator();
 
 function StackNavigator() {
     return (
-        <Stack.Navigator initialRouteName="Login">
+        <Stack.Navigator initialRouteName="Home">
             <Stack.Screen name="Home" component={Home} />
             <Stack.Screen name="TopTabNav" component={TopTabNavigation} />
             <Stack.Screen name="Favourites" component={Favourites} />
@@ -46,16 +48,18 @@ function StackNavigator() {
             <Stack.Screen name="Make A Review" component={FeedBack} />
             <Stack.Screen name="My Cards" component={MyCards} />
             <Stack.Screen name="Delivery Address Book" component={AddressBook} />
-            <Stack.Screen name="Login" component={Login} />
+            {/* <Stack.Screen name="Login" component={Login} /> */}
             <Stack.Screen name="NewUser" component={NewUser} />
             <Stack.Screen name="Register" component={Register} />
-             <Stack.Screen name="Loginfragment" component={Loginfragment} />
-            <Stack.Screen name="ResetpasswordEmail" component={ResetpasswordEmail} />
-            <Stack.Screen name="ResetpasswordMobile" component={ResetpasswordMobile} />
+            <Stack.Screen name="Login" component={Loginfragment} />
+            <Stack.Screen name="Reset Password Using Email" component={ResetpasswordEmail} />
+            <Stack.Screen name="Reset Password Using Mobile" component={ResetpasswordMobile} />
             <Stack.Screen name="Cart" component={Cart} />
             <Stack.Screen name="TrackOrder" component={TrackOrder} />
             <Stack.Screen name="Checkout" component={CheckoutCOD} />
+            <Stack.Screen name="Checkout Take Away" component={CheckoutTK} />
             <Stack.Screen name="ThankYou" component={GreetCOD} options={{ headerShown: false }} />
+            <Stack.Screen name="ThankYouTK" component={ThankYou} options={{ headerShown: false }} />
             <Stack.Screen name="Select Option" component={DeliveryOptions} />
             <Stack.Screen name="My Orders" component={PastOrders} />
         </Stack.Navigator>

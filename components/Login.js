@@ -8,6 +8,8 @@ const Login = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+
+    <View style={styles.square2}>
       
       <View style={styles.contentody} >
         
@@ -26,7 +28,7 @@ const Login = () => {
 
         <View style={styles.forgetdiv}>
           
-          <Text style={styles.forget} onPress={() => navigation.navigate("ResetpasswordEmail")}>Forgot password?</Text>
+          <Text style={styles.forget} onPress={() => navigation.navigate("Reset Password Using Email")}>Forgot password?</Text>
         
         </View>
         
@@ -37,6 +39,7 @@ const Login = () => {
         
         </TouchableHighlight>
       
+      </View>
       </View>
     
     </SafeAreaView>
@@ -147,7 +150,7 @@ const styles = StyleSheet.create({
   },
 
   emailaddressdiv: {
-    marginTop: -50,
+    marginTop: -70,
     marginLeft: -190,
   },
 
@@ -169,7 +172,7 @@ const styles = StyleSheet.create({
   },
 
   passworddiv: {
-    marginTop: 35,
+    marginTop: 20,
     marginLeft: -220,
   },
 

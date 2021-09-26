@@ -3,27 +3,28 @@ import { StyleSheet, Text, View, SafeAreaView, Button, Image, SafeAreaViewBase, 
 import Login from './Login';
 import NewUser from './NewUser';
 
-function Loginfragment({navigation}) {
+let cindex = 0;
 
-    const [index, setIndex] = useState(1);
+const setBorderColor = (choice) => {
+    cindex = choice;
+    console.log("Hi",cindex);
+}
 
-    const RenderElement = ({navigation}) => {
-        //You can add N number of Views here in if-else condition
-        if (index === 1) {
-            //Return the FirstScreen as a child to set in Parent View
+function Loginfragment() {
+
+    const [index, setIndex] = useState('first');
+
+    const RenderElement = () => {
+        if (index === 'first') {
             return <Login />;
-        } else if (index === 2) {
-            //Return the SecondScreen as a child to set in Parent View
+        } else if (index === 'second') {
             return <NewUser />;
         }
     };
 
     return (
         <SafeAreaView style={styles.container}>
-
             <View style={styles.container}>
-
-
                 <View style={styles.square1}>
                     <Image
                         style={styles.mcImage}
@@ -31,25 +32,21 @@ function Loginfragment({navigation}) {
                             uri: "https://i.ibb.co/x3shm4R/mcWhite.png"
                         }}
                     />
-                    <View style={styles.underlinelogin}>
+                    <View style={[styles.underlinelogin , { borderColor: cindex == 1 ? 'Yellow' : 'Yellow'}]}>
                         <TouchableOpacity
-                            onPress={() => setIndex(1)}>
+                            onPress={() => {setIndex('first') ; setBorderColor(1) }}>
                             <Text style={styles.login}>Login</Text>
                         </TouchableOpacity>
                         {/*To set the SecondScreen*/}
-
                     </View>
-                    <View style={styles.underlineregister}>
+                    <View style={[styles.underlineregister ,  { borderColor: cindex == 2 ? 'Yellow' : 'white'}]}>
                         <TouchableOpacity
-                            onPress={() => setIndex(2)}>
+                            onPress={() => {setIndex('second'); setBorderColor(2)}}>
                             <Text style={styles.reg}>I'am New</Text>
                         </TouchableOpacity>
                     </View>
-
                 </View>
-
                 <RenderElement />
-
             </View>
         </SafeAreaView>
     )
@@ -88,8 +85,9 @@ const styles = StyleSheet.create({
     },
 
     underlinelogin: {
-        borderBottomWidth: 2,
-    borderColor: 'yellow',
+    borderBottomWidth: 2,
+   //borderColor: 'yellow',
+    //borderWidth: 2,
     marginLeft: 45,
     marginTop: -50,
     height: 100,
@@ -105,13 +103,12 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
 
-    underlineregister: {
-        borderBottomWidth: 2,
-    borderColor: '#FF3133',
+underlineregister: {
+    borderBottomWidth: 2,
+    //borderColor: '#FF3133',
     marginLeft: 273,
     marginTop: -28,
     width: 90,
-  
 
     },
   

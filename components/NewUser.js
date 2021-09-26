@@ -1,4 +1,4 @@
-import { StatusBar } from 'expo-status-bar';
+//import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, SafeAreaView, Button, Image, SafeAreaViewBase, Alert, TextInput , TouchableHighlight} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
@@ -9,32 +9,10 @@ function NewUser (){
 
   return (
     <SafeAreaView style={styles.container}>
-     <StatusBar hidden/>  
-      {/* <View style={styles.square1}>   
-         <Image 
-          style={styles.mcImage}
-          source={{
-          uri: "https://i.ibb.co/smnnGpk/Daco-5018553.png"
-        }}  
-        />
-        <View style={styles.newdiv}>
-          <Text style={styles.love}>I’m loving it</Text>
-        </View>
-        <View style={styles.underlinelogin}>
-          <Text style={styles.login} 
-           onPress={() => navigation.navigate("Login")}>
-            Login
-          </Text>
-        </View> 
-        <View  style={styles.underlineregister}>
-          <Text style={styles.reg}  
-           onPress={() => navigation.navigate("Register")} >
-              I'am New
-          </Text> 
-        </View>
-        </View>  */}
+     <View style={styles.square2}>
+{/* 
         <View style={styles.contentody} >
-          
+           */}
           <View style={[styles.passwordMobileresetdiv , styles.shadow]}>
             <Text style={styles.passwordMobilereset}>Create an account</Text>        
               <Text style={styles.passwordMobileresetdetails}>
@@ -54,6 +32,7 @@ function NewUser (){
                     <Text style={styles.guestUsertext}>Guest Order</Text>
                 </TouchableHighlight>
           </View>  
+        {/* </View> */}
         </View>
              
     </SafeAreaView>
@@ -67,20 +46,24 @@ const styles = StyleSheet.create({
   },
 
   square1: {
-    marginTop: -120,
-    marginLeft: 0,
-    backgroundColor: "#FF3133",
-    height: 400,
-    width:412,
-    borderRadius: 50,
-    shadowOffset: {
-      width: 0,
-      height: 2
-    },
-    shadowColor: '#000000',
-    shadowOpacity: 0.1,
-    shadowRadius: 3,
-    elevation: 20,
+         marginTop: -120,
+        marginLeft: 0,
+         height: 400,
+        width: 412,
+    // marginTop: -120,
+    // marginLeft: 0,
+    // backgroundColor: "#FF3133",
+    // height: 400,
+    // width:412,
+    // borderRadius: 50,
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 2
+    // },
+    // shadowColor: '#000000',
+    // shadowOpacity: 0.1,
+    // shadowRadius: 3,
+    // elevation: 20,
   },
 
    mcImage: {
@@ -144,15 +127,6 @@ const styles = StyleSheet.create({
     paddingBottom : 2,
   },
 
-  
-  contentody: {
-    //backgroundColor: "pink",
-   // height: 410,
-   // width : 350,
-    //marginTop:10,
-    //marginLeft:22,
-    
- },
 
   passwordMobileresetdiv: {
     marginTop: 10,
