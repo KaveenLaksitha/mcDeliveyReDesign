@@ -1,6 +1,8 @@
 import React from 'react'
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Icon from 'react-native-vector-icons/Entypo';
+import ShopIcon from 'react-native-vector-icons/Feather';
+import AntDesignIcon from 'react-native-vector-icons/AntDesign'
 import { StyleSheet, Text, View, SafeAreaView, Button, Image, SafeAreaViewBase, Alert, TouchableOpacity } from 'react-native';
 
 function Menu({ navigation }) {
@@ -13,43 +15,48 @@ function Menu({ navigation }) {
                 </Text>
                 <TouchableOpacity style={styles.text}
                     onPress={() => navigation.navigate('Profile')}>
-                    <Text style={{ fontSize: 16 }}>Profile</Text></TouchableOpacity>
+                    <Text style={{ fontSize: 20 }}>Profile</Text></TouchableOpacity>
                 <Text style={styles.Icon}>
                     <Icon name="location" size={30} color="black" />
                 </Text>
                 <TouchableOpacity style={styles.text}
                     onPress={() => navigation.navigate('Delivery Address Book')}>
-                    <Text style={{ fontSize: 16 }} >Delivery Address Book</Text></TouchableOpacity>
+                    <Text style={{ fontSize: 20 }} >Delivery Address Book</Text></TouchableOpacity>
                 <Text style={styles.Icon}>
-                    <Icon name="location" size={30} color="black" />
+                    <ShopIcon name="shopping-bag" size={30} color="black" />
                 </Text>
                 <TouchableOpacity style={styles.text}
                     onPress={() => navigation.navigate('My Orders')}>
-                    <Text style={{ fontSize: 16 }}>My Orders</Text></TouchableOpacity>
+                    <Text style={{ fontSize: 20 }}>My Orders</Text></TouchableOpacity>
                 <Text style={styles.Icon}>
                     <Ionicons name="md-wallet-outline" size={30} color="black" />
                 </Text>
                 <TouchableOpacity style={styles.text}
                     onPress={() => navigation.navigate('My Cards')}>
-                    <Text style={{ fontSize: 16 }}>My Cards</Text></TouchableOpacity>
+                    <Text style={{ fontSize: 20 }}>My Cards</Text></TouchableOpacity>
                 <Text style={styles.Icon}>
-                    <Ionicons name="call-outline" size={30} color="black" />
+                    <AntDesignIcon name="customerservice" size={30} color="black" />
                 </Text>
                 <TouchableOpacity style={styles.text}
                     onPress={() => navigation.navigate('ContactUs')}>
-                    <Text style={{ fontSize: 16 }}>Support Services</Text></TouchableOpacity>
+                    <Text style={{ fontSize: 20 }}>Support Services</Text></TouchableOpacity>
                 <Text style={styles.Icon}>
                     <Ionicons name="star-outline" size={30} color="black" />
                 </Text>
                 <TouchableOpacity style={styles.text}
                     onPress={() => navigation.navigate('Make A Review')}>
-                    <Text style={{ fontSize: 16 }}>Make A Review</Text></TouchableOpacity>
+                    <Text style={{ fontSize: 20 }}>Make A Review</Text></TouchableOpacity>
                 <Text style={styles.Icon}>
-                    <Ionicons name="log-out-outline" size={30} color="black" />
+                    <Ionicons name="power" size={30} color="black" />
                 </Text>
                 <TouchableOpacity style={styles.text}
+<<<<<<< HEAD
                     onPress={() => navigation.navigate('Login')}>
                     <Text style={{ fontSize: 16 }}>Log Out</Text></TouchableOpacity>
+=======
+                    onPress={() => navigation.navigate('Profile')}>
+                    <Text style={{ fontSize: 20 }}>Log Out</Text></TouchableOpacity>
+>>>>>>> 6d018ae08260ae514616c1d68f555161efa7552c
 
             </View>
         </View>
@@ -73,7 +80,6 @@ const styles = StyleSheet.create({
     text: {
         marginTop: -52,
         marginLeft: 80,
-        fontSize: 16,
         padding: 10,
         marginBottom: 5
     },
