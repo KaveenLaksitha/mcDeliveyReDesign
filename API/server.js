@@ -11,6 +11,9 @@ const URL = process.env.MONGODB_URL;
 app.use(cors());
 app.use(express.json());
 
+const routes = require("./controller/controller.js");
+app.use("/api", routes)
+
 mongoose.connect(URL, {
     // useCreateIndex: true,
     useNewUrlParser: true,
