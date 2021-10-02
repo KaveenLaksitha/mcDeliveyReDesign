@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const Cart = require("../model/cart")
+const FoodFav = require("../model/foodFav")
 
 //to add items to cart{
 
@@ -41,5 +42,46 @@ router.get("/cart", async (req, res) => {
     }
 
 });
+
+//add food item to favourite list
+router.post("/addToFav", async (req, res) => {
+
+    console.log("data for Favourite", req.body)
+
+    const name = req.body.name;
+    const quantity = req.body.num;
+    const price = req.body.price;
+
+    const newFav = new FoodFav({
+        name, quantity, price
+    })
+
+    try {
+
+        let response = await newFav.save();
+        if (response) {
+            return res.status(201).send({ status: "item added for fAVOURITE" })
+        } else {
+            return res.status(500).send({ status: "failed to add item record" })
+        }
+
+    } catch (err) {
+        console.log("error", err)
+    }
+})
+
+//to retrieve data from db
+router.get("/FavList", async (req, res) => {
+
+    try {
+        const response = await FoodFav.find();
+        return res.status(200).send({ status: "Success", data: response });
+    } catch (error) {
+        console.log("Something went wrong while connecting to DB");
+        return { ok: false };
+    }
+
+});
+
 
 module.exports = router;
