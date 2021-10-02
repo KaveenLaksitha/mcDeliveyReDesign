@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
 
-
 import { View, Text, Button, Image, TouchableHighlight, StyleSheet, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { Picker } from '@react-native-picker/picker';
 
 import Icon1 from 'react-native-vector-icons/Entypo';
+import { addToCart } from '../../service/cartService';
 
 export default function SingleFoodItem({ navigation, route }) {
 
@@ -53,11 +53,16 @@ export default function SingleFoodItem({ navigation, route }) {
     }
 
 
-    const addToCart = () => {
-        navigation.navigate('Cart', {
+    function addToItemCart() {
+        const payload = {
             name, num, price
-        })
+        }
+        addToCart(payload)
+        // navigation.navigate('Cart', {
+        //     name, num, price
+        // })
     }
+
 
     return (
 
@@ -106,7 +111,7 @@ export default function SingleFoodItem({ navigation, route }) {
                     </TouchableOpacity>
                     {/* <Text style={styles.listItemPrice}>Rs.{num1 * 740}.00</Text> */}
                 </View>
-                <TouchableHighlight style={styles.btn} underlayColor='none' onPress={addToCart}>
+                <TouchableHighlight style={styles.btn} underlayColor='none' onPress={() => { addToItemCart() }}>
                     <View style={[styles.buttonRed, styles.elevation]}>
                         <Text style={{ fontSize: 18, color: 'white' }}>Add to Cart - Rs.{calculatedPrice}.00</Text>
                     </View>
