@@ -8,12 +8,9 @@ const wait = (timeout) => {
 }
 function Cart({ navigation }) {
 
-    const [name, setName] = useState("");
-    const [price, setPrice] = useState()
-    const [num1, setNum1] = useState(1);
-    const [num2, setNum2] = useState(1);
-    const [num3, setNum3] = useState(1);
     const [data, setData] = useState([]);
+    var arr = []
+    var total = 0;
 
     const [refreshing, setRefreshing] = React.useState(false);
 
@@ -32,31 +29,49 @@ function Cart({ navigation }) {
 
     useEffect(() => {
 
-        getAllItems().then((data) => {
-            setData(data.data)
+        getAllItems().then((res) => {
+            setData(res.data)
         })
-    }, [num1])
 
-    const decreaseOne = () => {
-        setNum1(num1 - 1);
-        if (num1 == 1) { setNum1(1) }
+    }, [])
+
+    useEffect(() => {
+        arr = data.slice(0, data.length)
+    }, [data, arr])
+
+
+    //to find index
+    const index = (qty) => data.findIndex(function (item, i) {
+        if (item._id === qty._id) {
+            return (i + 2)
+        }
+    })
+
+    //to decrease quantity
+    const decrease = (qty) => {
+        data[index(qty)].quantity = qty.quantity - 1;
+        if (data[index(qty)].quantity >= 0) {
+            setData(arr)
+            arr[index(qty)].price = (qty.quantity - 1) * arr[index(qty)].price;
+        }
     }
-    const increaseOne = () => {
-        setNum1(num1 + 1);
+
+    //to increase quantity
+    const increase = (qty) => {
+        data[index(qty)].quantity = qty.quantity + 1;
+        if (data[index(qty)].quantity < 10) {
+            setData(arr)
+            arr[index(qty)].price = (qty.quantity - 1) * arr[index(qty)].price;
+        }
     }
-    const decreaseTwo = () => {
-        setNum2(num2 - 1);
-        if (num2 == 1) { setNum2(1) }
-    }
-    const increaseTwo = () => {
-        setNum2(num2 + 1);
-    }
-    const decreaseThree = () => {
-        setNum3(num3 - 1);
-        if (num3 == 1) { setNum3(1) }
-    }
-    const increaseThree = () => {
-        setNum3(num3 + 1);
+
+    //to calculate total price
+    const calculateTotal = () => {
+        data.forEach(function (item, i) {
+            total = (total + data[i].price)
+        })
+        console.log(total)
+        return total;
     }
 
     const List = () => {
@@ -68,16 +83,20 @@ function Cart({ navigation }) {
                             <Text style={styles.listItemText}>{element.name}</Text>
                         </View>
                         <View style={styles.quantity}>
-                            <TouchableOpacity onPress={decreaseOne} >
+                            <TouchableOpacity
+                                onPress={() => { decrease(element) }}
+                            >
                                 <Icon name="squared-minus" size={30} />
                             </TouchableOpacity>
-                            <Text style={styles.listItemQty}>0{num1}</Text>
-                            <TouchableOpacity onPress={increaseOne}>
+                            <Text style={styles.listItemQty}>0{data[index(element)].quantity}</Text>
+                            <TouchableOpacity
+                                onPress={() => { increase(element) }}
+                            >
                                 <Icon name="squared-plus" size={30} />
                             </TouchableOpacity>
                         </View>
                         <View style={styles.priceAbsolute}>
-                            <Text style={styles.listItemPrice}>Rs.{element.price}.00</Text>
+                            <Text style={styles.listItemPrice}>Rs.{(data[index(element)].quantity) * element.price}.00</Text>
                         </View>
                     </View>
                 </View>
@@ -93,7 +112,7 @@ function Cart({ navigation }) {
                     refreshControl={<RefreshControl
                         refreshing={refreshing}
                         onRefresh={onRefresh} />}
-                    style={{ maxHeight: 550, minHeight: 550, zIndex: 9999 }}
+                    style={{ maxHeight: 535, minHeight: 535, marginBottom: 10, marginTop: 10 }}
                 >
                     {List()}
                 </ScrollView>
@@ -105,7 +124,7 @@ function Cart({ navigation }) {
                         </View>
                     </TouchableHighlight>
 
-                    <TouchableHighlight underlayColor='none' onPress={() => navigation.navigate("Select Option")}>
+                    <TouchableHighlight underlayColor='none' onPress={() => navigation.navigate("Select Option", { price: calculateTotal() })}>
                         <View style={[styles.buttonYellow, styles.elevation]}>
                             <Text style={{ fontSize: 16, color: 'black' }}>Checkout</Text>
                         </View>
@@ -165,10 +184,11 @@ const styles = StyleSheet.create({
         alignItems: "center",
     },
     priceAbsolute: {
-        marginLeft: 55,
+        marginLeft: 52,
     }
     ,
     image: {
+        zIndex: -1,
         marginTop: 80,
         width: 412,
         height: 445,
