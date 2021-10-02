@@ -5,7 +5,7 @@ function AlaCarte({ navigation }) {
     return (
         <View>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
-                <TouchableHighlight underlayColor='none' onPress={() => navigation.navigate('View Item')}>
+                <TouchableHighlight underlayColor='none' onPress={() => navigation.navigate('Mc Fries')}>
                     <View style={[Styles.square1, Styles.elevation]}>
                         <Image style={Styles.img1} source={{ uri: "https://i.ibb.co/cw4KRFK/goodeats-yqr-z-VTf-YVY9-HY0-unsplash.jpg" }}>
 
