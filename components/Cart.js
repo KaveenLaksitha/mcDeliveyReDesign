@@ -1,13 +1,41 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, StyleSheet, ImageBackground, TouchableHighlight, Alert, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, RefreshControl, ImageBackground, TouchableHighlight, Alert, TouchableOpacity, ScrollView } from 'react-native'
 import Icon from 'react-native-vector-icons/Entypo';
+import { getAllItems } from '../service/cartService';
 
-
+const wait = (timeout) => {
+    return new Promise(resolve => setTimeout(resolve, timeout));
+}
 function Cart({ navigation }) {
 
+    const [name, setName] = useState("");
+    const [price, setPrice] = useState()
     const [num1, setNum1] = useState(1);
     const [num2, setNum2] = useState(1);
     const [num3, setNum3] = useState(1);
+    const [data, setData] = useState([]);
+
+    const [refreshing, setRefreshing] = React.useState(false);
+
+    const onRefresh = React.useCallback(() => {
+        setRefreshing(true);
+        wait(500).then(() => setRefreshing(false));
+        getAllItems().then((res) => {
+
+            if (res.ok) {
+                setData(res.data);
+            }
+        }).catch((err) => {
+            alert("error", err);
+        })
+    }, []);
+
+    useEffect(() => {
+
+        getAllItems().then((data) => {
+            setData(data.data)
+        })
+    }, [num1])
 
     const decreaseOne = () => {
         setNum1(num1 - 1);
@@ -31,55 +59,46 @@ function Cart({ navigation }) {
         setNum3(num3 + 1);
     }
 
-    useEffect(() => {
-    }, [num1])
+    const List = () => {
+        return data.map((element) => {
+            return (
+                <View style={[styles.listItem, styles.elevation]} key={element._id}>
+                    <View style={styles.horizontal}>
+                        <View style={styles.textAbsolute}>
+                            <Text style={styles.listItemText}>{element.name}</Text>
+                        </View>
+                        <View style={styles.quantity}>
+                            <TouchableOpacity onPress={decreaseOne} >
+                                <Icon name="squared-minus" size={30} />
+                            </TouchableOpacity>
+                            <Text style={styles.listItemQty}>0{num1}</Text>
+                            <TouchableOpacity onPress={increaseOne}>
+                                <Icon name="squared-plus" size={30} />
+                            </TouchableOpacity>
+                        </View>
+                        <View style={styles.priceAbsolute}>
+                            <Text style={styles.listItemPrice}>Rs.{element.price}.00</Text>
+                        </View>
+                    </View>
+                </View>
+            )
+        })
+    }
 
     return (
         <View>
             <View style={styles.body}>
                 <Text style={styles.headers}>Your Order</Text>
-                <View style={[styles.listItem, styles.elevation]}>
-                    <View style={styles.horizontal}>
-                        <Text style={styles.listItemText}>Ziinger Burger</Text>
-                        <TouchableOpacity onPress={decreaseOne} >
-                            <Icon name="squared-minus" size={30} />
-                        </TouchableOpacity>
-                        <Text style={styles.listItemQty}>0{num1}</Text>
-                        <TouchableOpacity onPress={increaseOne}>
-                            <Icon name="squared-plus" size={30} />
-                        </TouchableOpacity>
-                        <Text style={styles.listItemPrice}>Rs.{num1 * 740}.00</Text>
-                    </View>
-                </View>
-                <View style={[styles.listItem, styles.elevation]}>
+                <ScrollView
+                    refreshControl={<RefreshControl
+                        refreshing={refreshing}
+                        onRefresh={onRefresh} />}
+                    style={{ maxHeight: 550, minHeight: 550, zIndex: 9999 }}
+                >
+                    {List()}
+                </ScrollView>
 
-                    <View style={styles.horizontal}>
-                        <Text style={styles.listItemText}>Cheese Burger</Text>
-                        <TouchableOpacity onPress={decreaseTwo} >
-                            <Icon name="squared-minus" size={30} />
-                        </TouchableOpacity>
-                        <Text style={styles.listItemQty}>0{num2}</Text>
-                        <TouchableOpacity onPress={increaseTwo} >
-                            <Icon name="squared-plus" size={30} />
-                        </TouchableOpacity>
-                        <Text style={styles.listItemPrice}>Rs.{num2 * 540}.00</Text>
-                    </View>
-                </View>
-                <View style={[styles.listItem, styles.elevation]}>
-
-                    <View style={styles.horizontal}>
-                        <Text style={styles.listItemText}>Double Cheese</Text>
-                        <TouchableOpacity onPress={decreaseThree} >
-                            <Icon name="squared-minus" size={30} />
-                        </TouchableOpacity>
-                        <Text style={styles.listItemQty}>0{num3}</Text>
-                        <TouchableOpacity onPress={increaseThree} >
-                            <Icon name="squared-plus" size={30} />
-                        </TouchableOpacity>
-                        <Text style={styles.listItemPrice}>Rs.{num3 * 640}.00</Text>
-                    </View>
-                </View>
-                <View style={{ marginTop: 270, flexDirection: 'row' }}>
+                <View style={{ flexDirection: 'row' }}>
                     <TouchableHighlight underlayColor='none' onPress={() => navigation.navigate("Home")}>
                         <View style={[styles.buttonRed, styles.elevation]}>
                             <Text style={{ fontSize: 16, color: 'white' }}>Cancel</Text>
@@ -122,11 +141,9 @@ const styles = StyleSheet.create({
     },
     listItemText: {
         fontSize: 16,
-        marginRight: 40,
     },
     listItemPrice: {
         fontSize: 16,
-        marginLeft: 35
     },
     listItemQty: {
         margin: 5,
@@ -140,6 +157,17 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: "bold",
     },
+    textAbsolute: {
+        width: 135,
+    },
+    quantity: {
+        flexDirection: "row",
+        alignItems: "center",
+    },
+    priceAbsolute: {
+        marginLeft: 55,
+    }
+    ,
     image: {
         marginTop: 80,
         width: 412,
@@ -151,6 +179,7 @@ const styles = StyleSheet.create({
     horizontal: {
         flexDirection: "row",
         alignItems: "center",
+
     },
     buttonYellow: {
         alignItems: "center",
