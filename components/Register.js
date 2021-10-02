@@ -6,7 +6,7 @@ export default function Register({navigation}) {
 
   const [isSelected, setSelection] = useState(false);
   const [isSelected2, setSelection2] = useState(false);
-
+  const [textInputValue, setTextInputValue] = React.useState('');
   const [selectedValue, setSelectedValue] = useState("mr");
 
   return (
@@ -19,48 +19,65 @@ export default function Register({navigation}) {
             selectedValue={selectedValue} style={styles.salutation}
             onValueChange={(itemValue,itemIndex) => setSelectedValue(itemValue)}
             >
-            <Picker.Item label="Mr" value ="mr"/>
-            <Picker.Item label="Mrs" value ="mrs"/>
-             <Picker.Item label="Ms" value ="ms"/>
+              <Picker.Item label="Mr" value ="mr"/>
+              <Picker.Item label="Mrs" value ="mrs"/>
+              <Picker.Item label="Ms" value ="ms"/>
             </Picker>
           
           <Text style={styles.nameText}>Name</Text>
           <TextInput style={styles.name}></TextInput>
 
           <Text style={styles.contactnoText}>Contact No</Text>
-          <TextInput style={styles.contactno}></TextInput>
+          <TextInput style={styles.contactno}
+            keyboardType={'numeric'}
+          ></TextInput>
 
           <Text style={styles.dobText}>Date of Birth</Text>
           <TextInput style={styles.dob}></TextInput>
 
           <Text style={styles.emailText}>Email address</Text>
-          <TextInput style={styles.email}></TextInput>
+          <TextInput style={styles.email}
+             onChangeText={text => setTextInputValue(text)}
+             value={textInputValue}
+             placeholder="abc@gmail.com"
+             pattern = '/[a-zA-Z0-9]+[\.]?([a-zA-Z0-9]+)?[\@][a-z]{3,9}[\.][a-z]{2,5}/g'
+          ></TextInput>
 
           <Text style={styles.passwordText}>Password</Text>
-          <TextInput style={styles.password}></TextInput>
+          <TextInput style={styles.password}
+             secureTextEntry={true} 
+             maxLength={4}
+             minLength= {6}
+          ></TextInput>
 
           <Text style={styles.cpText}>Confirm password</Text>
-          <TextInput style={styles.cp}></TextInput>
+          <TextInput style={styles.cp}
+             secureTextEntry={true} 
+             maxLength={10}
+             minLength= {6}
+          ></TextInput>
+
           <Text style={styles.passworddetails}>Password must be 6-10 charcters with 1 numeric digit</Text>
 
           <View style={styles.checkboxContainer}>
-            <CheckBox style={styles.checkbox}  value={isSelected}
-                          onValueChange={setSelection}/>
-
+            <CheckBox style={styles.checkbox}  value={isSelected}  onValueChange={setSelection} />
               <Text style={styles.privact1}>Yes, I have read and agre to following policies 
                                           <Text style={styles.underline1}> Terms & Conditions </Text> and 
                                           <Text style={styles.underline2}> Privacy Policy </Text> </Text>        
           </View>
+
           <View style={styles.checkboxContainer2}>
-           <CheckBox style={styles.checkbox2}  value={isSelected2}
+            <CheckBox style={styles.checkbox2}  value={isSelected2}
                           onValueChange={setSelection2}/>
               <Text style={styles.privact2}>I would like to subscribe for promotional emails and sms</Text>
           </View>
+
           <TouchableHighlight style={styles.resetbutton}
               onPress={() => navigation.navigate("Home")}>
               <Text style={styles.resettext}>Register</Text>
           </TouchableHighlight>        
-        </View>    
+        </View> 
+
         <ImageBackground source={{
           uri: "https://i.ibb.co/cC9bKMK/Nice-Png-ronald-mcdonald-face-png-4130175.png",
         }} style={styles.image}>

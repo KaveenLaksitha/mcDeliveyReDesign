@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     },
 
     square1: {
-        marginTop: -10,
+        marginTop: -50,
         marginLeft: 0,
         backgroundColor: "#FF3133",
         height: 400,
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     mcImage: {
         width: 250,
         height: 240,
-        marginTop: 70,
+        marginTop: 80,
         marginLeft: 80,
         justifyContent: 'center',
         alignItems: 'center',
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
         borderColor: cindex === 1 ? 'yellow' : 'white',
         // borderWidth: 2,
         marginLeft: 45,
-        marginTop: -10,
+        marginTop: -20,
         height: 100,
         width: 90,
     },
