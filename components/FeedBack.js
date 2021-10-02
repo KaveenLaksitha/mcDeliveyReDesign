@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Picker } from '@react-native-picker/picker';
 import { Rating, AirbnbRating } from 'react-native-ratings';
+import Feather from 'react-native-vector-icons/FontAwesome5';
 import { StyleSheet, Text, View, SafeAreaView, Button, ImageBackground, Alert, TextInput, TouchableHighlight, TouchableOpacity, ScrollView } from 'react-native';
-
+import { StatusBar } from 'expo-status-bar';
 
 
 export default function FeedBack({ navigation }) {
@@ -12,9 +13,68 @@ export default function FeedBack({ navigation }) {
     const [complaint, onChangeComplaint] = React.useState(null);
     const [rate, onChangeRate] = React.useState(null);
     const [none, setNone] = useState(false);
+
+
+    const [data, setData] = React.useState({
+        orderId: '',
+        checkTextInputChange: false,
+        secureTextEntry: true,
+        isValidOrderId: true
+    });
+
+    const textInputChange = (val) => {
+        if (val.trim().length != 0) {
+            setData({
+                ...data,
+                orderId: val,
+                checkTextInputChange: true,
+            })
+            handleOrderId(val);
+        } else {
+            setData({
+                ...data,
+                orderId: '',
+                checkTextInputChange: false,
+            })
+            handleOrderId(val);
+        }
+
+    }
+
+    const handleOrderId = (value) => {
+        let pattern = value;
+        if (value.trim().length == 6) {
+            if (pattern.match('OI-[0-9]{3}')) {
+                setData({
+                    ...data,
+                    isValidOrderId: true,
+                    checkTextInputChange: true
+                })
+            }
+        }
+        else {
+            setData({
+                ...data,
+                isValidOrderId: false,
+                checkTextInputChange: false
+            })
+        }
+    }
+
+
+
+
+
+
     return (
 
         <SafeAreaView style={styles.container}>
+            {/* <StatusBar
+                barStyle="light-content"
+                hidden={true}
+                backgroundColor="blue"
+                translucent={true}
+            /> */}
 
 
             <View style={styles.square1}>
@@ -29,17 +89,38 @@ export default function FeedBack({ navigation }) {
                     <View style={styles.square3}>
 
                         <View style={styles.box}>
+                            {data.isValidOrderId && data.checkTextInputChange ?
+                                <View style={styles.validId}>
+                                    <Feather
+                                        name="check-circle"
+                                        color="green"
+                                        size={20}>
+                                    </Feather>
+                                </View>
+                                : <View style={styles.validId}>
+                                    <Feather
+                                        name="star-of-life"
+                                        color="red"
+                                        size={10}>
+                                    </Feather>
+                                </View>}
+                            {data.isValidOrderId ? false :
+                                <Text style={styles.errMsg1}>Must follow the OI-000 pattern</Text>
+
+                            }
                             <Text style={styles.textValue}>Order Id </Text>
                             <TextInput style={styles.input}
-                                onChangeText={onChangeOrderId}
+                                onChangeText={(e) => { textInputChange(e); onChangeOrderId(e) }}
                                 value={orderId}
+                                onEndEditing={(e) => textInputChange(e.nativeEvent.text)}
                             />
+
                         </View>
                         <View style={styles.box}>
                             <Text style={styles.textValue}>Review On </Text>
                             <Picker style={styles.pickerinput}
                                 selectedValue={reviewOn}
-                                onValueChange={(itemValue, itemIndex) => onChangeReviewOn(itemValue)}
+                                onValueChange={(itemValue) => onChangeReviewOn(itemValue)}
                             >
                                 <Picker.Item style={{ fontSize: 14 }} label="Food" value="Food" />
                                 <Picker.Item style={{ fontSize: 14 }} label="Delivery" value="Delivery" />
@@ -49,7 +130,7 @@ export default function FeedBack({ navigation }) {
                         <View style={styles.box}>
                             <Text style={styles.textValue}>Suggestions </Text>
                             <TextInput style={styles.input}
-                                onChangeText={onChangeSuggestion}
+                                onChangeText={(e) => onChangeSuggestion(e)}
                                 value={suggestion}
                                 multiline={true}
                                 numberOfLines={2}
@@ -58,7 +139,7 @@ export default function FeedBack({ navigation }) {
                         <View style={styles.box}>
                             <Text style={styles.textValue}>Complaints </Text>
                             <TextInput style={styles.input}
-                                onChangeText={onChangeComplaint}
+                                onChangeText={(e) => onChangeComplaint(e)}
                                 value={complaint}
                                 multiline={true}
                                 numberOfLines={2}
@@ -72,8 +153,8 @@ export default function FeedBack({ navigation }) {
                                     // reviews={["Bad", "Meh", "OK", "Good", "Amazing"]}
                                     // defaultRating={5}
                                     showRating={none}
-                                    onFinishRating={onChangeRate}
-                                    size={35}
+                                    onFinishRating={(e) => onChangeRate(e)}
+                                    size={20}
                                 />
                             </Text>
 
@@ -262,9 +343,22 @@ const styles = StyleSheet.create({
         fontSize: 14,
         color: "#CCCC00",
         fontWeight: 'bold',
-    }
+    },
+    errMsg1: {
+        color: "red",
+        textAlign: "left",
+        marginLeft: 100,
+        marginTop: -15,
+    },
 
-
+    validId: {
+        position: "absolute",
+        width: 20,
+        height: 10,
+        //backgroundColor: "green",
+        marginTop: 5,
+        marginLeft: 330
+    },
 
 
 });

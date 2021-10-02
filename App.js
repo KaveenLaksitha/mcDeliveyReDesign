@@ -15,6 +15,7 @@ const defaultTheme = {
 function App() {
   return (
     <NavigationContainer theme={defaultTheme}>
+
       <TabNavigation />
     </NavigationContainer>
   );

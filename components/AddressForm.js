@@ -14,6 +14,45 @@ export default function AddressForm({ navigation }) {
     const [instruct, onChangeinstruct] = React.useState(null);
     const [autoFocus, onChangeAutoFocus] = React.useState(false);
     const [trues, onChangeSetTrue] = useState(true);
+    const [editFloor, setEditFloor] = useState(true);
+    const [editApm, setEditApm] = useState(true);
+    const [editCompany, setEditCompany] = useState(true);
+    const [editDepartment, setEditDepartment] = useState(true);
+    const [state, setState] = useState("");
+
+
+    function resetAll() {
+        onChangeDeliveryAddres("");
+        onChangeCity("Colombo");
+        onChangeLocationType("Home");
+        onChangeFloor("");
+        onChangeApartmentNo("");
+        onChangeLandMark("");
+        onChangeCompanyName("");
+        onChangeDepartment("");
+        onChangeinstruct("")
+    }
+
+    function setDisables(value) {
+        if (value === "Home" || locationType === "Home") {
+            setEditFloor(false);
+            setEditApm(false);
+            setEditCompany(false);
+            setEditDepartment(false);
+        } else if (value === "Apartment") {
+            setEditFloor(true);
+            setEditApm(true);
+            setEditCompany(false);
+            setEditDepartment(false);
+
+        } else if (value === "Office") {
+            setEditFloor(true);
+            setEditApm(false);
+            setEditCompany(true);
+            setEditDepartment(true);
+
+        }
+    }
 
     return (
 
@@ -24,10 +63,9 @@ export default function AddressForm({ navigation }) {
                     <ScrollView vertical={true}>
                         <Text style={styles.textValue}>Delivery Address: * </Text>
                         <TextInput style={styles.input}
-                            onChangeText={onChangeDeliveryAddres}
+                            onChangeText={(e) => onChangeDeliveryAddres(e)}
                             value={deliveryAddress}
                             multiline={true}
-                            autoFocus={autoFocus}
                             numberOfLines={3}
                             require={true}
                             //placeholder="Delivery Address"
@@ -39,7 +77,7 @@ export default function AddressForm({ navigation }) {
                         <Picker style={styles.pickerinput}
                             require={true}
                             selectedValue={city}
-                            onValueChange={(itemValue, itemIndex) => onChangeCity(itemValue)}
+                            onValueChange={(itemValue) => onChangeCity(itemValue)}
                         >
                             <Picker.Item style={{ fontSize: 14, color: "#8B0000", fontWeight: "bold-italic" }} label="Aluthkade" value="Aluthkade" />
                             <Picker.Item style={{ fontSize: 14, color: "#8B0000", fontWeight: "bold-italic" }} label="Ambuldeniya" value="Ambuldeniya" />
@@ -63,7 +101,7 @@ export default function AddressForm({ navigation }) {
                         <Picker style={styles.pickerinput}
                             selectedValue={locationType}
                             require={true}
-                            onValueChange={(itemValue, itemIndex) => onChangeLocationType(itemValue)}
+                            onValueChange={(itemValue) => { onChangeLocationType(itemValue); setDisables(itemValue) }}
                         >
                             <Picker.Item style={{ fontSize: 14, color: "#8B0000", fontWeight: "bold-italic" }} label="Home" value="Home" />
                             <Picker.Item style={{ fontSize: 14, color: "#8B0000", fontStyle: "bold-italic" }} label="Apartment" value="Apartment" />
@@ -77,6 +115,8 @@ export default function AddressForm({ navigation }) {
                             onChangeText={onChangeFloor}
                             value={floor}
                             keyboardType="decimal-pad"
+                            maxLength={3}
+                            editable={editFloor}
                         />
                         <View style={styles.textValueApN}>
                             <Text >Apartment Number/Name: </Text>
@@ -85,7 +125,9 @@ export default function AddressForm({ navigation }) {
                         <TextInput style={styles.apN}
                             onChangeText={onChangeApartmentNo}
                             value={apartmentNo}
-                            keyboardType="decimal-pad"
+                            keyboardType="default"
+                            maxLength={20}
+                            editable={editApm}
                         />
 
                         <Text style={styles.textValue}>LandMark: *</Text>
@@ -103,6 +145,7 @@ export default function AddressForm({ navigation }) {
                             value={companyName}
                             placeholder="company name"
                             keyboardType="default"
+                            editable={editCompany}
                         />
 
                         <Text style={styles.textValue}>Department: </Text>
@@ -111,6 +154,7 @@ export default function AddressForm({ navigation }) {
                             value={department}
                             placeholder="department name"
                             keyboardType="default"
+                            editable={editDepartment}
                         />
 
                         <Text style={styles.textValue}>Delivery Instruction: </Text>
@@ -131,7 +175,7 @@ export default function AddressForm({ navigation }) {
                     <Text style={styles.submitText}>Save</Text>
                 </TouchableHighlight>
                 <TouchableHighlight style={{ textAlign: 'center' }, styles.submitButton2}
-                    onPress={() => Alert.alert('Reset Deatisl')}>
+                    onPress={() => resetAll()}>
                     <Text style={styles.submitText}>Reset</Text>
                 </TouchableHighlight>
 

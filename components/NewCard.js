@@ -1,16 +1,110 @@
 import React, { useState } from 'react';
 import { Picker } from '@react-native-picker/picker';
-import { StyleSheet, Text, View, SafeAreaView, Button, Image, SafeAreaViewBase, Alert, TextInput, TouchableHighlight, ScrollView } from 'react-native';
-import { RadioButton } from 'react-native-paper';
+import { StyleSheet, Text, View, SafeAreaView, Button, Image, Animated, Form, TextInput, TouchableHighlight, ScrollView } from 'react-native';
+import Feather from 'react-native-vector-icons/FontAwesome5'
+
+
+// import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 function NewCard({ navigation }) {
 
     const [cardType, onChangeCardType] = useState("Visa");
-    const [cardNumber, onChangeCardNumber] = React.useState(null);
-    const [nameOnCard, onChangeNameOnCard] = React.useState(null);
-    const [ExpiryDate, onChangeExpiryDate] = React.useState(null);
-    const [date, setDate] = useState(new Date())
-    const [open, setOpen] = useState(false)
+    const [cardNumber, onChangeCardNumber] = useState();
+    const [dcardNumber, onChangeDCardNumber] = useState();
+    const [nameOnCard, onChangeNameOnCard] = useState();
+    const [dnameOnCard, onChangeDNameOnCard] = useState();
+    const [ExpiryDate, onChangeExpiryDate] = useState();
+    const [dExpiryDate, onChangeDExpiryDate] = useState();
+
+    const [data, setData] = React.useState({
+        cardNumber: '',
+        nameOnCard: '',
+        checkTextInputChange1: false,
+        checkTextInputChange2: false,
+        secureTextEntry: true,
+        isValidNumber: true,
+        isValidName: true
+    });
+
+
+    const textInputChange = (val) => {
+        if (val.trim().length != 0) {
+            setData({
+                ...data,
+                cardNumber: val,
+                checkTextInputChange1: true
+            })
+            handleCardNumber(val);
+        } else {
+            setData({
+                ...data,
+                cardNumber: '',
+                checkTextInputChange1: false
+            })
+            handleCardNumber(val);
+        }
+    }
+
+    const handleCardNumber = (value) => {
+        let pattern = value;
+        onChangeDCardNumber(value)
+        if (value.trim().length == 19) {
+            if (pattern.match('[0-9]{4} [0-9]{4} [0-9]{4} [0-9]{4}')) {
+                setData({
+                    ...data,
+                    isValidNumber: true,
+                    checkTextInputChange1: true
+                })
+            }
+
+
+        } else {
+            setData({
+                ...data,
+                isValidNumber: false,
+                checkTextInputChange1: false
+            })
+        }
+    }
+
+    const textInputChange2 = (val) => {
+        if (val.trim().length != 0) {
+            setData({
+                ...data,
+                nameOnCard: val,
+                checkTextInputChange2: true
+            })
+            handleName(val)
+        } else {
+            setData({
+                ...data,
+                nameOnCard: '',
+                checkTextInputChange2: false
+            })
+            handleName(val);
+        }
+    }
+
+    const handleName = (value) => {
+        let pattern = value;
+        onChangeDNameOnCard(value)
+
+        if (pattern.match(/^[a-zA-Z\s]*$/)) {
+            setData({
+                ...data,
+                isValidName: true,
+                checkTextInputChange2: true
+            })
+        }
+        else {
+            setData({
+                ...data,
+                isValidName: false,
+                checkTextInputChange2: false
+            })
+        }
+    }
+
 
 
 
@@ -18,6 +112,7 @@ function NewCard({ navigation }) {
         <SafeAreaView style={styles.container}>
 
             <View style={styles.contentody} >
+
                 <ScrollView vertical={true}>
                     <View style={[styles.cardDisplay, styles.shadow]}>
                         <Image style={styles.visa}
@@ -25,9 +120,17 @@ function NewCard({ navigation }) {
                                 uri: "https://i.ibb.co/PmDYwrP/visa.jpg"
                             }}></Image>
 
-                        <Text style={styles.cardNo}>XXXX  XXXX  XXXX  1425</Text>
+                        <TextInput style={styles.cardNo}
+                            placeholder="XXXX XXXX XXXX 1425"
+                            value={dcardNumber}
+                            editable={false}
+                        ></TextInput>
                         <Text style={styles.cardHolder}>Card Holder</Text>
-                        <Text style={styles.Name}>Andrew Wilson</Text>
+                        <TextInput style={styles.Name}
+                            placeholder="Andrew Wilson"
+                            value={dnameOnCard}
+                            editable={false}
+                        ></TextInput>
                         <Text style={styles.validThru}>Valid Thru</Text>
                         <Text style={styles.date}>10/24</Text>
                     </View>
@@ -37,7 +140,8 @@ function NewCard({ navigation }) {
                         <Text style={styles.textValue}>Card Type </Text>
                         <Picker style={styles.pickerinput}
                             selectedValue={cardType}
-                            onValueChange={(itemValue, itemIndex) => onChangeCardType(itemValue)}
+                            onValueChange={(itemValue) => onChangeCardType(itemValue)}
+
                         >
                             <Picker.Item label="Visa" value="Visa" />
                             <Picker.Item label="Master" value="Master" />
@@ -46,22 +150,60 @@ function NewCard({ navigation }) {
 
 
                         <Text style={styles.textValue}>Card Number </Text>
+                        {data.isValidNumber && data.checkTextInputChange1 ?
+                            <View style={styles.validNo}>
+                                <Feather
+                                    name="check-circle"
+                                    color="green"
+                                    size={20}>
+                                </Feather>
+                            </View>
+                            : <View style={styles.validNo}>
+                                <Feather
+                                    name="star-of-life"
+                                    color="red"
+                                    size={10}>
+                                </Feather>
+                            </View>}
                         <TextInput style={styles.input}
-                            onChangeText={onChangeCardNumber}
+                            onChangeText={(val) => { textInputChange(val); (e) => onChangeCardNumber(e) }}
                             value={cardNumber}
                             placeholder="xxxx xxxx xxxx xxxx"
                             keyboardType="numeric"
+                            onEndEditing={(e) => textInputChange(e.nativeEvent.text)}
                         />
 
+                        {data.isValidNumber ? false :
+                            <Text style={styles.errMsg}>Card must include 16 numbers in correct format</Text>
 
+                        }
                         <Text style={styles.textValue}>Name on Card </Text>
+                        {data.isValidName && data.checkTextInputChange2 ?
+                            <View style={styles.nameValid}>
+                                <Feather
+                                    name="check-circle"
+                                    color="green"
+                                    size={20}>
+                                </Feather>
+                            </View>
+                            : <View style={styles.nameValid}>
+                                <Feather
+                                    name="star-of-life"
+                                    color="red"
+                                    size={10}>
+                                </Feather>
+                            </View>}
                         <TextInput style={styles.input}
-                            onChangeText={onChangeNameOnCard}
+                            onChangeText={(val) => { textInputChange2(val); (val) => onChangeNameOnCard(val) }}
                             value={nameOnCard}
                             placeholder="Andrew Wilson"
                             keyboardType="default"
+                            onEndEditing={(e) => textInputChange2(e.nativeEvent.text)}
                         />
+                        {data.isValidName ? false :
+                            <Text style={styles.errMsg}>Cannot use characters other than letters</Text>
 
+                        }
 
                         <Text style={styles.textValue}>Expiry Date </Text>
                         <TextInput style={styles.input}
@@ -70,47 +212,6 @@ function NewCard({ navigation }) {
                             placeholder="2021/10/14"
                             keyboardType="decimal-pad"
                         />
-                        {/* <DatePicker
-                            style={{ width: 200 }}
-                            date={ExpiryDate}
-                            mode="date"
-                            placeholder="select date"
-                            format="YYYY-MM-DD"
-                            minDate="2016-05-01"
-                            maxDate="2016-06-01"
-                            confirmBtnText="Confirm"
-                            cancelBtnText="Cancel"
-                            customStyles={{
-                                dateIcon: {
-                                    position: 'absolute',
-                                    left: 0,
-                                    top: 4,
-                                    marginLeft: 0
-                                },
-                                dateInput: {
-                                    marginLeft: 36
-                                }
-                                // ... You can check the source to find the other keys.
-                            }}
-                            onDateChange={() => { onChangeExpiryDate }}
-                        /> */}
-                        {/* <DatePicker
-                            modal
-                            open={open}
-                            date={ExpiryDate}
-                            onConfirm={(date) => {
-
-                                setOpen(false)
-                                //setDate(date)
-
-                            }}
-                            onCancel={() => {
-                                setOpen(false)
-                            }}
-                            onChange={(e) => {
-                                onChangeExpiryDate(e.target.value)
-                            }} */}
-                        {/* /> */}
 
                     </View>
                 </ScrollView>
@@ -165,7 +266,7 @@ const styles = StyleSheet.create({
         marginTop: 30,
         marginLeft: 20,
         width: 346,
-        height: 340
+        height: 360
 
     },
 
@@ -187,7 +288,10 @@ const styles = StyleSheet.create({
         marginTop: 70,
         marginLeft: 65,
         fontSize: 20,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        width: 250,
+        color: "black"
+        //height: 50
     },
     cardHolder: {
         position: "absolute",
@@ -198,10 +302,12 @@ const styles = StyleSheet.create({
     },
     Name: {
         position: "absolute",
-        marginTop: 140,
+        marginTop: 135,
         marginLeft: 16,
+        width: 250,
         fontSize: 14,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        color: "black"
     },
     validThru: {
         position: "absolute",
@@ -276,6 +382,29 @@ const styles = StyleSheet.create({
         fontSize: 18,
         color: "white",
     },
+
+    validNo: {
+        position: "absolute",
+        width: 20,
+        height: 10,
+        //backgroundColor: "green",
+        marginTop: 120,
+        marginLeft: 300
+    },
+    nameValid: {
+        position: "absolute",
+        width: 20,
+        height: 10,
+        //backgroundColor: "green",
+        marginTop: 200,
+        marginLeft: 300
+    },
+    errMsg: {
+        color: "red",
+        textAlign: "left",
+        marginLeft: 25,
+        fontSize: 14
+    }
 
 });
 
