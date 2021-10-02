@@ -1,59 +1,50 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View, SafeAreaView, Button, Image, SafeAreaViewBase, Alert, TextInput, TouchableHighlight } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, View, SafeAreaView, Button, Image, SafeAreaViewBase, Alert, TextInput, TouchableHighlight, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
+const Login = () => {
 
-export default function Login({ navigation }) {
+  const navigation = useNavigation();
+
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar hidden />
-      <View style={styles.square1}>
-        <Image
-          style={styles.mcImage}
-          source={{
-            uri: "https://i.ibb.co/smnnGpk/Daco-5018553.png"
-          }}
-        />
 
-        <View style={styles.newdiv}>
-          <Text style={styles.love}>I’m loving it</Text>
-        </View>
-        <View style={styles.underlinelogin}>
-          <Text style={styles.login}
-            onPress={() => navigation.navigate("Login")}>
-            Login
-          </Text>
-        </View>
-        <View style={styles.underlineregister}>
-          <Text style={styles.reg}
-            onPress={() => navigation.navigate("NewUser")} >
-            I'am New
-          </Text>
+      <View style={styles.square2}>
+
+        <View style={styles.contentody} >
+
+          <View style={styles.emailaddressdiv}>
+
+            <Text style={styles.emailaddress}>Email Address</Text>
+
+          </View>
+
+          <TextInput style={styles.inputemail} ></TextInput>
+          <View style={styles.passworddiv}>
+            <Text style={styles.password}>Password</Text>
+          </View>
+
+          <TextInput style={styles.inputpassword} ></TextInput>
+
+          <View style={styles.forgetdiv}>
+
+            <Text style={styles.forget} onPress={() => navigation.navigate("Reset Password Using Email")}>Forgot password?</Text>
+
+          </View>
+
+          <TouchableHighlight style={styles.loginbutton}
+            onPress={() => Alert.alert('Login Successfully')}>
+
+            <Text style={styles.logintext}>Login</Text>
+
+          </TouchableHighlight>
+
         </View>
       </View>
-      <View style={styles.contentody} >
-        <View style={styles.emailaddressdiv}>
-          <Text style={styles.emailaddress}>Email Address</Text>
-        </View>
-        <TextInput style={styles.inputemail} ></TextInput>
-        <View style={styles.passworddiv}>
-          <Text style={styles.password}>Password</Text>
-        </View>
-        <TextInput style={styles.inputpassword} ></TextInput>
-
-        <View style={styles.forgetdiv}>
-          <Text style={styles.forget} onPress={() => navigation.navigate("ResetpasswordEmail")}>Forgot password?</Text>
-        </View>
-        <TouchableHighlight style={styles.loginbutton}
-          onPress={() => navigation.navigate("Home")}>
-          <Text style={styles.logintext}>Login</Text>
-        </TouchableHighlight>
-      </View>
-
 
     </SafeAreaView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -67,7 +58,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#FF3133",
     height: 400,
     width: 412,
-    borderRadius: 50,
+    borderBottomLeftRadius: 50,
+    borderBottomRightRadius: 50,
+    // borderRadius: 50,
     shadowOffset: {
       width: 0,
       height: 2
@@ -78,15 +71,23 @@ const styles = StyleSheet.create({
     elevation: 20,
   },
 
-  mcImage: {
-    width: 140,
-    height: 115,
-    marginTop: 180,
-    marginLeft: 140,
-    justifyContent: 'center',
-    alignItems: 'center',
 
+  mcImage: {
+    width: 210,
+    height: 200,
+    marginTop: 150,
+    marginLeft: 100,
   },
+
+  // mcImage: {
+  //   width: 140,
+  //   height: 115,
+  //   marginTop: 180,
+  //   marginLeft: 140,
+  //   justifyContent: 'center',
+  //   alignItems: 'center',
+
+  // },
 
   love: {
     marginTop: 0,
@@ -119,7 +120,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 2,
     borderColor: 'yellow',
     marginLeft: 45,
-    marginTop: -120,
+    marginTop: -50,
     height: 100,
     width: 90,
   },
@@ -151,7 +152,7 @@ const styles = StyleSheet.create({
   },
 
   emailaddressdiv: {
-    marginTop: -50,
+    marginTop: -70,
     marginLeft: -190,
   },
 
@@ -173,7 +174,7 @@ const styles = StyleSheet.create({
   },
 
   passworddiv: {
-    marginTop: 35,
+    marginTop: 20,
     marginLeft: -220,
   },
 
@@ -211,17 +212,11 @@ const styles = StyleSheet.create({
     width: 190,
     height: 45,
     marginTop: 30,
-    marginLeft: 8,
+    marginLeft: 17,
     backgroundColor: "#FF3133",
     borderRadius: 15,
-    shadowOffset: {
-      width: 0,
-      height: 2
-    },
     shadowColor: 'black',
-    shadowOpacity: 100,
-    shadowRadius: 50,
-    elevation: 20,
+    elevation: 7,
   },
 
   logintext: {
@@ -235,3 +230,4 @@ const styles = StyleSheet.create({
 
 });
 
+export default Login;

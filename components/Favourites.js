@@ -133,6 +133,6 @@ const Styles = StyleSheet.create({
 
 
 
-})
+});
 
 

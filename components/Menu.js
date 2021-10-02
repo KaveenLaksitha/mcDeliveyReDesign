@@ -50,9 +50,8 @@ function Menu({ navigation }) {
                     <Ionicons name="power" size={30} color="black" />
                 </Text>
                 <TouchableOpacity style={styles.text}
-                    onPress={() => navigation.navigate('Profile')}>
+                    onPress={() => navigation.navigate('Login')}>
                     <Text style={{ fontSize: 20 }}>Log Out</Text></TouchableOpacity>
-
             </View>
         </View>
     )

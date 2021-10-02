@@ -14,14 +14,17 @@ import AddressForm from '../AddressForm';
 import FeedBack from '../FeedBack';
 import MyCards from '../CardList';
 import AddressBook from '../DeliveryAddressBook';
-import Login from '../Login';
+// import Login from '../Login';
 import Register from '../Register';
 import ResetpasswordEmail from '../ResetpasswordEmail';
 import ResetpasswordMobile from '../ResetpasswordMobile';
 import NewUser from '../NewUser';
+import Loginfragment from '../Loginfragment';
 import TrackOrder from '../TrackOrder';
 import CheckoutCOD from '../CheckoutCOD';
+import CheckoutTK from '../CheckoutTK';
 import GreetCOD from '../GreetCOD';
+import ThankYou from '../ThankYou';
 import DeliveryOptions from '../DeliveryOptions';
 import PastOrders from '../PastOrders';
 import TopTabNavigation from './TopTabNavigation';
@@ -47,7 +50,7 @@ function StackNavigator() {
             <Stack.Screen name="Make A Review" component={FeedBack} options={{ headerTitleAlign: 'center' }} />
             <Stack.Screen name="My Cards" component={MyCards} options={{ headerTitleAlign: 'center' }} />
             <Stack.Screen name="Delivery Address Book" component={AddressBook} options={{ headerTitleAlign: 'center' }} />
-            <Stack.Screen name="Login" component={Login} options={{ headerTitleAlign: 'center' }} />
+            <Stack.Screen name="Login" component={Loginfragment} options={{ headerTitleAlign: 'center', headerShown: false }} />
             <Stack.Screen name="NewUser" component={NewUser} options={{ headerTitleAlign: 'center' }} />
             <Stack.Screen name="Register" component={Register} options={{ headerTitleAlign: 'center' }} />
             <Stack.Screen name="ResetpasswordEmail" component={ResetpasswordEmail} options={{ headerTitleAlign: 'center' }} />
@@ -59,9 +62,9 @@ function StackNavigator() {
             <Stack.Screen name="Select Option" component={DeliveryOptions} options={{ headerTitleAlign: 'center' }} />
             <Stack.Screen name="My Orders" component={PastOrders} options={{ headerTitleAlign: 'center' }} />
             <Stack.Screen name="View Item" component={SingleFoodItem} options={{ headerTitleAlign: 'center' }} />
+            <Stack.Screen name="Checkout Take Away" component={CheckoutTK} options={{ headerTitleAlign: 'center' }} />
+            <Stack.Screen name="ThankYouTK" component={ThankYou} options={{ headerTitleAlign: 'center' }, { headerShown: false }} />
             <Stack.Screen name="Mc Fries" component={McFries} options={{ headerTitleAlign: 'center' }, { title: 'Mc French Fries' }} />
-
-
         </Stack.Navigator>
     )
 }
