@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-import { View, Text, Button, Image, TouchableHighlight, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, Button, Image, TouchableHighlight, StyleSheet, TouchableOpacity, ToastAndroid } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { Picker } from '@react-native-picker/picker';
@@ -52,15 +52,20 @@ export default function SingleFoodItem({ navigation, route }) {
         setNum(num + 1);
     }
 
+    const setIcon = () => {
+        console.log("icon pressed")
+    }
+
+    const showToast = () => {
+        ToastAndroid.show("Item added successfully!", ToastAndroid.SHORT);
+    };
 
     function addToItemCart() {
         const payload = {
-            name, num, price
+            name, num, calculatedPrice
         }
         addToCart(payload)
-        // navigation.navigate('Cart', {
-        //     name, num, price
-        // })
+        showToast();
     }
 
 
@@ -83,9 +88,9 @@ export default function SingleFoodItem({ navigation, route }) {
                 <View style={{ flexDirection: "row" }}>
                     <Text style={styles.Topic}>{name}</Text>
 
-                    <TouchableOpacity>
+                    <TouchableOpacity underlayColor='none' onPress={() => setIcon()}>
                         {/* <Icon style={styles.icon} name="favorite-outline" color='#FF3131' size={40} /> */}
-                        <Icon style={styles.icon} name="heart-o" color='#FF3131' size={40} />
+                        <Icon name="heart-o" color='#FF3131' size={40} />
                     </TouchableOpacity>
                 </View>
                 <Text style={styles.des}>McDonald's World Famous Fries® We use specially selected potatoes to make our long and thin, Crispy French Fries. Made simple with sunflower oil and our unique crispy coating</Text>
@@ -174,9 +179,10 @@ const styles = StyleSheet.create({
     },
     Topic: {
         fontWeight: "bold",
+        width: 320,
         //   marginLeft: 15,
         //   marginTop:20,
-        marginRight: 20,
+        marginRight: 10,
         fontSize: 35
     },
     des: {
@@ -190,10 +196,6 @@ const styles = StyleSheet.create({
         marginLeft: 67,
 
         marginTop: 10
-
-    },
-    icon: {
-        marginLeft: 50
 
     },
     buttonRed: {

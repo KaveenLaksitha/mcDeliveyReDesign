@@ -11,7 +11,7 @@ const setBorderColor = (choice) => {
     index = choice;
 }
 
-function CheckoutCOD({ navigation }) {
+function CheckoutCOD({ navigation, route }) {
 
     const [checked, setChecked] = useState('first');
     // const [index, setIndex] = useState(0);
@@ -85,7 +85,7 @@ function CheckoutCOD({ navigation }) {
                         Items
                     </Text>
                     <Text style={styles.textRight}>
-                        Rs.3000.00
+                        Rs.{route.params.price}.00
                     </Text>
                 </View>
                 <View style={styles.horizontal}>
@@ -109,7 +109,7 @@ function CheckoutCOD({ navigation }) {
                         Total cost
                     </Text>
                     <Text style={[styles.textRight, { fontWeight: 'bold' }]}>
-                        Rs.3200.00
+                        Rs.{route.params.price + 300 + 100}.00
                     </Text>
                 </View>
                 <TouchableHighlight underlayColor='none' onPress={() => navigation.navigate("ThankYou")}>
