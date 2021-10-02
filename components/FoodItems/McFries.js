@@ -8,33 +8,39 @@ import { Picker } from '@react-native-picker/picker';
 
 import Icon1 from 'react-native-vector-icons/Entypo';
 
-export default function SingleFoodItem({ navigation }) {
+export default function SingleFoodItem({ navigation, route }) {
+
+    const [image, setImage] = useState("");
+    const [name, setName] = useState("");
+    const [price, setPrice] = useState("");
 
     const [num, setNum] = useState(1);
     const [selectedSize, setSelectedSize] = useState("");
-    const [price, setPrice] = useState(140);
+    const [calculatedPrice, setCalculatedPrice] = useState();
 
 
     useEffect(() => {
 
+        setName(route.params.name);
+        setImage(route.params.img);
+        setPrice(route.params.price);
 
+    }, [route.params])
+
+    useEffect(() => {
+
+        console.log(num)
         if (selectedSize == "Large") {
 
-
-            setPrice(num * 200)
+            setCalculatedPrice(num * 350)
 
         } else {
-            setPrice(num * 140)
+            setCalculatedPrice(num * price)
         }
 
+        console.log("price", calculatedPrice);
 
-    }, [num, setSelectedSize])
-
-    useEffect(() => {
-        console.log(price);
-        setPrice(price);
-
-    }, [setSelectedSize, price])
+    }, [num, setSelectedSize, price, calculatedPrice])
 
 
     const decreaseOne = () => {
@@ -47,20 +53,13 @@ export default function SingleFoodItem({ navigation }) {
     }
 
 
-
-
-
-
-
-
-
     return (
 
         <View style={{ flex: 1 }}>
 
             <View style={styles.image} >
 
-                <Image style={styles.image1} source={{ uri: "https://i.ibb.co/4R9ZLcx/mak-tpai-Poi-AMMU-unsplash.jpg" }}>
+                <Image style={styles.image1} source={{ uri: image }}>
 
                 </Image>
 
@@ -71,7 +70,7 @@ export default function SingleFoodItem({ navigation }) {
 
             <View style={styles.square}>
                 <View style={{ flexDirection: "row" }}>
-                    <Text style={styles.Topic}>Mc French Fries</Text>
+                    <Text style={styles.Topic}>{name}</Text>
 
                     <TouchableOpacity>
                         {/* <Icon style={styles.icon} name="favorite-outline" color='#FF3131' size={40} /> */}
@@ -103,7 +102,7 @@ export default function SingleFoodItem({ navigation }) {
                 </View>
                 <TouchableHighlight style={styles.btn}>
                     <View style={[styles.buttonRed, styles.elevation]}>
-                        <Text style={{ fontSize: 18, color: 'white' }}>Add to Cart - Rs.{price}.00</Text>
+                        <Text style={{ fontSize: 18, color: 'white' }}>Add to Cart - Rs.{calculatedPrice}.00</Text>
                     </View>
                 </TouchableHighlight>
 

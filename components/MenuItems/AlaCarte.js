@@ -1,11 +1,31 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Text, View, StyleSheet, Image, TouchableHighlight } from 'react-native'
 
 function AlaCarte({ navigation }) {
+
+    const [img, setImg] = useState('');
+    const [name, setName] = useState('');
+    const [price, setPrice] = useState('');
+    const [description, setDescription] = useState('');
+
+    useEffect(() => {
+    }, [])
+    useEffect(() => {
+        console.log(img, name, price)
+        //to update states
+        // navigate()
+    }, [img, name, setName, price])
+
+    const navigate = () => {
+        navigation.navigate('Mc Fries', {
+            img, name, price
+        })
+    }
+
     return (
         <View>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
-                <TouchableHighlight underlayColor='none' onPress={() => navigation.navigate('Mc Fries')}>
+                <TouchableHighlight underlayColor='none' onPress={() => { setImg("https://i.ibb.co/cw4KRFK/goodeats-yqr-z-VTf-YVY9-HY0-unsplash.jpg"); setName("Crispy Chicken"); setPrice(200); navigate(); }}>
                     <View style={[Styles.square1, Styles.elevation]}>
                         <Image style={Styles.img1} source={{ uri: "https://i.ibb.co/cw4KRFK/goodeats-yqr-z-VTf-YVY9-HY0-unsplash.jpg" }}>
 
@@ -14,15 +34,17 @@ function AlaCarte({ navigation }) {
                         <Text style={Styles.txt2}>From Rs.200.00</Text>
 
                     </View>
+                </TouchableHighlight >
+                <TouchableHighlight underlayColor='none' onPress={() => { setImg("https://i.ibb.co/0rqhW4r/brian-chan-Nb-Xj-Zomy-NEM-unsplash.jpg"); setName("McWings"); setPrice(800); navigate(); }}>
+                    <View style={[Styles.square1, Styles.elevation]}>
+                        <Image style={Styles.img1} source={{ uri: "https://i.ibb.co/0rqhW4r/brian-chan-Nb-Xj-Zomy-NEM-unsplash.jpg" }}>
+
+                        </Image>
+                        <Text style={Styles.txt1}>McWings</Text>
+                        <Text style={Styles.txt2}>From Rs.800.00</Text>
+
+                    </View>
                 </TouchableHighlight>
-                <View style={[Styles.square1, Styles.elevation]}>
-                    <Image style={Styles.img1} source={{ uri: "https://i.ibb.co/0rqhW4r/brian-chan-Nb-Xj-Zomy-NEM-unsplash.jpg" }}>
-
-                    </Image>
-                    <Text style={Styles.txt1}>McWings</Text>
-                    <Text style={Styles.txt2}>From Rs.800.00</Text>
-
-                </View>
                 <View style={[Styles.square1, Styles.elevation]}>
                     <Image style={Styles.img1} source={{ uri: "https://i.ibb.co/JxmCLWM/leo-roza-CLMp-C9-Uhy-To-unsplash.jpg" }}>
 
