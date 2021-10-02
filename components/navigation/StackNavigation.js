@@ -26,6 +26,7 @@ import DeliveryOptions from '../DeliveryOptions';
 import PastOrders from '../PastOrders';
 import TopTabNavigation from './TopTabNavigation';
 import SingleFoodItem from '../SingleFoodItem';
+import McFries from '../FoodItems/McFries'
 
 
 const Stack = createNativeStackNavigator();
@@ -58,6 +59,8 @@ function StackNavigator() {
             <Stack.Screen name="Select Option" component={DeliveryOptions} options={{ headerTitleAlign: 'center' }} />
             <Stack.Screen name="My Orders" component={PastOrders} options={{ headerTitleAlign: 'center' }} />
             <Stack.Screen name="View Item" component={SingleFoodItem} options={{ headerTitleAlign: 'center' }} />
+            <Stack.Screen name="Mc Fries" component={McFries} options={{ headerTitleAlign: 'center' }, { title: 'Mc French Fries' }} />
+
 
         </Stack.Navigator>
     )

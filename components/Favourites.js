@@ -5,7 +5,7 @@ export default function Favourites({ navigation }) {
     return (
         <View>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
-                <TouchableHighlight underlayColor='none' onPress={() => navigation.navigate('View Item')}>
+                <TouchableHighlight underlayColor='none' onPress={() => navigation.navigate('Mc Fries')}>
                     <View style={[Styles.square1, Styles.elevation]}>
                         <Image style={Styles.img1} source={{ uri: "https://i.ibb.co/4R9ZLcx/mak-tpai-Poi-AMMU-unsplash.jpg" }}>
 
