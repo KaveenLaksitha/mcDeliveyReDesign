@@ -1,11 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useState} from 'react';
-import { StyleSheet, Text, View, SafeAreaView, Button, ImageBackground, SafeAreaViewBase, Alert, TextInput , TouchableHighlight, CheckBox} from 'react-native';
+import { StyleSheet, Text, View,Picker, SafeAreaView, Button, ImageBackground, SafeAreaViewBase, Alert, TextInput , TouchableHighlight, CheckBox} from 'react-native';
 
 export default function Register({navigation}) {
 
   const [isSelected, setSelection] = useState(false);
   const [isSelected2, setSelection2] = useState(false);
+
+  const [selectedValue, setSelectedValue] = useState("mr");
 
   return (
     <SafeAreaView style={styles.container}>
@@ -13,7 +15,14 @@ export default function Register({navigation}) {
      <View>
         <View style={styles.bodycontent}>
           <Text style={styles.salutationText}>Salutation</Text>
-          <TextInput style={styles.salutation}></TextInput>
+          <Picker 
+            selectedValue={selectedValue} style={styles.salutation}
+            onValueChange={(itemValue,itemIndex) => setSelectedValue(itemValue)}
+            >
+            <Picker.Item label="Mr" value ="mr"/>
+            <Picker.Item label="Mrs" value ="mrs"/>
+             <Picker.Item label="Ms" value ="ms"/>
+            </Picker>
           
           <Text style={styles.nameText}>Name</Text>
           <TextInput style={styles.name}></TextInput>
@@ -90,7 +99,7 @@ image: {        
   },
 
   salutation: {
-    width: 250,
+    width: 270,
     margin: 12,
     marginTop: -40,
     marginLeft:90,
@@ -209,14 +218,14 @@ privact1: {
 },
 
 checkboxContainer: {
-    flexDirection: "row",
+    flexDirection: "row",    
     marginBottom: 20,
     marginRight:20
   },
 
   checkbox: {
     marginLeft: -8,
-    marginTop: 12
+    marginTop: 12,     
   },
 
 privact2: {
@@ -225,7 +234,7 @@ privact2: {
     color: '#707070',
     marginLeft: 20,
     marginRight: 30,
-    paddingBottom:5
+    paddingBottom:0
 },
 
  checkboxContainer2: {
