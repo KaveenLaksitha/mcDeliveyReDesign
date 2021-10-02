@@ -53,6 +53,12 @@ export default function SingleFoodItem({ navigation, route }) {
     }
 
 
+    const addToCart = () => {
+        navigation.navigate('Cart', {
+            name, num, price
+        })
+    }
+
     return (
 
         <View style={{ flex: 1 }}>
@@ -100,7 +106,7 @@ export default function SingleFoodItem({ navigation, route }) {
                     </TouchableOpacity>
                     {/* <Text style={styles.listItemPrice}>Rs.{num1 * 740}.00</Text> */}
                 </View>
-                <TouchableHighlight style={styles.btn}>
+                <TouchableHighlight style={styles.btn} underlayColor='none' onPress={addToCart}>
                     <View style={[styles.buttonRed, styles.elevation]}>
                         <Text style={{ fontSize: 18, color: 'white' }}>Add to Cart - Rs.{calculatedPrice}.00</Text>
                     </View>
