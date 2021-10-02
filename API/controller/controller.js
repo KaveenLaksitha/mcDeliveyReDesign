@@ -20,7 +20,7 @@ router.post("/addToCart", async (req, res) => {
 
         let response = await newCart.save();
         if (response) {
-            return res.status(201).send({ status: "item added for cart" })
+            return res.status(201).send({ status: true, message: "item added for cart" })
         } else {
             return res.status(500).send({ status: "failed to add item record" })
         }
