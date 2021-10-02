@@ -7,6 +7,7 @@ import { Picker } from '@react-native-picker/picker';
 
 import Icon1 from 'react-native-vector-icons/Entypo';
 import { addToCart } from '../../service/cartService';
+import { addToFav } from "../../service/favService";
 
 export default function SingleFoodItem({ navigation, route }) {
 
@@ -63,6 +64,13 @@ export default function SingleFoodItem({ navigation, route }) {
         // })
     }
 
+    function addToFavaourite() {
+        const payload = {
+            name, num, price, image
+        }
+        addToFav(payload)
+    }
+
 
     return (
 
@@ -83,7 +91,7 @@ export default function SingleFoodItem({ navigation, route }) {
                 <View style={{ flexDirection: "row" }}>
                     <Text style={styles.Topic}>{name}</Text>
 
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => { addToFavaourite() }}>
                         {/* <Icon style={styles.icon} name="favorite-outline" color='#FF3131' size={40} /> */}
                         <Icon style={styles.icon} name="heart-o" color='#FF3131' size={40} />
                     </TouchableOpacity>

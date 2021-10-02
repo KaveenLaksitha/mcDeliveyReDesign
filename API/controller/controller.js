@@ -51,9 +51,10 @@ router.post("/addToFav", async (req, res) => {
     const name = req.body.name;
     const quantity = req.body.num;
     const price = req.body.price;
+    const image = req.body.image;
 
     const newFav = new FoodFav({
-        name, quantity, price
+        name, quantity, price, image
     })
 
     try {

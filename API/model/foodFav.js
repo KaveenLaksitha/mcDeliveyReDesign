@@ -11,6 +11,9 @@ const foodFavSchema = new Schema({
     price: {
         type: Number
     },
+    image: {
+        type: String
+    }
 
 })
 
