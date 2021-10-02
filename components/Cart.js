@@ -3,8 +3,10 @@ import { View, Text, StyleSheet, ImageBackground, TouchableHighlight, Alert, Tou
 import Icon from 'react-native-vector-icons/Entypo';
 
 
-function Cart({ navigation }) {
+function Cart({ navigation, route }) {
 
+    const [name, setName] = useState("");
+    const [price, setPrice] = useState()
     const [num1, setNum1] = useState(1);
     const [num2, setNum2] = useState(1);
     const [num3, setNum3] = useState(1);
@@ -32,7 +34,9 @@ function Cart({ navigation }) {
     }
 
     useEffect(() => {
-    }, [num1])
+        setName(route.params.name);
+        setPrice(route.params.price);
+    }, [num1, route.params])
 
     return (
         <View>
@@ -40,7 +44,7 @@ function Cart({ navigation }) {
                 <Text style={styles.headers}>Your Order</Text>
                 <View style={[styles.listItem, styles.elevation]}>
                     <View style={styles.horizontal}>
-                        <Text style={styles.listItemText}>Ziinger Burger</Text>
+                        <Text style={styles.listItemText}>{name}</Text>
                         <TouchableOpacity onPress={decreaseOne} >
                             <Icon name="squared-minus" size={30} />
                         </TouchableOpacity>

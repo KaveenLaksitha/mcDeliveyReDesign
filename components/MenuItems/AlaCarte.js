@@ -9,8 +9,6 @@ function AlaCarte({ navigation }) {
     const [description, setDescription] = useState('');
 
     useEffect(() => {
-    }, [])
-    useEffect(() => {
         console.log(img, name, price)
         //to update states
         // navigate()
@@ -21,6 +19,8 @@ function AlaCarte({ navigation }) {
             img, name, price
         })
     }
+
+
 
     return (
         <View>
