@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, SafeAreaView, Button, Image, SafeAreaViewBase, Alert, TextInput , TouchableHighlight, TouchableOpacity} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import { StyleSheet, Text, View, SafeAreaView, Button, Image, SafeAreaViewBase, Alert, TextInput, TouchableHighlight, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const Login = () => {
 
@@ -9,39 +9,39 @@ const Login = () => {
   return (
     <SafeAreaView style={styles.container}>
 
-    <View style={styles.square2}>
-      
-      <View style={styles.contentody} >
-        
-        <View style={styles.emailaddressdiv}>
-          
-          <Text style={styles.emailaddress}>Email Address</Text>
-        
-        </View>
-        
-          <TextInput style={styles.inputemail} ></TextInput>
-        <View style={styles.passworddiv}>
-          <Text style={styles.password}>Password</Text>
-        </View>
-        
-        <TextInput style={styles.inputpassword} ></TextInput>
+      <View style={styles.square2}>
 
-        <View style={styles.forgetdiv}>
-          
-          <Text style={styles.forget} onPress={() => navigation.navigate("Reset Password Using Email")}>Forgot password?</Text>
-        
+        <View style={styles.contentody} >
+
+          <View style={styles.emailaddressdiv}>
+
+            <Text style={styles.emailaddress}>Email Address</Text>
+
+          </View>
+
+          <TextInput style={styles.inputemail} ></TextInput>
+          <View style={styles.passworddiv}>
+            <Text style={styles.password}>Password</Text>
+          </View>
+
+          <TextInput style={styles.inputpassword} ></TextInput>
+
+          <View style={styles.forgetdiv}>
+
+            <Text style={styles.forget} onPress={() => navigation.navigate("Reset Password Using Email")}>Forgot password?</Text>
+
+          </View>
+
+          <TouchableHighlight style={styles.loginbutton}
+            onPress={() => Alert.alert('Login Successfully')}>
+
+            <Text style={styles.logintext}>Login</Text>
+
+          </TouchableHighlight>
+
         </View>
-        
-        <TouchableHighlight style={styles.loginbutton}
-              onPress={() => Alert.alert('Login Successfully')}>
-              
-              <Text style={styles.logintext}>Login</Text>
-        
-        </TouchableHighlight>
-      
       </View>
-      </View>
-    
+
     </SafeAreaView>
   );
 };
@@ -58,7 +58,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#FF3133",
     height: 400,
     width: 412,
-    borderRadius: 50,
+    borderBottomLeftRadius: 50,
+    borderBottomRightRadius: 50,
+    // borderRadius: 50,
     shadowOffset: {
       width: 0,
       height: 2
@@ -70,12 +72,12 @@ const styles = StyleSheet.create({
   },
 
 
-   mcImage: {
+  mcImage: {
     width: 210,
     height: 200,
-    marginTop:150,
+    marginTop: 150,
     marginLeft: 100,
-   },
+  },
 
   // mcImage: {
   //   width: 140,
@@ -213,14 +215,8 @@ const styles = StyleSheet.create({
     marginLeft: 17,
     backgroundColor: "#FF3133",
     borderRadius: 15,
-    shadowOffset: {
-      width: 0,
-      height: 2
-    },
     shadowColor: 'black',
-    shadowOpacity: 100,
-    shadowRadius: 50,
-    elevation: 20,
+    elevation: 7,
   },
 
   logintext: {

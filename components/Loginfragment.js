@@ -5,19 +5,20 @@ import NewUser from './NewUser';
 
 let cindex = 0;
 
-const setBorderColor = (choice) => {
-    cindex = choice;
-    console.log("Hi",cindex);
-}
+
 
 function Loginfragment() {
 
-    const [index, setIndex] = useState('first');
+    const [index, setIndex] = useState(1);
 
     const RenderElement = () => {
-        if (index === 'first') {
+        if (index === 1) {
+            cindex = index;
+            console.log("Hi", cindex);
             return <Login />;
-        } else if (index === 'second') {
+        } else if (index === 2) {
+            cindex = index;
+            console.log("Hi", cindex);
             return <NewUser />;
         }
     };
@@ -29,19 +30,19 @@ function Loginfragment() {
                     <Image
                         style={styles.mcImage}
                         source={{
-                            uri: "https://i.ibb.co/x3shm4R/mcWhite.png"
+                            uri: "https://i.ibb.co/N1zyVSy/mcWhite.png"
                         }}
                     />
-                    <View style={[styles.underlinelogin , { borderColor: cindex == 1 ? 'Yellow' : 'Yellow'}]}>
+                    <View style={styles.underlinelogin}>
                         <TouchableOpacity
-                            onPress={() => {setIndex('first') ; setBorderColor(1) }}>
+                            onPress={() => { setIndex(1) }}>
                             <Text style={styles.login}>Login</Text>
                         </TouchableOpacity>
                         {/*To set the SecondScreen*/}
                     </View>
-                    <View style={[styles.underlineregister ,  { borderColor: cindex == 2 ? 'Yellow' : 'white'}]}>
+                    <View style={styles.underlineregister}>
                         <TouchableOpacity
-                            onPress={() => {setIndex('second'); setBorderColor(2)}}>
+                            onPress={() => { setIndex(2) }}>
                             <Text style={styles.reg}>I'am New</Text>
                         </TouchableOpacity>
                     </View>
@@ -58,7 +59,7 @@ const styles = StyleSheet.create({
     },
 
     square1: {
-        marginTop: -120,
+        marginTop: -10,
         marginLeft: 0,
         backgroundColor: "#FF3133",
         height: 400,
@@ -75,50 +76,52 @@ const styles = StyleSheet.create({
     },
 
     mcImage: {
-        width: 210,
-        height: 200,
-        marginTop: 150,
-        marginLeft: 100,
+        width: 250,
+        height: 240,
+        marginTop: 70,
+        marginLeft: 80,
         justifyContent: 'center',
         alignItems: 'center',
+        resizeMode: 'stretch'
 
     },
 
     underlinelogin: {
-    borderBottomWidth: 2,
-   //borderColor: 'yellow',
-    //borderWidth: 2,
-    marginLeft: 45,
-    marginTop: -50,
-    height: 100,
-    width: 90,
+        borderBottomWidth: 2,
+        borderColor: cindex === 1 ? 'yellow' : 'white',
+        // borderWidth: 2,
+        marginLeft: 45,
+        marginTop: -10,
+        height: 100,
+        width: 90,
     },
 
-     login: {
-    marginTop: 70,
-    marginLeft: 17,
-    height: 30,
-    width: 70,
-    color:"white",
-    fontSize: 18,
-  },
+    login: {
+        marginTop: 70,
+        marginLeft: 17,
+        height: 30,
+        width: 70,
+        color: "white",
+        fontSize: 18,
+    },
 
-underlineregister: {
-    borderBottomWidth: 2,
-    //borderColor: '#FF3133',
-    marginLeft: 273,
-    marginTop: -28,
-    width: 90,
+    underlineregister: {
+        borderBottomWidth: 2,
+        // borderWidth: 2,
+        borderColor: cindex === 1 ? 'yellow' : 'white',
+        marginLeft: 273,
+        marginTop: -28,
+        width: 90,
 
     },
-  
-  reg: {
-    marginLeft: 7,
-    color: "white",
-    fontSize: 18,
-    width: 80,
-    paddingBottom : 2,
-  },
+
+    reg: {
+        marginLeft: 7,
+        color: "white",
+        fontSize: 18,
+        width: 80,
+        paddingBottom: 2,
+    },
 
 
     contentody: {

@@ -1,7 +1,10 @@
 import * as React from 'react';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import TabNavigation from './components/navigation/TabNavigation';
+import { LogBox } from 'react-native';
 
+// to ignore yellow box warnings
+LogBox.ignoreAllLogs(true);
 
 const defaultTheme = {
   ...DefaultTheme,
