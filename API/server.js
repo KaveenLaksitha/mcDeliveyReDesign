@@ -14,6 +14,9 @@ app.use(express.json());
 const routes = require("./controller/controller.js");
 app.use("/api", routes)
 
+const feedback = require("./controller/reviewController.js");
+app.use("/feedback", feedback)
+
 mongoose.connect(URL, {
     // useCreateIndex: true,
     useNewUrlParser: true,

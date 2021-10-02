@@ -4,6 +4,8 @@ import { Rating, AirbnbRating } from 'react-native-ratings';
 import Feather from 'react-native-vector-icons/FontAwesome5';
 import { StyleSheet, Text, View, SafeAreaView, Button, ImageBackground, Alert, TextInput, TouchableHighlight, TouchableOpacity, ScrollView } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
+import {createFeedBack} from '../service/feedBackService'
+
 
 
 export default function FeedBack({ navigation }) {
@@ -59,6 +61,26 @@ export default function FeedBack({ navigation }) {
                 checkTextInputChange: false
             })
         }
+    }
+
+
+    const saveReview = () => {
+        
+        console.log(orderId +reviewOn+suggestion +complaint +rate)
+        const newFeedBack = {
+          orderId,
+          reviewOn,
+          suggestion,
+          complaint,
+          rate
+        }
+
+        createFeedBack(newFeedBack).then((res) => {
+            Alert.alert("draft saved")
+            //navigation.navigate('draftList');
+        }).catch((err) => {
+            Alert.alert("draft NOT saved", err);
+        })
     }
 
 
@@ -291,6 +313,7 @@ const styles = StyleSheet.create({
         marginLeft: 5,
         fontSize: 14,
         color: "black",
+        fontWeight:"bold"
     },
 
     input: {
