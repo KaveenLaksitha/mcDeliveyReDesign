@@ -9,6 +9,8 @@ import Icon1 from 'react-native-vector-icons/Entypo';
 import { addToCart } from '../../service/cartService';
 import { addToFav } from "../../service/favService";
 
+
+
 let count = 0;
 export default function SingleFoodItem({ navigation, route }) {
 
@@ -61,6 +63,7 @@ export default function SingleFoodItem({ navigation, route }) {
         count++;
         if (count === 1) {
             addToFavaourite()
+
         }
 
         if (count % 2 == 1) {
@@ -72,6 +75,8 @@ export default function SingleFoodItem({ navigation, route }) {
 
     const showToast = () => {
         ToastAndroid.show("Item added successfully!", ToastAndroid.SHORT);
+
+
     };
 
     function addToItemCart() {
@@ -82,17 +87,27 @@ export default function SingleFoodItem({ navigation, route }) {
         showToast();
     }
 
+
+    const showToastFav = () => {
+        ToastAndroid.show("Added To Favourite List!", ToastAndroid.SHORT);
+
+
+    };
+
     function addToFavaourite() {
         const payload = {
             name, num, price, image
         }
+
         addToFav(payload)
+        showToastFav();
     }
 
 
     return (
 
         <View style={{ flex: 1 }}>
+
 
             <View style={styles.image} >
 
@@ -142,7 +157,9 @@ export default function SingleFoodItem({ navigation, route }) {
                     {/* <Text style={styles.listItemPrice}>Rs.{num1 * 740}.00</Text> */}
                 </View>
                 <TouchableHighlight style={styles.btn} underlayColor='none' onPress={() => { addToItemCart() }}>
+
                     <View style={[styles.buttonRed, styles.elevation]}>
+
                         <Text style={{ fontSize: 18, color: 'white' }}>Add to Cart - Rs.{calculatedPrice}.00</Text>
                     </View>
                 </TouchableHighlight>
