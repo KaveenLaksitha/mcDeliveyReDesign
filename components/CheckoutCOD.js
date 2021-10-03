@@ -23,6 +23,7 @@ function CheckoutCOD({ navigation, route }) {
     function calculateDiscount() {
 
         if (input.length > 0) {
+            toast({ message: 'Promo code applied!' })
             setDiscount(300)
         } else {
             toast({
