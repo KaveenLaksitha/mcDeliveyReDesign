@@ -9,15 +9,18 @@ import Icon1 from 'react-native-vector-icons/Entypo';
 import { addToCart } from '../../service/cartService';
 import { addToFav } from "../../service/favService";
 
+let count = 0;
 export default function SingleFoodItem({ navigation, route }) {
 
     const [image, setImage] = useState("");
     const [name, setName] = useState("");
     const [price, setPrice] = useState("");
+    const [index, setIndex] = useState(0);
 
     const [num, setNum] = useState(1);
     const [selectedSize, setSelectedSize] = useState("");
     const [calculatedPrice, setCalculatedPrice] = useState();
+
 
 
     useEffect(() => {
@@ -54,7 +57,17 @@ export default function SingleFoodItem({ navigation, route }) {
     }
 
     const setIcon = () => {
-        console.log("icon pressed")
+
+        count++;
+        if (count === 1) {
+            addToFavaourite()
+        }
+
+        if (count % 2 == 1) {
+            setIndex(1);
+        } else {
+            setIndex(0);
+        }
     }
 
     const showToast = () => {
@@ -96,9 +109,13 @@ export default function SingleFoodItem({ navigation, route }) {
                 <View style={{ flexDirection: "row" }}>
                     <Text style={styles.Topic}>{name}</Text>
 
-                    <TouchableOpacity onPress={() => { addToFavaourite() }}>
-                        {/* <Icon style={styles.icon} name="favorite-outline" color='#FF3131' size={40} /> */}
-                        <Icon name="heart-o" color='#FF3131' size={40} />
+                    <TouchableOpacity underlayColor='none' onPress={() => setIcon()}>
+                        <View style={{ transform: index === 1 ? [{ scale: 1 }] : [{ scale: 0 }] }}>
+                            <Icon name="heart" color='#FF3131' size={40} />
+                        </View>
+                        <View style={{ transform: index === 0 ? [{ scale: 1 }] : [{ scale: 0 }], position: 'absolute' }}>
+                            <Icon name="heart-o" color='#FF3131' size={40} />
+                        </View>
                     </TouchableOpacity>
                 </View>
                 <Text style={styles.des}>McDonald's World Famous Fries® We use specially selected potatoes to make our long and thin, Crispy French Fries. Made simple with sunflower oil and our unique crispy coating</Text>

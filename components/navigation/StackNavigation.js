@@ -53,8 +53,8 @@ function StackNavigator() {
             <Stack.Screen name="Login" component={Loginfragment} options={{ headerTitleAlign: 'center', headerShown: false }} />
             <Stack.Screen name="NewUser" component={NewUser} options={{ headerTitleAlign: 'center' }} />
             <Stack.Screen name="Register" component={Register} options={{ headerTitleAlign: 'center' }} />
-            <Stack.Screen name="ResetpasswordEmail" component={ResetpasswordEmail} options={{ headerTitleAlign: 'center' }} />
-            <Stack.Screen name="ResetpasswordMobile" component={ResetpasswordMobile} options={{ headerTitleAlign: 'center' }} />
+            <Stack.Screen name="Reset Password Using Email" component={ResetpasswordEmail} options={{ headerTitleAlign: 'center' }} />
+            <Stack.Screen name="Reset Password Using Mobile" component={ResetpasswordMobile} options={{ headerTitleAlign: 'center' }} />
             <Stack.Screen name="Cart" component={Cart} options={{ headerTitleAlign: 'center' }} />
             <Stack.Screen name="TrackOrder" component={TrackOrder} options={{ headerTitleAlign: 'center' }} />
             <Stack.Screen name="Checkout" component={CheckoutCOD} options={{ headerTitleAlign: 'center' }} />

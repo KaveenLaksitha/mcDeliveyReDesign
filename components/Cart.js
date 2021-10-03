@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
         marginRight: 20,
     },
     listItem: {
-        opacity: 0.8,
+        opacity: 0.9,
         backgroundColor: "white",
         marginTop: 20,
         width: 370,

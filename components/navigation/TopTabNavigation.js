@@ -38,19 +38,14 @@ function TopTabNavigation({ route }) {
         <TopTab.Navigator
             initialRouteName="Beverages"
 
-            tabBarOptions={{
-                scrollEnabled: true,
-                style: {
+            screenOptions={{
+                tabBarScrollEnabled: true,
+                tabBarStyle: {
 
                     height: 50,
                     width: 412
                 },
-
-                // tabStyle: {
-                //   width: 150,
-
-                // },
-                indicatorStyle: {
+                tabBarIndicatorStyle: {
 
                     backgroundColor: "#FFC300"
                 }
