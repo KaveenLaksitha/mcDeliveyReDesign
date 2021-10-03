@@ -23,8 +23,7 @@ function CheckoutCOD({ navigation, route }) {
     function calculateDiscount() {
 
         if (input.length > 0) {
-            // setDiscount(300)
-            console.log("input", input.length);
+            setDiscount(300)
         } else {
             toast({
                 message: 'promo code can\'t be empty!',
@@ -37,7 +36,6 @@ function CheckoutCOD({ navigation, route }) {
                 hideAccent: true,
                 hideCloseIcon: true
             })
-            // Alert.alert("please enter something")
         }
     }
 
