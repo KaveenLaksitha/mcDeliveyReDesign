@@ -4,9 +4,14 @@ import HandIcon from 'react-native-vector-icons/FontAwesome5'
 import VisaIcon from 'react-native-vector-icons/Fontisto'
 import { RadioButton } from 'react-native-paper';
 
+<<<<<<< HEAD
 import { useToast } from 'react-native-styled-toast'
 
 let index = 1;
+=======
+
+let index = 0;
+>>>>>>> a116dfc0e5e4896529d5036536b8bb0e550e14ef
 
 const setBorderColor = (choice) => {
     index = choice;
@@ -86,7 +91,7 @@ function CheckoutCOD({ navigation, route }) {
                         <View style={{ width: 290 }}>
                             <Text style={styles.text}>3rd floor "Samagam Medura",400,{"\n"}D.R. Wijewardena Mawatha{"\n"}Colombo 10</Text>
                         </View>
-                        <TouchableOpacity onPress={() => { console.log("pressed") }}>
+                        <TouchableOpacity onPress={() => { navigation.navigate("Delivery Address Book") }}>
                             <Text style={{ fontSize: 18, color: '#7E7E7E' }}>Edit</Text>
                         </TouchableOpacity>
                     </View>
