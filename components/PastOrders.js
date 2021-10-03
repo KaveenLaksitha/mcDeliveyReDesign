@@ -1,6 +1,7 @@
 import React from 'react'
-import { StyleSheet, View, Text, Image, ScrollView, TouchableOpacity } from 'react-native'
+import { StyleSheet, View, Text, Image, ScrollView } from 'react-native'
 import Icon from 'react-native-vector-icons/Entypo';
+import DeleteIcon from 'react-native-vector-icons/AntDesign'
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 
 function PastOrders() {
@@ -8,24 +9,18 @@ function PastOrders() {
     const LeftSwipeActions = () => {
         return (
             <View
-                style={{ flex: 1, backgroundColor: '#FF3131', justifyContent: 'center' }}
+                style={{ flex: 1, height: 100, marginTop: 10, backgroundColor: '#FF3131', justifyContent: 'space-around', alignItems: 'center', flexDirection: 'row' }}
             >
-
-                <TouchableOpacity onPress={() => { deleteDraftPermenantly(id) }}>
-                    <Text
-                        style={{
-                            color: 'white',
-                            paddingHorizontal: 10,
-                            fontWeight: '600',
-                            paddingHorizontal: 30,
-                            paddingVertical: 20,
-                            fontSize: 18,
-                            marginLeft: 150
-                        }}
-                    >
-                        Delete
-                    </Text>
-                </TouchableOpacity>
+                <DeleteIcon name="delete" size={30} style={{ color: 'white' }} />
+                <Text
+                    style={{
+                        color: 'white',
+                        fontSize: 18,
+                        marginRight: 100
+                    }}
+                >
+                    Removed
+                </Text>
             </View>
         );
     };
@@ -34,7 +29,6 @@ function PastOrders() {
         <ScrollView style={styles.body}>
             <Swipeable
                 renderLeftActions={LeftSwipeActions}
-            // renderRightActions={RightSwipeActions}
             >
                 <View style={[styles.listItem, styles.elevation, { flexDirection: 'row' }]}>
                     <View style={styles.horizontal}>

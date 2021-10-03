@@ -67,7 +67,7 @@ export default function Favourites({ navigation }) {
     const List = () => {
         return favData.map((element) => {
             return (
-                <View>
+                <View key={element._id}>
 
                     <TouchableHighlight underlayColor='none' onLongPress={handlerLongClick} onPress={() => { setImg(element.image); setName(element.name); setPrice(element.price); navigate(); }}>
                         <View style={[Styles.square1, Styles.elevation]}>
