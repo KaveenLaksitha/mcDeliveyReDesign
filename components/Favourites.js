@@ -79,23 +79,6 @@ export default function Favourites({ navigation }) {
 
                         </View>
                     </TouchableHighlight >
-                    {/* <View style={[Styles.square1, Styles.elevation]}>
-                            <Image style={Styles.img1} source={{ uri: "https://i.ibb.co/HCc267J/amirali-mirhashemian-88-YAXjnpvr-M-unsplash.jpg" }}>
-
-                            </Image>
-                            <Text style={Styles.txt1}>{element.name}</Text>
-                            <Text style={Styles.txt2}>{element.price}</Text>
-
-                        </View>
-                        <View style={[Styles.square1, Styles.elevation]}>
-                            <Image style={Styles.img1} source={{ uri: "https://i.ibb.co/HCc267J/amirali-mirhashemian-88-YAXjnpvr-M-unsplash.jpg" }}>
-
-                            </Image>
-                            <Text style={Styles.txt1}>{element.name}</Text>
-                            <Text style={Styles.txt2}>{element.price}</Text>
-
-                        </View> */}
-
 
                 </View >
             )
@@ -115,88 +98,6 @@ export default function Favourites({ navigation }) {
                 <View style={{ display: "flex", flexWrap: "wrap", flexDirection: "row", alignItems: "center" }}>
                     {List()}
                 </View>
-
-                {/* <View style={{ flexDirection: "row", alignItems: "center" }}>
-                <TouchableHighlight underlayColor='none' onPress={() => navigation.navigate('Mc Fries')}>
-                    <View style={[Styles.square1, Styles.elevation]}>
-                        <Image style={Styles.img1} source={{ uri: "https://i.ibb.co/4R9ZLcx/mak-tpai-Poi-AMMU-unsplash.jpg" }}>
-
-                        </Image>
-                        <Text style={Styles.txt1}>Mc French Fries</Text>
-                        <Text style={Styles.txt2}>From Rs.160.00</Text>
-
-                    </View>
-                </TouchableHighlight>
-                <View style={[Styles.square1, Styles.elevation]}>
-                    <Image style={Styles.img1} source={{ uri: "https://i.ibb.co/HCc267J/amirali-mirhashemian-88-YAXjnpvr-M-unsplash.jpg" }}>
-
-                    </Image>
-                    <Text style={Styles.txt1}>Big Mac</Text>
-                    <Text style={Styles.txt2}>From Rs.800.00</Text>
-
-                </View>
-                <View style={[Styles.square1, Styles.elevation]}>
-                    <Image style={Styles.img1} source={{ uri: "https://i.ibb.co/HCc267J/amirali-mirhashemian-88-YAXjnpvr-M-unsplash.jpg" }}>
-
-                    </Image>
-                    <Text style={Styles.txt1}>Big Mac</Text>
-                    <Text style={Styles.txt2}>From Rs.800.00</Text>
-
-                </View>
-            </View>
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-                <View style={[Styles.square1, Styles.elevation]}>
-                    <Image style={Styles.img1} source={{ uri: "https://i.ibb.co/HCc267J/amirali-mirhashemian-88-YAXjnpvr-M-unsplash.jpg" }}>
-
-                    </Image>
-                    <Text style={Styles.txt1}>Big Mac</Text>
-                    <Text style={Styles.txt2}>From Rs.800.00</Text>
-
-                </View>
-                <View style={[Styles.square1, Styles.elevation]}>
-                    <Image style={Styles.img1} source={{ uri: "https://i.ibb.co/HCc267J/amirali-mirhashemian-88-YAXjnpvr-M-unsplash.jpg" }}>
-
-                    </Image>
-                    <Text style={Styles.txt1}>Big Mac</Text>
-                    <Text style={Styles.txt2}>From Rs.800.00</Text>
-
-
-                </View>
-                <View style={[Styles.square1, Styles.elevation]}>
-                    <Image style={Styles.img1} source={{ uri: "https://i.ibb.co/HCc267J/amirali-mirhashemian-88-YAXjnpvr-M-unsplash.jpg" }}>
-
-                    </Image>
-                    <Text style={Styles.txt1}>Big Mac</Text>
-                    <Text style={Styles.txt2}>From Rs.800.00</Text>
-
-                </View>
-            </View>
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-                <View style={[Styles.square1, Styles.elevation]}>
-                    <Image style={Styles.img1} source={{ uri: "https://i.ibb.co/HCc267J/amirali-mirhashemian-88-YAXjnpvr-M-unsplash.jpg" }}>
-
-                    </Image>
-                    <Text style={Styles.txt1}>Big Mac</Text>
-                    <Text style={Styles.txt2}>From Rs.800.00</Text>
-
-                </View>
-                <View style={[Styles.square1, Styles.elevation]}>
-                    <Image style={Styles.img1} source={{ uri: "https://i.ibb.co/HCc267J/amirali-mirhashemian-88-YAXjnpvr-M-unsplash.jpg" }}>
-
-                    </Image>
-                    <Text style={Styles.txt1}>Big Mac</Text>
-                    <Text style={Styles.txt2}>From Rs.800.00</Text>
-
-                </View>
-                <View style={[Styles.square1, Styles.elevation]}>
-                    <Image style={Styles.img1} source={{ uri: "https://i.ibb.co/HCc267J/amirali-mirhashemian-88-YAXjnpvr-M-unsplash.jpg" }}>
-
-                    </Image>
-                    <Text style={Styles.txt1}>Big Mac</Text>
-                    <Text style={Styles.txt2}>From Rs.800.00</Text>
-
-                </View>
-            </View> */}
 
             </ScrollView>
         </View>

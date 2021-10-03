@@ -1,112 +1,115 @@
-import React, { useEffect, useState } from 'react'
-import { Text, View, StyleSheet, Image, TouchableHighlight } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import { Alert, RefreshControl, Text, View, TouchableHighlight, ScrollView, StyleSheet, Image } from 'react-native'
+import { getAllFood } from "../../service/foodService"
+
+const wait = (timeout) => {
+    return new Promise(resolve => setTimeout(resolve, timeout));
+}
 
 function AlaCarte({ navigation }) {
+
+    const [FoodData, setData] = useState([]);
 
     const [img, setImg] = useState('');
     const [name, setName] = useState('');
     const [price, setPrice] = useState('');
-    const [description, setDescription] = useState('');
+    const [state, setState] = useState('');
+
+
+
+    const [refreshing, setRefreshing] = React.useState(false);
+
+    const onRefresh = React.useCallback(() => {
+        setRefreshing(true);
+        wait(500).then(() => setRefreshing(false));
+        getAllFav().then((res) => {
+
+            if (res.ok) {
+                setFavData(res.data);
+            }
+        }).catch((err) => {
+            alert("error", err);
+        })
+    }, []);
 
     useEffect(() => {
-        console.log(img, name, price)
-        //to update states
-        // navigate()
-    }, [img, name, setName, price])
+        try {
+            getAllFood(1).then((res) => {
+
+                setData(res.data);
+                console.log("salad dataaaaaaaa", res.data)
+
+            })
+        } catch (err) {
+            alert("error", err);
+        }
+    }, [])
+
+
+
 
     const navigate = () => {
         navigation.navigate('Mc Fries', {
-            img, name, price
+            img, name, price, img
         })
     }
+
+    const handlerLongClick = () => {
+        //handler for Long Click
+        Alert.alert("Delete Your Favourite!",
+            "Hitting delete will wipe favorite meal from your favourite meals. This cannot be undone!",
+            [
+                { text: 'Delete', style: 'destructive' },
+                { text: 'Cancel' },
+            ],
+            { cancelable: false }
+        )
+    };
+
+
+
+
+
+    const List = () => {
+        return FoodData.map((element) => {
+            return (
+                <View key={element._id}>
+
+                    <TouchableHighlight underlayColor='none' onLongPress={handlerLongClick} onPress={() => { setImg(element.image); setName(element.name); setPrice(element.price); navigate(); }}>
+                        <View style={[Styles.square1, Styles.elevation]}>
+                            <Image style={Styles.img1} source={{ uri: element.image }}>
+
+                            </Image>
+                            <Text style={Styles.txt1}>{element.name}</Text>
+                            <Text style={Styles.txt2}>Rs.{element.price}.00</Text>
+
+                        </View>
+                    </TouchableHighlight >
+
+                </View >
+            )
+        })
+
+
+    }
+
+
 
 
 
     return (
         <View>
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-                <TouchableHighlight underlayColor='none' onPress={() => { setImg("https://i.ibb.co/cw4KRFK/goodeats-yqr-z-VTf-YVY9-HY0-unsplash.jpg"); setName("Crispy Chicken"); setPrice(200); navigate(); }}>
-                    <View style={[Styles.square1, Styles.elevation]}>
-                        <Image style={Styles.img1} source={{ uri: "https://i.ibb.co/cw4KRFK/goodeats-yqr-z-VTf-YVY9-HY0-unsplash.jpg" }}>
-
-                        </Image>
-                        <Text style={Styles.txt1}>Crispy Chicken</Text>
-                        <Text style={Styles.txt2}>From Rs.200.00</Text>
-
-                    </View>
-                </TouchableHighlight >
-                <TouchableHighlight underlayColor='none' onPress={() => { setImg("https://i.ibb.co/0rqhW4r/brian-chan-Nb-Xj-Zomy-NEM-unsplash.jpg"); setName("McWings"); setPrice(800); navigate(); }}>
-                    <View style={[Styles.square1, Styles.elevation]}>
-                        <Image style={Styles.img1} source={{ uri: "https://i.ibb.co/0rqhW4r/brian-chan-Nb-Xj-Zomy-NEM-unsplash.jpg" }}>
-
-                        </Image>
-                        <Text style={Styles.txt1}>McWings</Text>
-                        <Text style={Styles.txt2}>From Rs.800.00</Text>
-
-                    </View>
-                </TouchableHighlight>
-                <View style={[Styles.square1, Styles.elevation]}>
-                    <Image style={Styles.img1} source={{ uri: "https://i.ibb.co/JxmCLWM/leo-roza-CLMp-C9-Uhy-To-unsplash.jpg" }}>
-
-                    </Image>
-                    <Text style={Styles.txt1}>Mc Drumlets</Text>
-                    <Text style={Styles.txt2}>From Rs.800.00</Text>
-
+            <ScrollView
+                refreshControl={<RefreshControl
+                    refreshing={refreshing}
+                    onRefresh={onRefresh} />}
+                style={{ zIndex: 9999 }}
+            >
+                <View style={{ display: "flex", flexWrap: "wrap", flexDirection: "row", alignItems: "center" }}>
+                    {List()}
                 </View>
-            </View>
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-                <View style={[Styles.square1, Styles.elevation]}>
-                    <Image style={Styles.img1} source={{ uri: "https://i.ibb.co/rHSwDTx/leo-roza-j2ofdcp-Pp-P0-unsplash.jpg" }}>
 
-                    </Image>
-                    <Text style={Styles.txt1}>McNuggests</Text>
-                    <Text style={Styles.txt2}>From Rs.800.00</Text>
-
-                </View>
-                <View style={[Styles.square1, Styles.elevation]}>
-                    <Image style={Styles.img1} source={{ uri: "https://i.ibb.co/30bmb0M/likemeat-8l-A4s3-Wj-Bds-unsplash.jpg" }}>
-
-                    </Image>
-                    <Text style={Styles.txt1}>Chicken Wrap</Text>
-                    <Text style={Styles.txt2}>From Rs.800.00</Text>
-
-
-                </View>
-                <View style={[Styles.square1, Styles.elevation]}>
-                    <Image style={Styles.img1} source={{ uri: "https://i.ibb.co/HCc267J/amirali-mirhashemian-88-YAXjnpvr-M-unsplash.jpg" }}>
-
-                    </Image>
-                    <Text style={Styles.txt1}>Big Mac</Text>
-                    <Text style={Styles.txt2}>From Rs.800.00</Text>
-
-                </View>
-            </View>
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-                <View style={[Styles.square1, Styles.elevation]}>
-                    <Image style={Styles.img1} source={{ uri: "https://i.ibb.co/rtBmVTB/christopher-alvarenga-r-QX9e-Vp-SFz8-unsplash.jpg" }}>
-
-                    </Image>
-                    <Text style={Styles.txt1}>Mc Rice</Text>
-                    <Text style={Styles.txt2}>From Rs.800.00</Text>
-
-                </View>
-                <View style={[Styles.square1, Styles.elevation]}>
-                    <Image style={Styles.img1} source={{ uri: "https://i.ibb.co/dgJTqD6/amirali-mirhashemian-puc-P6j-ZSy-V4-unsplash.jpg" }}>
-
-                    </Image>
-                    <Text style={Styles.txt1}>Cheese Burger</Text>
-                    <Text style={Styles.txt2}>From Rs.800.00</Text>
-
-                </View>
-                <View style={[Styles.square1, Styles.elevation]}>
-                    <Image style={Styles.img1} source={{ uri: "https://i.ibb.co/6rBnZC7/keriliwi-v-Jsw-ZL-s3k-unsplash.jpg" }}>
-
-                    </Image>
-                    <Text style={Styles.txt1}>Mc Spicy Wings</Text>
-                    <Text style={Styles.txt2}>From Rs.800.00</Text>
-
-                </View>
-            </View>
+            </ScrollView>
         </View>
     )
 }

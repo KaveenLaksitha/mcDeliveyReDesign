@@ -1,9 +1,11 @@
+
 const router = require("express").Router();
 const FeedBack = require("../model/feedback");
 const Address = require("../model/address");
 const Card = require("../model/card");
 const Cart = require("../model/cart")
 const FoodFav = require("../model/foodFav")
+const Food = require("../model/food")
 
 const Register = require("../model/register")
 const moment = require('moment');
@@ -307,5 +309,53 @@ router.get("/get/:email/:pass", async (req, res) => {
 })
 
 
+//add food item to food list
+router.post("/addToFood", async (req, res) => {
+
+    console.log("data for Food", req.body)
+
+    const name = req.body.name;
+    const quantity = req.body.num;
+    const price = req.body.price;
+    const image = req.body.image;
+    const cate = req.body.cate;
+    const state = req.body.state;
+
+    const newFood = new Food({
+        name, quantity, price, image, cate, state
+    })
+
+    try {
+
+        let response = await newFood.save();
+        if (response) {
+            return res.status(201).send({ status: "item added for Foods" })
+        } else {
+            return res.status(500).send({ status: "failed to add item record" })
+        }
+
+    } catch (err) {
+        console.log("error", err)
+    }
+})
+
+
+//to retrieve Food Lists data from db
+router.get("/FoodList/:cate", async (req, res) => {
+
+    let cat = req.params.cate;
+
+    try {
+        const response = await Food.find({ cate: cat });
+        return res.status(200).send({ status: "Success", data: response });
+    } catch (error) {
+        console.log("Something went wrong while connecting to DB");
+        return { ok: false };
+    }
+
+});
+
+
 
 module.exports = router;
+
