@@ -32,4 +32,4 @@ connection.once("open", () => {
 
 const Register = require("./controller/controller.js");
 app.use("/register", Register);
- 
+
