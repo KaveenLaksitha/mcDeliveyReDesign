@@ -18,7 +18,7 @@ function NewUser() {
           <Text style={styles.passwordMobileresetdetails}>
             Create an account will allow you to enjoy exclusive offers and
             promotions, retrieve saved orders and favourites, and faster checkout.</Text>
-          <TouchableHighlight style={styles.submitbutton}
+          <TouchableHighlight underlayColor='none' style={styles.submitbutton}
             onPress={() => navigation.navigate("Register")}>
             <Text style={styles.submittext}>Register</Text>
           </TouchableHighlight>
@@ -27,7 +27,7 @@ function NewUser() {
           <Text style={styles.guestUser}>Continue without an account</Text>
           <Text style={styles.guestUserText}>
             Express checkout with online payment as guest.</Text>
-          <TouchableHighlight style={styles.guestUserbutton}
+          <TouchableHighlight underlayColor='none' style={styles.guestUserbutton}
             onPress={() => navigation.navigate("Home")}>
             <Text style={styles.guestUsertext}>Guest Order</Text>
           </TouchableHighlight>

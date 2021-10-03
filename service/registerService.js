@@ -16,9 +16,9 @@ export const addRegister = async (payload) => {
 }
 
 // //for retrive the all records
-// export const getAllItems = async () => {
+// export const getEmailPassword = async () => {
 //     try {
-//         const response = await axios.get(`${HOST}/api/cart`);
+//         const response = await axios.get(`${HOST}/register/get/:email/:pass`);
 //         return {
 //             ok: true,
 //             data: response.data.data,

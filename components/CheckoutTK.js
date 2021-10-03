@@ -41,7 +41,7 @@ function CheckoutTK({ navigation }) {
                     <View style={styles.horizontal}>
                         <HandIcon name="hand-holding-usd" color='#F79E18' size={40} />
                         <View style={{ marginLeft: 30, marginRight: 90 }}>
-                            <Text style={styles.text}>Cash On Delivery</Text>
+                            <Text style={styles.text}>Pay at Outlet</Text>
 
                         </View>
                         <RadioButton

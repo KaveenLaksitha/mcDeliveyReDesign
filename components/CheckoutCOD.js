@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
-import { View, Text, ScrollView, StyleSheet, TouchableHighlight, TextInput, Dimensions, TouchableOpacity } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { View, Text, ScrollView, StyleSheet, TouchableHighlight, TextInput, Dimensions, TouchableOpacity, Alert } from 'react-native'
 import HandIcon from 'react-native-vector-icons/FontAwesome5'
 import VisaIcon from 'react-native-vector-icons/Fontisto'
-
 import { RadioButton } from 'react-native-paper';
 
-let index = 0;
+import { useToast } from 'react-native-styled-toast'
+
+let index = 1;
 
 const setBorderColor = (choice) => {
     index = choice;
@@ -15,9 +16,29 @@ function CheckoutCOD({ navigation, route }) {
 
     const [checked, setChecked] = useState('first');
     const [discount, setDiscount] = useState(0);
+    const [input, setInput] = useState("")
+
+    const { toast } = useToast()
 
     function calculateDiscount() {
-        setDiscount(300)
+
+        if (input.length > 0) {
+            // setDiscount(300)
+            console.log("input", input.length);
+        } else {
+            toast({
+                message: 'promo code can\'t be empty!',
+                toastStyles: {
+                    borderColor: '#FF3131',
+                },
+                iconFamily: 'Entypo',
+                iconName: 'info',
+                iconColor: 'red',
+                hideAccent: true,
+                hideCloseIcon: true
+            })
+            // Alert.alert("please enter something")
+        }
     }
 
     return (
@@ -65,7 +86,7 @@ function CheckoutCOD({ navigation, route }) {
                         <View style={{ width: 290 }}>
                             <Text style={styles.text}>3rd floor "Samagam Medura",400,{"\n"}D.R. Wijewardena Mawatha{"\n"}Colombo 10</Text>
                         </View>
-                        <TouchableOpacity onPress={() => { console.log("pressed") }}>
+                        <TouchableOpacity onPress={() => { navigation.navigate("Delivery Address Book") }}>
                             <Text style={{ fontSize: 18, color: '#7E7E7E' }}>Edit</Text>
                         </TouchableOpacity>
                     </View>
@@ -75,12 +96,12 @@ function CheckoutCOD({ navigation, route }) {
                 <View style={styles.horizontal}>
                     <View style={[styles.promoInput, styles.elevation]}>
                         <TextInput style={styles.text}
-                            placeholder="Code" />
+                            placeholder="Code" onChangeText={(e) => { setInput(e) }} />
                     </View>
 
                     <TouchableHighlight underlayColor='none' onPress={() => calculateDiscount()}>
                         <View style={[styles.buttonEnter, styles.elevation]}>
-                            <Text style={{ fontSize: 17, fontWeight: 'bold', color: 'black' }}>Enter</Text>
+                            <Text style={{ fontSize: 17, fontWeight: 'bold', color: 'black' }} >Enter</Text>
                         </View>
                     </TouchableHighlight>
                 </View>

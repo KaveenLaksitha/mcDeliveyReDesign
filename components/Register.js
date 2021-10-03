@@ -3,6 +3,8 @@ import React, {useState} from 'react';
 import { StyleSheet, Text, View, SafeAreaView, ToastAndroid, ImageBackground, Alert, TextInput , TouchableHighlight, CheckBox} from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import {addRegister} from '../service/registerService'
+//import DateTimePicker from 'react-native-modal-datetime-picker';
+
 
 export default function Register({navigation}) {
 
@@ -30,24 +32,51 @@ export default function Register({navigation}) {
     }
     if(salutation != "" && name != "" && contactno != "" && dateofbirth != "" && email != "" && password != "" && confirmpassword != ""){
       if(isSelected != "" && isSelected2 !=""){
-        if(password == confirmpassword){
-          addRegister(newRegister).then((response) => {
-    
-            if (response.ok) {
-                Alert.alert("Welcom to MC Delivery Home Pag!")
-                navigation.navigate('Home');
-            }
-            else {
-                Alert.alert("User Already in this System")
-            }
-        })
-    
+        var phone = /^(?=.*\d).{10,}$/;
+        if(phone.test(contactno)){
+          if(password == confirmpassword){
+            var passw = /^(?=.*\d)(?=.*[a-z]).{6,10}$/;
+            if(password.length>5 && password.length<11 && passw.test(password) ){
+              var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+              if(re.test(email)){
+                addRegister(newRegister).then((response) => {
+                  console.log("email check",response)
+                  if (response.ok) {
+                      Alert.alert("Welcom to MC Delivery Home Pag!")
+                      navigation.navigate('Home');
+                  }
+                  else {
+                      Alert.alert("User Already in this System")
+                  }
+              })
+          
+              }else{
+                ToastAndroid.show(
+                  'Invalid Email Address', ToastAndroid.SHORT
+                );
+                
+              }
+                
+              }else{
+                ToastAndroid.show(
+                  'Password must be satisfy this condition', ToastAndroid.SHORT
+                );
+              
+              }
+             
+            }else{
+              ToastAndroid.show(
+                'Sorry ! Password not match', ToastAndroid.SHORT
+              );
+  
+            }  
+
         }else{
           ToastAndroid.show(
-            'Sorry ! Password not match', ToastAndroid.SHORT
+            'Invalid Phon Number', ToastAndroid.SHORT
           );
-        }
 
+        }
       }else{
         ToastAndroid.show(
           'You must agree the teams & condition', ToastAndroid.SHORT
@@ -60,7 +89,9 @@ export default function Register({navigation}) {
       );
     }
    
-  }
+  };
+
+
 
   return (
     <SafeAreaView style={styles.container}>
@@ -94,7 +125,7 @@ export default function Register({navigation}) {
           <Text style={styles.emailText}>Email address</Text>
           <TextInput style={styles.email}
              placeholder="abc@gmail.com"
-             pattern = '/[a-zA-Z0-9]+[\.]?([a-zA-Z0-9]+)?[\@][a-z]{3,9}[\.][a-z]{2,5}/g'
+             pattern ={[ /[a-zA-Z0-9]+[\.]?([a-zA-Z0-9]+)?[\@][a-z]{3,9}[\.][a-z]{2,5}/g]}
              onChangeText={(e) => {setEmail(e)}}
              required
           ></TextInput>
@@ -104,7 +135,11 @@ export default function Register({navigation}) {
              secureTextEntry={true} 
              maxLength={10}
              minLength= {6}
-             pattern = '^(?=.*?[a-z])(?=.*?[0-9]){6,10}$'
+            //  pattern = {[
+            //   '^.{8,10}$', // min 6 chars max 10
+            //   '(?=.*\\d)', // number required
+            //   '(?=.*[a-z])', // uppercase letter
+            // ]}
              onChangeText={(e) => {setPassword(e)}}
              required
           ></TextInput>
@@ -114,7 +149,11 @@ export default function Register({navigation}) {
              secureTextEntry={true} 
              maxLength={10}
              minLength= {6}
-             pattern = '^(?=.*?[a-z])(?=.*?[0-9]){6,10}$'
+            //  pattern = {[
+            //   '^.{8,10}$', // min 6 chars max 10
+            //   '(?=.*\\d)', // number required
+            //   '(?=.*[a-z])', // uppercase letter
+            // ]}
              onChangeText={(e) => {setConfirmPassword(e)}}
              required
           ></TextInput>
@@ -134,7 +173,7 @@ export default function Register({navigation}) {
               <Text style={styles.privact2}>I would like to subscribe for promotional emails and sms</Text>
           </View>
 
-          <TouchableHighlight style={styles.resetbutton}
+          <TouchableHighlight underlayColor='none' style={styles.resetbutton}
               onPress={sendData}>
               <Text style={styles.resettext}>Register</Text>
           </TouchableHighlight>        

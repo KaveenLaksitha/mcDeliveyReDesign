@@ -9,7 +9,7 @@ const registerSchema = new Schema({
     name: {
         type: String,
         required:true,
-        unique: true
+    
     },
     contactno: {
         type: Number,
