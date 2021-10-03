@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react'
 
-import { View, Text, Button, Image, TouchableHighlight, StyleSheet, TouchableOpacity, ToastAndroid } from 'react-native';
+import { View, Text, Button, Image, TouchableHighlight, StyleSheet, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-
-import { Picker } from '@react-native-picker/picker';
-
 import Icon1 from 'react-native-vector-icons/Entypo';
+import { Picker } from '@react-native-picker/picker';
+import { useToast } from 'react-native-styled-toast'
 import { addToCart } from '../../service/cartService';
+import { addToFav } from "../../service/favService";
 
 let count = 0;
 export default function SingleFoodItem({ navigation, route }) {
 
-    const [image, setImage] = useState("");
+    const [image, setImage] = useState();
     const [name, setName] = useState("");
     const [price, setPrice] = useState("");
     const [index, setIndex] = useState(0);
@@ -20,7 +20,7 @@ export default function SingleFoodItem({ navigation, route }) {
     const [selectedSize, setSelectedSize] = useState("");
     const [calculatedPrice, setCalculatedPrice] = useState();
 
-
+    const { toast } = useToast()
 
     useEffect(() => {
 
@@ -58,6 +58,9 @@ export default function SingleFoodItem({ navigation, route }) {
     const setIcon = () => {
 
         count++;
+        if (count === 1) {
+            addToFavaourite()
+        }
 
         if (count % 2 == 1) {
             setIndex(1);
@@ -67,15 +70,23 @@ export default function SingleFoodItem({ navigation, route }) {
     }
 
     const showToast = () => {
-        ToastAndroid.show("Item added successfully!", ToastAndroid.SHORT);
+        toast({ message: 'Item added successfully!' })
+
     };
 
     function addToItemCart() {
         const payload = {
             name, num, calculatedPrice
         }
-        addToCart(payload)
+        // addToCart(payload)
         showToast();
+    }
+
+    function addToFavaourite() {
+        const payload = {
+            name, num, price, image
+        }
+        addToFav(payload)
     }
 
 
@@ -97,7 +108,6 @@ export default function SingleFoodItem({ navigation, route }) {
             <View style={styles.square}>
                 <View style={{ flexDirection: "row" }}>
                     <Text style={styles.Topic}>{name}</Text>
-
                     <TouchableOpacity underlayColor='none' onPress={() => setIcon()}>
                         <View style={{ transform: index === 1 ? [{ scale: 1 }] : [{ scale: 0 }] }}>
                             <Icon name="heart" color='#FF3131' size={40} />
@@ -130,7 +140,9 @@ export default function SingleFoodItem({ navigation, route }) {
                     </TouchableOpacity>
                     {/* <Text style={styles.listItemPrice}>Rs.{num1 * 740}.00</Text> */}
                 </View>
-                <TouchableHighlight style={styles.btn} underlayColor='none' onPress={() => { addToItemCart() }}>
+                <TouchableHighlight style={styles.btn} underlayColor='none'
+                    onPress={() => { addToItemCart() }}
+                >
                     <View style={[styles.buttonRed, styles.elevation]}>
                         <Text style={{ fontSize: 18, color: 'white' }}>Add to Cart - Rs.{calculatedPrice}.00</Text>
                     </View>

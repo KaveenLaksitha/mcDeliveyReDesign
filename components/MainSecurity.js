@@ -3,6 +3,13 @@ import { StyleSheet, Text, View, SafeAreaView, Button, Image, SafeAreaViewBase, 
 import SecurityEmail from './SecurityEmail';
 import SecurityPassword from './SecurityPassword';
 
+let index1 = 0;
+
+const setBorderColor = (choice) => {
+    index1 = choice;
+}
+
+
 function MainSecurity() {
 
     const [index, setIndex] = useState(1);
@@ -31,17 +38,17 @@ function MainSecurity() {
                             uri: "https://i.ibb.co/x3shm4R/mcWhite.png"
                         }}
                     />
-                    <View style={styles.underlinelogin}>
+                    <View style={[styles.underlinelogin, { borderColor: index1 === 1 ? 'yellow' : '#FF3133' }]}>
                         <TouchableOpacity
-                            onPress={() => setIndex(1)}>
+                            onPress={() => { setIndex(1); setBorderColor(1) }}>
                             <Text style={{ color: '#ffffff', fontSize: 16, fontWeight: 'bold', textAlign: 'center', }}>Change Email</Text>
                         </TouchableOpacity>
                         {/*To set the SecondScreen*/}
 
                     </View>
-                    <View style={styles.underlineregister}>
+                    <View style={[styles.underlineregister, { borderColor: index1 === 2 ? 'yellow' : '#FF3133' }]}>
                         <TouchableOpacity
-                            onPress={() => setIndex(2)}>
+                            onPress={() => { setIndex(2), setBorderColor(2) }}>
                             <Text style={{ color: '#ffffff', fontSize: 16, fontWeight: 'bold' }}>Change Password</Text>
                         </TouchableOpacity>
                     </View>
@@ -51,7 +58,7 @@ function MainSecurity() {
                 <RenderElement />
 
             </View>
-        </SafeAreaView>
+        </SafeAreaView >
     )
 }
 const styles = StyleSheet.create({
@@ -98,8 +105,8 @@ const styles = StyleSheet.create({
     underlineregister: {
         borderBottomWidth: 4,
         borderColor: 'yellow',
-        marginLeft: 248,
-        marginTop: -25,
+        marginLeft: 242,
+        marginTop: -27,
         width: 130,
 
 

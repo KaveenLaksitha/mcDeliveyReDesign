@@ -71,10 +71,10 @@ const styles = StyleSheet.create({
 
     ContactUsHeadLine: {
         position: "absolute",
-        marginTop: 20,
+        marginTop: 15,
         marginLeft: 50,
         fontWeight: 'bold',
-        fontSize: 18
+        fontSize: 20
     },
 
     body: {

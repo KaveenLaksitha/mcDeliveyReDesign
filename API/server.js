@@ -14,6 +14,12 @@ app.use(express.json());
 const routes = require("./controller/controller.js");
 app.use("/api", routes)
 
+// const feedback = require("./controller/reviewController.js");
+// app.use("/feedback", feedback)
+
+// const address = require("./controller/addressController.js");
+// app.use("/address", address)
+
 mongoose.connect(URL, {
     // useCreateIndex: true,
     useNewUrlParser: true,
@@ -32,4 +38,4 @@ connection.once("open", () => {
 
 const Register = require("./controller/controller.js");
 app.use("/register", Register);
- 
+

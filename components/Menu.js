@@ -52,6 +52,7 @@ function Menu({ navigation }) {
                 <TouchableOpacity style={styles.text}
                     onPress={() => navigation.navigate('Login')}>
                     <Text style={{ fontSize: 20 }}>Log Out</Text></TouchableOpacity>
+
             </View>
         </View>
     )
