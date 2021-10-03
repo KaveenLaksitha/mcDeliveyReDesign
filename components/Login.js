@@ -6,6 +6,8 @@ const Login = () => {
 
   const navigation = useNavigation();
 
+  const [textInputValue, setTextInputValue] = React.useState('');
+
   return (
     <SafeAreaView style={styles.container}>
 
@@ -19,12 +21,22 @@ const Login = () => {
 
           </View>
 
-          <TextInput style={styles.inputemail} ></TextInput>
+          <TextInput style={styles.inputemail} 
+            onChangeText={text => setTextInputValue(text)}
+            value={textInputValue}
+          placeholder="abc@gmail.com"
+          pattern = '/[a-zA-Z0-9]+[\.]?([a-zA-Z0-9]+)?[\@][a-z]{3,9}[\.][a-z]{2,5}/g'
+          ></TextInput>
+
           <View style={styles.passworddiv}>
             <Text style={styles.password}>Password</Text>
           </View>
 
-          <TextInput style={styles.inputpassword} ></TextInput>
+          <TextInput style={styles.inputpassword} 
+             secureTextEntry={true} 
+             maxLength={10}
+             minLength= {6}
+          ></TextInput>
 
           <View style={styles.forgetdiv}>
 
@@ -79,15 +91,6 @@ const styles = StyleSheet.create({
     marginLeft: 100,
   },
 
-  // mcImage: {
-  //   width: 140,
-  //   height: 115,
-  //   marginTop: 180,
-  //   marginLeft: 140,
-  //   justifyContent: 'center',
-  //   alignItems: 'center',
-
-  // },
 
   love: {
     marginTop: 0,

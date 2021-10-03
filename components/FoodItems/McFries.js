@@ -6,6 +6,7 @@ import Icon1 from 'react-native-vector-icons/Entypo';
 import { Picker } from '@react-native-picker/picker';
 import { useToast } from 'react-native-styled-toast'
 import { addToCart } from '../../service/cartService';
+import { addToFav } from "../../service/favService";
 
 let count = 0;
 export default function SingleFoodItem({ navigation, route }) {
@@ -57,6 +58,9 @@ export default function SingleFoodItem({ navigation, route }) {
     const setIcon = () => {
 
         count++;
+        if (count === 1) {
+            addToFavaourite()
+        }
 
         if (count % 2 == 1) {
             setIndex(1);
@@ -76,6 +80,13 @@ export default function SingleFoodItem({ navigation, route }) {
         }
         // addToCart(payload)
         showToast();
+    }
+
+    function addToFavaourite() {
+        const payload = {
+            name, num, price, image
+        }
+        addToFav(payload)
     }
 
 

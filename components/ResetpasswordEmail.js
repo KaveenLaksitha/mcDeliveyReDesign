@@ -3,6 +3,9 @@ import React from 'react';
 import { StyleSheet, Text, View, SafeAreaView, Button, Image, SafeAreaViewBase, Alert, TextInput , TouchableHighlight} from 'react-native';
 
 export default function ResetpasswordEmail({navigation}) {
+
+  const [textInputValue, setTextInputValue] = React.useState('');
+
   return (
     <SafeAreaView style={styles.container}>
      <StatusBar hidden/>  
@@ -38,7 +41,13 @@ export default function ResetpasswordEmail({navigation}) {
           <View style={styles.emailAddressdiv}>
              <Text style={styles.password}>Email Address</Text>
           </View>
-              <TextInput  style={styles.inputpassword} ></TextInput>
+              <TextInput  style={styles.inputpassword}
+                 onChangeText={text => setTextInputValue(text)}
+                 value={textInputValue}
+               placeholder="abc@gmail.com"
+               pattern = '/[a-zA-Z0-9]+[\.]?([a-zA-Z0-9]+)?[\@][a-z]{3,9}[\.][a-z]{2,5}/g'
+              ></TextInput>
+              
           <TouchableHighlight style={styles.submitbutton}
               onPress={() => Alert.alert('Login Successfully')}>
               <Text style={styles.submittext}>Submit</Text>
