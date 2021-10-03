@@ -10,7 +10,7 @@ router.post("/addToCart", async (req, res) => {
 
     const name = req.body.name;
     const quantity = req.body.num;
-    const price = req.body.price;
+    const price = req.body.calculatedPrice;
 
     const newCart = new Cart({
         name, quantity, price

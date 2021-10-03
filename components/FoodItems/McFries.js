@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-import { View, Text, Button, Image, TouchableHighlight, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, Button, Image, TouchableHighlight, StyleSheet, TouchableOpacity, ToastAndroid } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { Picker } from '@react-native-picker/picker';
@@ -8,15 +8,18 @@ import { Picker } from '@react-native-picker/picker';
 import Icon1 from 'react-native-vector-icons/Entypo';
 import { addToCart } from '../../service/cartService';
 
+let count = 0;
 export default function SingleFoodItem({ navigation, route }) {
 
     const [image, setImage] = useState("");
     const [name, setName] = useState("");
     const [price, setPrice] = useState("");
+    const [index, setIndex] = useState(0);
 
     const [num, setNum] = useState(1);
     const [selectedSize, setSelectedSize] = useState("");
     const [calculatedPrice, setCalculatedPrice] = useState();
+
 
 
     useEffect(() => {
@@ -52,13 +55,27 @@ export default function SingleFoodItem({ navigation, route }) {
         setNum(num + 1);
     }
 
+    const setIcon = () => {
+
+        count++;
+
+        if (count % 2 == 1) {
+            setIndex(1);
+        } else {
+            setIndex(0);
+        }
+    }
+
+    const showToast = () => {
+        ToastAndroid.show("Item added successfully!", ToastAndroid.SHORT);
+    };
 
     function addToItemCart() {
         const payload = {
-            name, num, price
+            name, num, calculatedPrice
         }
         addToCart(payload)
-     
+        showToast();
     }
 
 
@@ -81,9 +98,13 @@ export default function SingleFoodItem({ navigation, route }) {
                 <View style={{ flexDirection: "row" }}>
                     <Text style={styles.Topic}>{name}</Text>
 
-                    <TouchableOpacity>
-                        {/* <Icon style={styles.icon} name="favorite-outline" color='#FF3131' size={40} /> */}
-                        <Icon style={styles.icon} name="heart-o" color='#FF3131' size={40} />
+                    <TouchableOpacity underlayColor='none' onPress={() => setIcon()}>
+                        <View style={{ transform: index === 1 ? [{ scale: 1 }] : [{ scale: 0 }] }}>
+                            <Icon name="heart" color='#FF3131' size={40} />
+                        </View>
+                        <View style={{ transform: index === 0 ? [{ scale: 1 }] : [{ scale: 0 }], position: 'absolute' }}>
+                            <Icon name="heart-o" color='#FF3131' size={40} />
+                        </View>
                     </TouchableOpacity>
                 </View>
                 <Text style={styles.des}>McDonald's World Famous Fries® We use specially selected potatoes to make our long and thin, Crispy French Fries. Made simple with sunflower oil and our unique crispy coating</Text>
@@ -172,9 +193,10 @@ const styles = StyleSheet.create({
     },
     Topic: {
         fontWeight: "bold",
+        width: 320,
         //   marginLeft: 15,
         //   marginTop:20,
-        marginRight: 20,
+        marginRight: 10,
         fontSize: 35
     },
     des: {
@@ -188,10 +210,6 @@ const styles = StyleSheet.create({
         marginLeft: 67,
 
         marginTop: 10
-
-    },
-    icon: {
-        marginLeft: 50
 
     },
     buttonRed: {

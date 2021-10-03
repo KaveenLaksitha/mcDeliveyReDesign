@@ -3,25 +3,30 @@ import { StyleSheet, Text, View, SafeAreaView, Button, Image, SafeAreaViewBase, 
 import Login from './Login';
 import NewUser from './NewUser';
 
-let cindex = 0;
-
-
+var cindex = 1;
 
 function Loginfragment() {
 
     const [index, setIndex] = useState(1);
-
     const RenderElement = () => {
         if (index === 1) {
-            cindex = index;
+            cindex = 1;
             console.log("Hi", cindex);
             return <Login />;
         } else if (index === 2) {
-            cindex = index;
+            cindex = 2;
             console.log("Hi", cindex);
             return <NewUser />;
         }
     };
+
+    // function setColor(num) {
+    //     if (num == 1) {
+    //         cindex = 1
+    //     } else {
+    //         cindex = 2;
+    //     }
+    // }
 
     return (
         <SafeAreaView style={styles.container}>
@@ -33,14 +38,14 @@ function Loginfragment() {
                             uri: "https://i.ibb.co/N1zyVSy/mcWhite.png"
                         }}
                     />
-                    <View style={styles.underlinelogin}>
+                    <View style={[styles.underlinelogin, { borderColor: cindex === 1 ? 'white' : '#FFC300', }]}>
                         <TouchableOpacity
                             onPress={() => { setIndex(1) }}>
                             <Text style={styles.login}>Login</Text>
                         </TouchableOpacity>
                         {/*To set the SecondScreen*/}
                     </View>
-                    <View style={styles.underlineregister}>
+                    <View style={[styles.underlineregister, { borderColor: cindex === 2 ? 'white' : '#FFC300', }]}>
                         <TouchableOpacity
                             onPress={() => { setIndex(2) }}>
                             <Text style={styles.reg}>I'am New</Text>
@@ -87,9 +92,7 @@ const styles = StyleSheet.create({
     },
 
     underlinelogin: {
-        borderBottomWidth: 2,
-        borderColor: cindex === 1 ? 'yellow' : 'white',
-        // borderWidth: 2,
+        borderBottomWidth: 3,
         marginLeft: 45,
         marginTop: -30,
         height: 100,
@@ -106,9 +109,7 @@ const styles = StyleSheet.create({
     },
 
     underlineregister: {
-        borderBottomWidth: 2,
-        // borderWidth: 2,
-        borderColor: cindex === 1 ? 'yellow' : 'white',
+        borderBottomWidth: 3,
         marginLeft: 273,
         marginTop: -28,
         width: 90,
