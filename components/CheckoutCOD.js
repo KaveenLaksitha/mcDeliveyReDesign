@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, Text, ScrollView, StyleSheet, TouchableHighlight, TextInput, Dimensions } from 'react-native'
+import { View, Text, ScrollView, StyleSheet, TouchableHighlight, TextInput, Dimensions, TouchableOpacity } from 'react-native'
 import HandIcon from 'react-native-vector-icons/FontAwesome5'
 import VisaIcon from 'react-native-vector-icons/Fontisto'
 
@@ -14,7 +14,11 @@ const setBorderColor = (choice) => {
 function CheckoutCOD({ navigation, route }) {
 
     const [checked, setChecked] = useState('first');
-    // const [index, setIndex] = useState(0);
+    const [discount, setDiscount] = useState(0);
+
+    function calculateDiscount() {
+        setDiscount(300)
+    }
 
     return (
         <ScrollView>
@@ -58,10 +62,12 @@ function CheckoutCOD({ navigation, route }) {
 
                 <View style={[styles.listItemAddress, styles.elevation]}>
                     <View style={styles.horizontal}>
-                        <View style={{ marginRight: 25 }}>
+                        <View style={{ width: 290 }}>
                             <Text style={styles.text}>3rd floor "Samagam Medura",400,{"\n"}D.R. Wijewardena Mawatha{"\n"}Colombo 10</Text>
                         </View>
-                        <Text style={{ fontSize: 18, color: '#7E7E7E', marginTop: -40 }}>Edit</Text>
+                        <TouchableOpacity onPress={() => { console.log("pressed") }}>
+                            <Text style={{ fontSize: 18, color: '#7E7E7E' }}>Edit</Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
 
@@ -72,7 +78,7 @@ function CheckoutCOD({ navigation, route }) {
                             placeholder="Code" />
                     </View>
 
-                    <TouchableHighlight>
+                    <TouchableHighlight underlayColor='none' onPress={() => calculateDiscount()}>
                         <View style={[styles.buttonEnter, styles.elevation]}>
                             <Text style={{ fontSize: 17, fontWeight: 'bold', color: 'black' }}>Enter</Text>
                         </View>
@@ -101,7 +107,7 @@ function CheckoutCOD({ navigation, route }) {
                         Discount
                     </Text>
                     <Text style={styles.textRight}>
-                        Rs.100.00
+                        Rs.{discount}.00
                     </Text>
                 </View>
                 <View style={styles.horizontal}>
@@ -109,7 +115,7 @@ function CheckoutCOD({ navigation, route }) {
                         Total cost
                     </Text>
                     <Text style={[styles.textRight, { fontWeight: 'bold' }]}>
-                        Rs.{route.params.price + 300 + 100}.00
+                        Rs.{(route.params.price + 300) - discount}.00
                     </Text>
                 </View>
                 <TouchableHighlight underlayColor='none' onPress={() => navigation.navigate("ThankYou")}>
