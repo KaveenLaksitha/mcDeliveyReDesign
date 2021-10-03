@@ -1,11 +1,10 @@
 const router = require("express").Router();
 const Cart = require("../model/cart")
 const FoodFav = require("../model/foodFav")
-
 const Register = require("../model/register")
 const moment = require('moment');
-//to add items to cart{
 
+//to add items to cart{
 router.post("/addToCart", async (req, res) => {
 
     console.log("data for cart", req.body)
