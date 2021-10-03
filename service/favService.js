@@ -1,23 +1,22 @@
 import axios from "axios";
 const HOST = "http://10.0.2.2:4000"
 
-export const addToCart = async (payload) => {
+export const addToFav = async (payload) => {
     try {
-        const response = await axios.post(`${HOST}/api/addToCart`, payload)
+        const response = await axios.post(`${HOST}/api/addToFav`, payload)
         if (response) {
             return { ok: true }
         }
-    } catch (error) {
+    } catch (err) {
         return {
             ok: false, err: error.response.data.status
         };
     }
 }
 
-//for retrive the all records
-export const getAllItems = async () => {
+export const getAllFav = async () => {
     try {
-        const response = await axios.get(`${HOST}/api/cart`);
+        const response = await axios.get(`${HOST}/api/FavList`);
         return {
             ok: true,
             data: response.data.data,
@@ -25,6 +24,6 @@ export const getAllItems = async () => {
     } catch (error) {
         return {
             ok: false,
-        };
+        }
     }
 };

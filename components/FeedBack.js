@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Picker } from '@react-native-picker/picker';
 import { Rating, AirbnbRating } from 'react-native-ratings';
 import Feather from 'react-native-vector-icons/FontAwesome5';
+import { useToast } from 'react-native-styled-toast'
 import { StyleSheet, Text, View, SafeAreaView, ToastAndroid, ImageBackground, Alert, TextInput, TouchableHighlight, TouchableOpacity, ScrollView } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { createFeedBack } from '../service/feedBackService'
@@ -18,6 +19,8 @@ export default function FeedBack({ navigation }) {
     const [isActive1, setActive1] = useState(false);
     const [isActive2, setActive2] = useState(false);
     const [isActive3, setActive3] = useState(false);
+
+    const { toast } = useToast()
 
     const [data, setData] = React.useState({
         orderId: '',
@@ -65,6 +68,11 @@ export default function FeedBack({ navigation }) {
         }
     }
 
+    const showToast = () => {
+        toast({ message: 'FeedBack Sent Successfully!' })
+
+    };
+
     function clearInputs() {
         onChangeOrderId(" ");
         onChangeSuggestion(" ");
@@ -90,7 +98,8 @@ export default function FeedBack({ navigation }) {
 
             createFeedBack(newFeedBack).then((res) => {
                 if (res.ok) {
-                    Alert.alert("FeedBack Succefully saved");
+                    // Alert.alert("FeedBack Succefully saved");
+                    showToast();
                     clearInputs();
                 } else {
                     Alert.alert("FeedBack could not be saved", res.err)

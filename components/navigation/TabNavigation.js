@@ -17,6 +17,7 @@ function TabNavigation() {
             screenOptions={({ route }) => ({
                 tabBarStyle: { backgroundColor: '#FF3131' },
                 tabBarShowLabel: false,
+                tabBarHideOnKeyboard: true,
                 tabBarIcon: ({ focused, color, size }) => {
                     let iconName;
 

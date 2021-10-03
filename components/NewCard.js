@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Picker } from '@react-native-picker/picker';
-import { StyleSheet, Text, View, SafeAreaView, Image, TextInput, TouchableHighlight, ScrollView, Alert, ToastAndroid } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, Image, TextInput, TouchableHighlight, ScrollView, Alert, ToastAndroid, Button } from 'react-native';
 import Feather from 'react-native-vector-icons/FontAwesome5'
 import { createCard } from '../service/cardService';
+import DatePicker from '@react-native-community/datetimepicker';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 // import DateTimePickerModal from "react-native-modal-datetime-picker";
 
@@ -19,7 +21,33 @@ function NewCard({ navigation }) {
     const [isActive2, setActive2] = useState(false);
     const [isActive3, setActive3] = useState(false);
 
-    const [uri, setImageUri] = useState(" ")
+    const [uri, setImageUri] = useState(" ");
+
+    const [date, setDate] = useState(new Date(1598051730000));
+    const [mode, setMode] = useState('date');
+    const [show, setShow] = useState(false);
+    const [text, setText] = useState('Empty');
+
+    const onChange = (event, selectedDate) => {
+        const currentDate = selectedDate || date;
+        setShow(Platform.OS === 'android');
+        setDate(currentDate);
+
+        let tempDate = new Date(currentDate);
+        let fDate = (tempDate.getMonth() + 1) + '/' + tempDate.getFullYear();
+        onChangeExpiryDate(fDate);
+
+    };
+
+    const showMode = (currentMode) => {
+        setShow(true);
+        setMode(currentMode);
+    };
+
+    const showDatepicker = () => {
+        showMode('date');
+    };
+
     const [data, setData] = React.useState({
         cardNumber: '',
         nameOnCard: '',
@@ -261,14 +289,34 @@ function NewCard({ navigation }) {
                         }
 
                         <Text style={styles.textValue}>Expiry Date </Text>
-                        <TextInput style={[styles.input, { borderColor: isActive3 ? 'blue' : 'grey' }]}
+                        <TextInput style={[styles.input, { borderColor: isActive3 ? 'blue' : 'grey' }, { color: 'black' }]}
                             onChangeText={onChangeExpiryDate}
                             value={ExpiryDate}
-                            placeholder="2021/10/14"
-                            keyboardType="decimal-pad"
+                            //placeholder="2021/10/14"
+                            //keyboardType="decimal-pad"
+                            editable={false}
                             onFocus={() => setActive3(true)}
                             onBlur={() => setActive3(false)}
+                            onPress={showDatepicker}
                         />
+
+                        <Feather style={styles.calender}
+                            name="calendar-day"
+                            color="blue"
+                            size={20}
+                            onPress={showDatepicker}
+                        />
+
+                        {show && (
+                            <DatePicker
+                                testID="dateTimePicker"
+                                value={date}
+                                mode={mode}
+                                is24Hour={false}
+                                display="default"
+                                onChange={onChange}
+                            />
+                        )}
 
                     </View>
                 </ScrollView>
@@ -462,6 +510,11 @@ const styles = StyleSheet.create({
         textAlign: "left",
         marginLeft: 25,
         fontSize: 14
+    },
+    calender: {
+        position: "absolute",
+        marginTop: 280,
+        marginLeft: 300
     }
 
 });

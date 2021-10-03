@@ -35,3 +35,7 @@ app.listen(port, () => {
 connection.once("open", () => {
     console.log("Mongodb Connection success!");
 })
+
+const Register = require("./controller/controller.js");
+app.use("/register", Register);
+

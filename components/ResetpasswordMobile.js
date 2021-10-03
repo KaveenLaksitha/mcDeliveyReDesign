@@ -38,7 +38,9 @@ export default function ResetpasswordMobile({navigation}) {
           <View style={styles.emailAddressdiv}>
              <Text style={styles.password}>Mobile Number</Text>
           </View>
-              <TextInput  style={styles.inputpassword} ></TextInput>
+              <TextInput  style={styles.inputpassword} 
+                 keyboardType={'numeric'}
+              ></TextInput>
           <TouchableHighlight style={styles.submitbutton}
               onPress={() => Alert.alert('Login Successfully')}>
               <Text style={styles.submittext}>Submit</Text>

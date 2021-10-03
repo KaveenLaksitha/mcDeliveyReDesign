@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import { View, Text, ScrollView, StyleSheet, TouchableHighlight, TextInput, Dimensions } from 'react-native'
+import { View, Text, ScrollView, StyleSheet, TouchableHighlight, TextInput, Dimensions, TouchableOpacity } from 'react-native'
 import HandIcon from 'react-native-vector-icons/FontAwesome5'
 import VisaIcon from 'react-native-vector-icons/Fontisto'
 
 import { RadioButton } from 'react-native-paper';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+
 
 let index = 0;
 
@@ -12,11 +12,14 @@ const setBorderColor = (choice) => {
     index = choice;
 }
 
-function CheckoutCOD({ navigation }) {
+function CheckoutCOD({ navigation, route }) {
 
     const [checked, setChecked] = useState('first');
+    const [discount, setDiscount] = useState(0);
 
-    // const [index, setIndex] = useState(0);
+    function calculateDiscount() {
+        setDiscount(300)
+    }
 
     return (
         <ScrollView>
@@ -76,7 +79,7 @@ function CheckoutCOD({ navigation }) {
                             placeholder="Code" />
                     </View>
 
-                    <TouchableHighlight>
+                    <TouchableHighlight underlayColor='none' onPress={() => calculateDiscount()}>
                         <View style={[styles.buttonEnter, styles.elevation]}>
                             <Text style={{ fontSize: 17, fontWeight: 'bold', color: 'black' }}>Enter</Text>
                         </View>
@@ -89,7 +92,7 @@ function CheckoutCOD({ navigation }) {
                         Items
                     </Text>
                     <Text style={styles.textRight}>
-                        Rs.3000.00
+                        Rs.{route.params.price}.00
                     </Text>
                 </View>
                 <View style={styles.horizontal}>
@@ -105,7 +108,7 @@ function CheckoutCOD({ navigation }) {
                         Discount
                     </Text>
                     <Text style={styles.textRight}>
-                        Rs.100.00
+                        Rs.{discount}.00
                     </Text>
                 </View>
                 <View style={styles.horizontal}>
@@ -113,7 +116,7 @@ function CheckoutCOD({ navigation }) {
                         Total cost
                     </Text>
                     <Text style={[styles.textRight, { fontWeight: 'bold' }]}>
-                        Rs.3200.00
+                        Rs.{(route.params.price + 300) - discount}.00
                     </Text>
                 </View>
                 <TouchableHighlight underlayColor='none' onPress={() => navigation.navigate("ThankYou")}>

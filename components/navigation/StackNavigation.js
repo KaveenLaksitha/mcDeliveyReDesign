@@ -36,8 +36,9 @@ const Stack = createNativeStackNavigator();
 
 function StackNavigator() {
     return (
-        <Stack.Navigator initialRouteName="Login">
-            <Stack.Screen name="Home" component={Home} options={{ headerTitleAlign: 'center' }} />
+        <Stack.Navigator>
+            {/* <Stack.Screen name="Login" component={Loginfragment} options={{ headerTitleAlign: 'center', headerShown: false }} /> */}
+            <Stack.Screen name="Home" component={Home} options={{ title: 'Welcome back user!' }} />
             <Stack.Screen name="All Food Categories" component={TopTabNavigation} options={{ headerTitleAlign: 'center' }} />
             <Stack.Screen name="Favourites" component={Favourites} options={{ headerTitleAlign: 'center' }} />
             <Stack.Screen name="FoodMenu" component={FoodMenu} options={{ headerTitleAlign: 'center' }} />
@@ -50,11 +51,10 @@ function StackNavigator() {
             <Stack.Screen name="Make A Review" component={FeedBack} options={{ headerTitleAlign: 'center' }} />
             <Stack.Screen name="My Cards" component={MyCards} options={{ headerTitleAlign: 'center' }} />
             <Stack.Screen name="Delivery Address Book" component={AddressBook} options={{ headerTitleAlign: 'center' }} />
-            <Stack.Screen name="Login" component={Loginfragment} options={{ headerTitleAlign: 'center', headerShown: false }} />
             <Stack.Screen name="NewUser" component={NewUser} options={{ headerTitleAlign: 'center' }} />
             <Stack.Screen name="Register" component={Register} options={{ headerTitleAlign: 'center' }} />
-            <Stack.Screen name="ResetpasswordEmail" component={ResetpasswordEmail} options={{ headerTitleAlign: 'center' }} />
-            <Stack.Screen name="ResetpasswordMobile" component={ResetpasswordMobile} options={{ headerTitleAlign: 'center' }} />
+            <Stack.Screen name="Reset Password Using Email" component={ResetpasswordEmail} options={{ headerTitleAlign: 'center' }} />
+            <Stack.Screen name="Reset Password Using Mobile" component={ResetpasswordMobile} options={{ headerTitleAlign: 'center' }} />
             <Stack.Screen name="Cart" component={Cart} options={{ headerTitleAlign: 'center' }} />
             <Stack.Screen name="TrackOrder" component={TrackOrder} options={{ headerTitleAlign: 'center' }} />
             <Stack.Screen name="Checkout" component={CheckoutCOD} options={{ headerTitleAlign: 'center' }} />
