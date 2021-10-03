@@ -2,20 +2,22 @@ import React, { useState } from 'react';
 import { Picker } from '@react-native-picker/picker';
 import { Rating, AirbnbRating } from 'react-native-ratings';
 import Feather from 'react-native-vector-icons/FontAwesome5';
-import { StyleSheet, Text, View, SafeAreaView, Button, ImageBackground, Alert, TextInput, TouchableHighlight, TouchableOpacity, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, ToastAndroid, ImageBackground, Alert, TextInput, TouchableHighlight, TouchableOpacity, ScrollView } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import {createFeedBack} from '../service/feedBackService'
+import { createFeedBack } from '../service/feedBackService'
 
 
 
 export default function FeedBack({ navigation }) {
-    const [orderId, onChangeOrderId] = React.useState(null);
+    const [orderId, onChangeOrderId] = React.useState(" ");
     const [reviewOn, onChangeReviewOn] = useState("Food");
-    const [suggestion, onChangeSuggestion] = React.useState(null);
-    const [complaint, onChangeComplaint] = React.useState(null);
-    const [rate, onChangeRate] = React.useState(null);
+    const [suggestion, onChangeSuggestion] = React.useState(" ");
+    const [complaint, onChangeComplaint] = React.useState(" ");
+    const [rate, onChangeRate] = React.useState(" ");
     const [none, setNone] = useState(false);
-
+    const [isActive1, setActive1] = useState(false);
+    const [isActive2, setActive2] = useState(false);
+    const [isActive3, setActive3] = useState(false);
 
     const [data, setData] = React.useState({
         orderId: '',
@@ -63,24 +65,42 @@ export default function FeedBack({ navigation }) {
         }
     }
 
+    function clearInputs() {
+        onChangeOrderId(" ");
+        onChangeSuggestion(" ");
+        onChangeComplaint(" ")
+    }
+
 
     const saveReview = () => {
-        
-        console.log(orderId +reviewOn+suggestion +complaint +rate)
-        const newFeedBack = {
-          orderId,
-          reviewOn,
-          suggestion,
-          complaint,
-          rate
-        }
 
-        createFeedBack(newFeedBack).then((res) => {
-            Alert.alert("draft saved")
-            //navigation.navigate('draftList');
-        }).catch((err) => {
-            Alert.alert("draft NOT saved", err);
-        })
+        console.log(orderId + reviewOn + suggestion + complaint + rate)
+
+        if (orderId === " " || suggestion === " " || complaint === " ") {
+            ToastAndroid.show("Please fill all the fields", ToastAndroid.SHORT);
+        } else {
+
+            const newFeedBack = {
+                orderId,
+                reviewOn,
+                suggestion,
+                complaint,
+                rate
+            }
+
+            createFeedBack(newFeedBack).then((res) => {
+                if (res.ok) {
+                    Alert.alert("FeedBack Succefully saved");
+                    clearInputs();
+                } else {
+                    Alert.alert("FeedBack could not be saved", res.err)
+                }
+
+                //navigation.navigate('draftList');
+            }).catch((err) => {
+                Alert.alert("FeedBack could not be saved", err);
+            })
+        }
     }
 
 
@@ -131,10 +151,12 @@ export default function FeedBack({ navigation }) {
 
                             }
                             <Text style={styles.textValue}>Order Id </Text>
-                            <TextInput style={styles.input}
+                            <TextInput style={[styles.input, { borderColor: isActive1 ? 'blue' : 'grey' }]}
                                 onChangeText={(e) => { textInputChange(e); onChangeOrderId(e) }}
                                 value={orderId}
                                 onEndEditing={(e) => textInputChange(e.nativeEvent.text)}
+                                onFocus={() => setActive1(true)}
+                                onBlur={() => setActive1(false)}
                             />
 
                         </View>
@@ -144,27 +166,31 @@ export default function FeedBack({ navigation }) {
                                 selectedValue={reviewOn}
                                 onValueChange={(itemValue) => onChangeReviewOn(itemValue)}
                             >
-                                <Picker.Item style={{ fontSize: 14 }} label="Food" value="Food" />
-                                <Picker.Item style={{ fontSize: 14 }} label="Delivery" value="Delivery" />
+                                <Picker.Item style={{ fontSize: 16 }} label="Food" value="Food" />
+                                <Picker.Item style={{ fontSize: 16 }} label="Delivery" value="Delivery" />
                             </Picker>
                         </View>
 
                         <View style={styles.box}>
                             <Text style={styles.textValue}>Suggestions </Text>
-                            <TextInput style={styles.input}
+                            <TextInput style={[styles.input, { borderColor: isActive2 ? 'blue' : 'grey' }]}
                                 onChangeText={(e) => onChangeSuggestion(e)}
                                 value={suggestion}
                                 multiline={true}
                                 numberOfLines={2}
+                                onFocus={() => setActive2(true)}
+                                onBlur={() => setActive2(false)}
                             />
                         </View>
                         <View style={styles.box}>
                             <Text style={styles.textValue}>Complaints </Text>
-                            <TextInput style={styles.input}
+                            <TextInput style={[styles.input, { borderColor: isActive3 ? 'blue' : 'grey' }]}
                                 onChangeText={(e) => onChangeComplaint(e)}
                                 value={complaint}
                                 multiline={true}
                                 numberOfLines={2}
+                                onFocus={() => setActive3(true)}
+                                onBlur={() => setActive3(false)}
                             />
                         </View>
                         <View style={styles.box}>
@@ -176,7 +202,7 @@ export default function FeedBack({ navigation }) {
                                     // defaultRating={5}
                                     showRating={none}
                                     onFinishRating={(e) => onChangeRate(e)}
-                                    size={20}
+                                    size={25}
                                 />
                             </Text>
 
@@ -185,13 +211,13 @@ export default function FeedBack({ navigation }) {
                     </View>
 
                     <TouchableHighlight style={styles.submitButton}
-                        onPress={() => Alert.alert('Submit Pressed to make a review!')}>
+                        onPress={() => saveReview()}>
                         <Text style={styles.submitText}>Submit </Text>
                     </TouchableHighlight>
                     <View style={styles.link}>
                         <Text style={styles.text1}>For furthur inquiries</Text>
                         <TouchableOpacity style={styles.text2}
-                            onPress={() => navigation.navigate('ContactUs')}>
+                            onPress={() => navigation.navigate("ContactUs")}>
                             <Text style={{
                                 fontSize: 14, color: "#CCCC00", fontWeight: 'bold'
                             }} >SupportServices </Text>
@@ -246,10 +272,10 @@ const styles = StyleSheet.create({
     },
     box: {
         marginLeft: 0,
-        marginTop: 6,
+        marginTop: 5,
         marginLeft: 5,
         marginRight: 5,
-        padding: 3,
+        padding: 1,
 
     },
 
@@ -264,7 +290,7 @@ const styles = StyleSheet.create({
 
     MakeAReviewHeadLine: {
         position: "absolute",
-        marginTop: 20,
+        marginTop: 10,
         marginLeft: 26,
         fontWeight: 'bold',
         fontSize: 24
@@ -283,8 +309,8 @@ const styles = StyleSheet.create({
     submitButton: {
         position: "absolute",
         width: 150,
-        height: 45,
-        marginTop: 300,
+        height: 40,
+        marginTop: 308,
         marginLeft: 135,
         backgroundColor: "#FF3133",
         borderRadius: 10,
@@ -311,9 +337,9 @@ const styles = StyleSheet.create({
     textValue: {
         marginTop: 1,
         marginLeft: 5,
-        fontSize: 14,
+        fontSize: 15,
         color: "black",
-        fontWeight:"bold"
+        fontWeight: "bold"
     },
 
     input: {
@@ -322,7 +348,8 @@ const styles = StyleSheet.create({
         margin: 12,
         padding: 6,
         borderBottomWidth: 1,
-        borderColor: "grey"
+        borderColor: "grey",
+        fontSize: 16
     },
 
     rateinput: {
@@ -344,7 +371,7 @@ const styles = StyleSheet.create({
 
     },
     submitText: {
-        marginTop: 5,
+        marginTop: 2,
         padding: 5,
         marginLeft: 40,
         fontSize: 18,

@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import { Picker } from '@react-native-picker/picker';
-import { StyleSheet, Text, View, SafeAreaView, Button, ImageBackground, ScrollView, Alert, TextInput, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, Button, ImageBackground, ScrollView, Alert, TextInput, TouchableHighlight, ToastAndroid } from 'react-native';
+import { createAddress } from '../service/addressService';
 
 export default function AddressForm({ navigation }) {
-    const [deliveryAddress, onChangeDeliveryAddres] = React.useState(null);
+    const [deliveryAddress, onChangeDeliveryAddres] = React.useState(" ");
     const [city, onChangeCity] = useState("Colombo");
     const [locationType, onChangeLocationType] = useState("Home");
-    const [floor, onChangeFloor] = React.useState(null);
-    const [apartmentNo, onChangeApartmentNo] = React.useState(null);
-    const [landMark, onChangeLandMark] = React.useState(null);
-    const [companyName, onChangeCompanyName] = React.useState(null);
-    const [department, onChangeDepartment] = React.useState(null);
-    const [instruct, onChangeinstruct] = React.useState(null);
+    const [floor, onChangeFloor] = React.useState(" ");
+    const [apartmentNo, onChangeApartmentNo] = React.useState(" ");
+    const [landMark, onChangeLandMark] = React.useState(" ");
+    const [companyName, onChangeCompanyName] = React.useState(" ");
+    const [department, onChangeDepartment] = React.useState(" ");
+    const [instruct, onChangeinstruct] = React.useState(" ");
     const [autoFocus, onChangeAutoFocus] = React.useState(false);
     const [trues, onChangeSetTrue] = useState(true);
     const [editFloor, setEditFloor] = useState(true);
@@ -20,8 +21,16 @@ export default function AddressForm({ navigation }) {
     const [editDepartment, setEditDepartment] = useState(true);
     const [state, setState] = useState("");
 
+    const [isActive1, setActive1] = useState(false);
+    const [isActive2, setActive2] = useState(false);
+    const [isActive3, setActive3] = useState(false);
+    const [isActive4, setActive4] = useState(false);
+    const [isActive5, setActive5] = useState(false);
+    const [isActive6, setActive6] = useState(false);
+    const [isActive7, setActive7] = useState(false);
 
     function resetAll() {
+        ToastAndroid.show("Resetting all the fields !", ToastAndroid.SHORT);
         onChangeDeliveryAddres("");
         onChangeCity("Colombo");
         onChangeLocationType("Home");
@@ -31,6 +40,7 @@ export default function AddressForm({ navigation }) {
         onChangeCompanyName("");
         onChangeDepartment("");
         onChangeinstruct("")
+        setDisables();
     }
 
     function setDisables(value) {
@@ -54,6 +64,53 @@ export default function AddressForm({ navigation }) {
         }
     }
 
+
+    const saveDeliveryAddress = () => {
+        console.log(deliveryAddress + city + locationType + landMark + instruct)
+        if (deliveryAddress === " " && city === "Colombo" && locationType === "Home" && landMark === " " && instruct === " ") {
+            ToastAndroid.show("Please fill all the fields before submitting", ToastAndroid.SHORT)
+
+        } else if (deliveryAddress === " ") {
+            ToastAndroid.show("Please fill delivery address field", ToastAndroid.SHORT)
+        } else if (city === " ") {
+            ToastAndroid.show("Please choose a city", ToastAndroid.SHORT)
+        } else if (locationType === " ") {
+            ToastAndroid.show("Please choose location type", ToastAndroid.SHORT)
+        } else if (landMark === " ") {
+            ToastAndroid.show("Please insert a landmark ", ToastAndroid.SHORT)
+        } else if (instruct === " ") {
+            ToastAndroid.show("Please add delivery instructions", ToastAndroid.SHORT)
+        } else {
+            console.log(deliveryAddress + city + locationType + floor + apartmentNo)
+            const newAddress = {
+                userId: "UI002",
+                deliveryAddress,
+                city,
+                locationType,
+                floor,
+                apartmentNo,
+                landMark,
+                companyName,
+                department,
+                instruct
+            }
+
+            createAddress(newAddress).then((res) => {
+                console.log("responseeeeeeeeeee", res)
+                if (res.ok) {
+                    Alert.alert("Address Successfully saved");
+                    navigation.navigate("Delivery Address Book");
+                } else {
+                    Alert.alert("Error!", res.err);
+                    console.log(res.err)
+                }
+            }).catch((err) => {
+                Alert.alert("Error!", err);
+            })
+        }
+    }
+
+
     return (
 
         <SafeAreaView style={styles.container}>
@@ -62,12 +119,14 @@ export default function AddressForm({ navigation }) {
                 <View style={styles.contentody} >
                     <ScrollView vertical={true}>
                         <Text style={styles.textValue}>Delivery Address: * </Text>
-                        <TextInput style={styles.input}
+                        <TextInput style={[styles.input, { borderColor: isActive1 ? 'blue' : 'grey' }]}
                             onChangeText={(e) => onChangeDeliveryAddres(e)}
                             value={deliveryAddress}
                             multiline={true}
                             numberOfLines={3}
                             require={true}
+                            onFocus={() => setActive1(true)}
+                            onBlur={() => setActive1(false)}
                             //placeholder="Delivery Address"
                             keyboardType="default"
                         />
@@ -79,21 +138,21 @@ export default function AddressForm({ navigation }) {
                             selectedValue={city}
                             onValueChange={(itemValue) => onChangeCity(itemValue)}
                         >
-                            <Picker.Item style={{ fontSize: 14, color: "#8B0000", fontWeight: "bold-italic" }} label="Aluthkade" value="Aluthkade" />
-                            <Picker.Item style={{ fontSize: 14, color: "#8B0000", fontWeight: "bold-italic" }} label="Ambuldeniya" value="Ambuldeniya" />
-                            <Picker.Item style={{ fontSize: 14, color: "#8B0000", fontWeight: "bold-italic" }} label="Angulana" value="Angulana" />
-                            <Picker.Item style={{ fontSize: 14, color: "#8B0000", fontWeight: "bold-italic" }} label="Bambalapitiya" value="Bambalapitiya" />
-                            <Picker.Item style={{ fontSize: 14, color: "#8B0000", fontWeight: "bold-italic" }} label="Baththaramulla" value="Baththaramulla" />
-                            <Picker.Item style={{ fontSize: 14, color: "#8B0000", fontWeight: "bold-italic" }} label="Colombo" value="Colombo" />
-                            <Picker.Item style={{ fontSize: 14, color: "#8B0000", fontWeight: "bold-italic" }} label="Colombo 11" value="Colombo 11" />
-                            <Picker.Item style={{ fontSize: 14, color: "#8B0000", fontWeight: "bold-italic" }} label="Colombo 01" value="Colombo 01" />
-                            <Picker.Item style={{ fontSize: 14, color: "#8B0000", fontWeight: "bold-italic" }} label="Colombo 02" value="Colombo 02" />
-                            <Picker.Item style={{ fontSize: 14, color: "#8B0000", fontWeight: "bold-italic" }} label="Colombo 03" value="Colombo 03" />
-                            <Picker.Item style={{ fontSize: 14, color: "#8B0000", fontWeight: "bold-italic" }} label="Colombo 04" value="Colombo 04" />
-                            <Picker.Item style={{ fontSize: 14, color: "#8B0000", fontWeight: "bold-italic" }} label="Colombo 05" value="Colombo 05" />
-                            <Picker.Item style={{ fontSize: 14, color: "#8B0000", fontWeight: "bold-italic" }} label="Ethulkotte" value="Ethulkotte" />
-                            <Picker.Item style={{ fontSize: 14, color: "#8B0000", fontWeight: "bold-italic" }} label="Koswatte" value="Koswatte" />
-                            <Picker.Item style={{ fontSize: 14, color: "#8B0000", fontWeight: "bold-italic" }} label="Malabe" value="Malabe" />
+                            <Picker.Item style={{ fontSize: 16, color: "#8B0000", fontWeight: "bold-italic" }} label="Aluthkade" value="Aluthkade" />
+                            <Picker.Item style={{ fontSize: 16, color: "#8B0000", fontWeight: "bold-italic" }} label="Ambuldeniya" value="Ambuldeniya" />
+                            <Picker.Item style={{ fontSize: 16, color: "#8B0000", fontWeight: "bold-italic" }} label="Angulana" value="Angulana" />
+                            <Picker.Item style={{ fontSize: 16, color: "#8B0000", fontWeight: "bold-italic" }} label="Bambalapitiya" value="Bambalapitiya" />
+                            <Picker.Item style={{ fontSize: 16, color: "#8B0000", fontWeight: "bold-italic" }} label="Baththaramulla" value="Baththaramulla" />
+                            <Picker.Item style={{ fontSize: 16, color: "#8B0000", fontWeight: "bold-italic" }} label="Colombo" value="Colombo" />
+                            <Picker.Item style={{ fontSize: 16, color: "#8B0000", fontWeight: "bold-italic" }} label="Colombo 11" value="Colombo 11" />
+                            <Picker.Item style={{ fontSize: 16, color: "#8B0000", fontWeight: "bold-italic" }} label="Colombo 01" value="Colombo 01" />
+                            <Picker.Item style={{ fontSize: 16, color: "#8B0000", fontWeight: "bold-italic" }} label="Colombo 02" value="Colombo 02" />
+                            <Picker.Item style={{ fontSize: 16, color: "#8B0000", fontWeight: "bold-italic" }} label="Colombo 03" value="Colombo 03" />
+                            <Picker.Item style={{ fontSize: 16, color: "#8B0000", fontWeight: "bold-italic" }} label="Colombo 04" value="Colombo 04" />
+                            <Picker.Item style={{ fontSize: 16, color: "#8B0000", fontWeight: "bold-italic" }} label="Colombo 05" value="Colombo 05" />
+                            <Picker.Item style={{ fontSize: 16, color: "#8B0000", fontWeight: "bold-italic" }} label="Ethulkotte" value="Ethulkotte" />
+                            <Picker.Item style={{ fontSize: 16, color: "#8B0000", fontWeight: "bold-italic" }} label="Koswatte" value="Koswatte" />
+                            <Picker.Item style={{ fontSize: 16, color: "#8B0000", fontWeight: "bold-italic" }} label="Malabe" value="Malabe" />
                         </Picker>
 
 
@@ -103,75 +162,87 @@ export default function AddressForm({ navigation }) {
                             require={true}
                             onValueChange={(itemValue) => { onChangeLocationType(itemValue); setDisables(itemValue) }}
                         >
-                            <Picker.Item style={{ fontSize: 14, color: "#8B0000", fontWeight: "bold-italic" }} label="Home" value="Home" />
-                            <Picker.Item style={{ fontSize: 14, color: "#8B0000", fontStyle: "bold-italic" }} label="Apartment" value="Apartment" />
-                            <Picker.Item style={{ fontSize: 14, color: "#8B0000", fontStyle: "bold-italic" }} label="Office" value="Office" />
+                            <Picker.Item style={{ fontSize: 16, color: "#8B0000", fontWeight: "bold-italic" }} label="Home" value="Home" />
+                            <Picker.Item style={{ fontSize: 16, color: "#8B0000", fontStyle: "bold-italic" }} label="Apartment" value="Apartment" />
+                            <Picker.Item style={{ fontSize: 16, color: "#8B0000", fontStyle: "bold-italic" }} label="Office" value="Office" />
                         </Picker>
 
 
 
                         <Text style={styles.textValueFloor}>Floor: </Text>
-                        <TextInput style={styles.floor}
-                            onChangeText={onChangeFloor}
+                        <TextInput style={[styles.floor, { borderColor: isActive4 ? 'blue' : 'grey' }]}
+                            onChangeText={(e) => onChangeFloor(e)}
                             value={floor}
                             keyboardType="decimal-pad"
                             maxLength={3}
                             editable={editFloor}
+                            onFocus={() => setActive4(true)}
+                            onBlur={() => setActive4(false)}
                         />
                         <View style={styles.textValueApN}>
-                            <Text >Apartment Number/Name: </Text>
+                            <Text style={styles.apnName}>Apartment Number/Name: </Text>
                         </View>
 
-                        <TextInput style={styles.apN}
-                            onChangeText={onChangeApartmentNo}
+                        <TextInput style={[styles.apN, { borderColor: isActive2 ? 'blue' : 'grey' }]}
+                            onChangeText={(e) => onChangeApartmentNo(e)}
                             value={apartmentNo}
                             keyboardType="default"
                             maxLength={20}
                             editable={editApm}
+                            onFocus={() => setActive2(true)}
+                            onBlur={() => setActive2(false)}
                         />
 
                         <Text style={styles.textValue}>LandMark: *</Text>
-                        <TextInput style={styles.input}
-                            onChangeText={onChangeLandMark}
+                        <TextInput style={[styles.input, { borderColor: isActive3 ? 'blue' : 'grey' }]}
+                            onChangeText={(e) => onChangeLandMark(e)}
                             require={true}
                             value={landMark}
+                            onFocus={() => setActive3(true)}
+                            onBlur={() => setActive3(false)}
                             placeholder="land marks"
                             keyboardType="default"
                         />
 
                         <Text style={styles.textValue}>Company Name: </Text>
-                        <TextInput style={styles.input}
-                            onChangeText={onChangeCompanyName}
+                        <TextInput style={[styles.input, { borderColor: isActive5 ? 'blue' : 'grey' }]}
+                            onChangeText={(e) => onChangeCompanyName(e)}
                             value={companyName}
                             placeholder="company name"
                             keyboardType="default"
                             editable={editCompany}
+                            onFocus={() => setActive5(true)}
+                            onBlur={() => setActive5(false)}
                         />
 
                         <Text style={styles.textValue}>Department: </Text>
-                        <TextInput style={styles.input}
-                            onChangeText={onChangeDepartment}
+                        <TextInput style={[styles.input, { borderColor: isActive6 ? 'blue' : 'grey' }]}
+                            onChangeText={(e) => onChangeDepartment(e)}
                             value={department}
                             placeholder="department name"
                             keyboardType="default"
                             editable={editDepartment}
+                            onFocus={() => setActive6(true)}
+                            onBlur={() => setActive6(false)}
                         />
 
                         <Text style={styles.textValue}>Delivery Instruction: </Text>
-                        <TextInput style={styles.input}
-                            onChangeText={onChangeinstruct}
+                        <TextInput style={[styles.input, { borderColor: isActive7 ? 'blue' : 'grey' }]}
+                            onChangeText={(e) => onChangeinstruct(e)}
                             value={instruct}
                             require={true}
                             autoFocus={autoFocus}
                             multiline={true}
                             numberOfLines={3}
                             keyboardType="default"
+                            onFocus={() => setActive7(true)}
+                            onBlur={() => setActive7(false)}
                         />
 
                     </ScrollView>
                 </View>
                 <TouchableHighlight style={styles.submitButton1}
-                    onPress={() => navigation.navigate('Delivery Address Book')}>
+                    onPress={() => saveDeliveryAddress()}>
                     <Text style={styles.submitText}>Save</Text>
                 </TouchableHighlight>
                 <TouchableHighlight style={{ textAlign: 'center' }, styles.submitButton2}
@@ -217,8 +288,9 @@ const styles = StyleSheet.create({
         width: 320,
         padding: 2,
         marginLeft: 40,
-        fontSize: 14,
+        fontSize: 16,
         color: "black",
+        fontWeight: "bold"
     },
 
     input: {
@@ -251,7 +323,7 @@ const styles = StyleSheet.create({
         position: "absolute",
         width: 90,
         height: 45,
-        marginTop: 590,
+        marginTop: 615,
         marginLeft: 260,
         backgroundColor: "#FF3133",
         borderRadius: 10,
@@ -269,7 +341,7 @@ const styles = StyleSheet.create({
         position: "absolute",
         width: 90,
         height: 45,
-        marginTop: 590,
+        marginTop: 615,
         marginLeft: 160,
         backgroundColor: "#FF3133",
         borderRadius: 10,
@@ -296,8 +368,9 @@ const styles = StyleSheet.create({
         padding: 2,
         paddingBottom: 4,
         marginLeft: 40,
-        fontSize: 14,
+        fontSize: 16,
         color: "black",
+        fontWeight: "bold"
     },
     floor: {
         marginTop: -5,
@@ -319,6 +392,7 @@ const styles = StyleSheet.create({
         width: 190,
         borderBottomWidth: 1,
         borderColor: "grey",
+
     },
     textValueApN: {
         marginTop: -70,
@@ -327,6 +401,12 @@ const styles = StyleSheet.create({
         marginLeft: 150,
         fontSize: 14,
         color: "black",
+        fontWeight: "bold"
+
+    },
+    apnName: {
+        fontSize: 16,
+        fontWeight: "bold"
     }
 
 });

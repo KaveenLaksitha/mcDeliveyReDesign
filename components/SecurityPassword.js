@@ -13,11 +13,9 @@ const SecurityPassword = () => {
     const [secureTextEntry, setsecureTextEntry] = useState(true);
     const [password, setPasword] = useState(true);
 
-    // function changeIcon(val) {
-    //     if (val === 1) {
-    //         setIcon("eye")
-    //     }
-    // }
+    const [isActive1, setActive1] = useState(false);
+    const [isActive2, setActive2] = useState(false);
+    const [isActive3, setActive3] = useState(false);
 
     const [data, setData] = React.useState({
         currentPwd: '',
@@ -202,7 +200,7 @@ const SecurityPassword = () => {
                             </Feather>
                         </View>}
 
-                    <TextInput style={styles.cPwdInputs}
+                    <TextInput style={[styles.cPwdInputs, { borderColor: isActive1 ? 'blue' : 'grey' }]}
                         onChangeText={(e) => { textInputChangeCurrentPwd(e); onChangeCurrentPwd(e); }}
                         //value={currentPwd}
                         secureTextEntry={secureTextEntry}
@@ -211,6 +209,8 @@ const SecurityPassword = () => {
                         maxLength={8}
                         minLength={8}
                         onEndEditing={(e) => textInputChangeCurrentPwd(e.nativeEvent.text)}
+                        onFocus={() => setActive1(true)}
+                        onBlur={() => setActive1(false)}
                     />
                     {data.isValidCpwd ? false :
                         <Text style={styles.errMsg1}>Follow the correct format mentioned</Text>
@@ -237,7 +237,7 @@ const SecurityPassword = () => {
                                 size={10}>
                             </Feather>
                         </View>}
-                    <TextInput style={styles.nPwdInputs}
+                    <TextInput style={[styles.nPwdInputs, { borderColor: isActive2 ? 'blue' : 'grey' }]}
                         onChangeText={(e) => { textInputChangeNewPwd(e); onChangeNewPwd(e); }}
                         //value={newPwd}
                         secureTextEntry={secureTextEntry}
@@ -246,6 +246,8 @@ const SecurityPassword = () => {
                         maxLength={8}
                         minLength={8}
                         onEndEditing={(e) => textInputChangeNewPwd(e.nativeEvent.text)}
+                        onFocus={() => setActive2(true)}
+                        onBlur={() => setActive2(false)}
                     />
                     {data.isValidNpwd ? false :
                         <Text style={styles.errMsg2}>Follow the correct format mentioned</Text>
@@ -275,7 +277,7 @@ const SecurityPassword = () => {
                         </View>}
 
 
-                    <TextInput style={styles.rPwdinputs}
+                    <TextInput style={[styles.rPwdinputs, { borderColor: isActive3 ? 'blue' : 'grey' }]}
                         onChangeText={(e) => { textInputChangeReNewPwd(e); onChangeRePwd(e) }}
                         //value={rePwd}
                         placeholder="Re enter Password"
@@ -284,6 +286,8 @@ const SecurityPassword = () => {
                         maxLength={8}
                         minLength={8}
                         onEndEditing={(e) => textInputChangeReNewPwd(e.nativeEvent.text)}
+                        onFocus={() => setActive3(true)}
+                        onBlur={() => setActive3(false)}
                     />
                     {data.isValidRpwd ? false :
                         <Text style={styles.errMsg3}>{data.errorMsg}</Text>
@@ -343,7 +347,8 @@ const styles = StyleSheet.create({
         fontStyle: 'italic',
         padding: 6,
         borderBottomWidth: 1,
-        borderColor: "grey"
+        borderColor: "grey",
+        fontSize: 16
     },
 
     nPwdInputs: {
@@ -356,7 +361,8 @@ const styles = StyleSheet.create({
         fontStyle: 'italic',
         padding: 6,
         borderBottomWidth: 1,
-        borderColor: "grey"
+        borderColor: "grey",
+        fontSize: 16
     },
 
     rPwdinputs: {
@@ -369,7 +375,8 @@ const styles = StyleSheet.create({
         fontStyle: 'italic',
         padding: 6,
         borderBottomWidth: 1,
-        borderColor: "grey"
+        borderColor: "grey",
+        fontSize: 16
     },
 
     submitButton: {
@@ -400,7 +407,7 @@ const styles = StyleSheet.create({
     condition: {
         marginTop: 165,
         marginLeft: 10,
-        fontSize: 14,
+        fontSize: 15,
         textAlign: "center"
     },
     errMsg1: {

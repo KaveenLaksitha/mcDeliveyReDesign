@@ -11,6 +11,10 @@ const SecurityEmail = () => {
     const [currentEmail, onChangeCurrentEmail] = React.useState(null);
     const [newEmail, onChangeNewEmail] = React.useState(null);
 
+    const [isActive1, setActive1] = useState(false);
+    const [isActive2, setActive2] = useState(false);
+    const [isActive3, setActive3] = useState(false);
+
     const [data, setData] = React.useState({
         contactNo: '',
         currentEmail: '',
@@ -168,12 +172,14 @@ const SecurityEmail = () => {
                                 size={10}>
                             </Feather>
                         </View>}
-                    <TextInput style={styles.contactNo}
+                    <TextInput style={[styles.contactNo, { borderColor: isActive1 ? 'blue' : 'grey' }]}
                         onChangeText={(e) => { textInputChangeContactNumber(e); (e) => onChangeContactNo(e) }}
                         value={contactNo}
                         placeholder="Contact Number"
                         keyboardType="numeric"
                         onEndEditing={(e) => textInputChangeContactNumber(e.nativeEvent.text)}
+                        onFocus={() => setActive1(true)}
+                        onBlur={() => setActive1(false)}
                     />
                     {data.isValidNumber ? false :
                         <Text style={styles.errMsg1}>Phone Number includes 10 digits</Text>
@@ -196,12 +202,14 @@ const SecurityEmail = () => {
                             </Feather>
                         </View>}
 
-                    <TextInput style={styles.email}
+                    <TextInput style={[styles.email, { borderColor: isActive2 ? 'blue' : 'grey' }]}
                         onChangeText={(e) => { textInputChangeCurrentEmail(e); onChangeCurrentEmail(e) }}
                         value={currentEmail}
                         placeholder="Current Email"
                         keyboardType="email-address"
                         onEndEditing={(e) => textInputChangeCurrentEmail(e.nativeEvent.text)}
+                        onFocus={() => setActive2(true)}
+                        onBlur={() => setActive2(false)}
                     />
                     {data.isValidCurrEmail ? false :
                         <Text style={styles.errMsg2}>Email format is abcd@gmail.com</Text>
@@ -224,12 +232,14 @@ const SecurityEmail = () => {
                             </Feather>
                         </View>}
 
-                    <TextInput style={styles.newEmail}
+                    <TextInput style={[styles.newEmail, { borderColor: isActive3 ? 'blue' : 'grey' }]}
                         onChangeText={(e) => { textInputChangeNewEmail(e); onChangeNewEmail(e) }}
                         value={newEmail}
                         placeholder="New Email"
                         keyboardType="email-address"
                         onEndEditing={(e) => textInputChangeNewEmail(e.nativeEvent.text)}
+                        onFocus={() => setActive3(true)}
+                        onBlur={() => setActive3(false)}
                     />
                     {data.isValidNewEmail ? false :
                         <Text style={styles.errMsg3}>Email format is abcd@gmail.com</Text>

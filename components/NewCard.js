@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Picker } from '@react-native-picker/picker';
-import { StyleSheet, Text, View, SafeAreaView, Button, Image, Animated, Form, TextInput, TouchableHighlight, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, Image, TextInput, TouchableHighlight, ScrollView, Alert, ToastAndroid } from 'react-native';
 import Feather from 'react-native-vector-icons/FontAwesome5'
-
+import { createCard } from '../service/cardService';
 
 // import DateTimePickerModal from "react-native-modal-datetime-picker";
 
@@ -15,7 +15,11 @@ function NewCard({ navigation }) {
     const [dnameOnCard, onChangeDNameOnCard] = useState();
     const [ExpiryDate, onChangeExpiryDate] = useState();
     const [dExpiryDate, onChangeDExpiryDate] = useState();
+    const [isActive1, setActive1] = useState(false);
+    const [isActive2, setActive2] = useState(false);
+    const [isActive3, setActive3] = useState(false);
 
+    const [uri, setImageUri] = useState(" ")
     const [data, setData] = React.useState({
         cardNumber: '',
         nameOnCard: '',
@@ -105,7 +109,53 @@ function NewCard({ navigation }) {
         }
     }
 
+    function setCardImage(cardType) {
+        if (cardType === "Master") {
+            setImageUri("https://i.ibb.co/0KNQFf0/58482354cef1014c0b5e49c0.png")
+        } else if (cardType === "Visa") {
+            setImageUri("https://i.ibb.co/PmDYwrP/visa.jpg")
+        } else if (cardType === "American Express") {
+            setImageUri("https://i.ibb.co/wzYRpWW/am.png")
+        }
 
+    }
+
+    function clearInputs() {
+        onChangeCardNumber(" ");
+        onChangeNameOnCard(" ");
+        onChangeExpiryDate(" ");
+    }
+
+    const saveCard = () => {
+        console.log("cardUri", uri);
+        console.log(cardType + nameOnCard + cardNumber + ExpiryDate)
+        if (cardType === " " || nameOnCard === " " || cardNumber === " " || ExpiryDate === " " || uri === " ") {
+            ToastAndroid.show("Please fill all the fields before submitting", ToastAndroid.SHORT)
+        } else {
+
+            const newCard = {
+                userId: "UI002",
+                cardType,
+                nameOnCard,
+                cardNumber,
+                ExpiryDate,
+                uri
+            }
+
+            createCard(newCard).then((res) => {
+                if (res.ok) {
+                    ToastAndroid.show("Card Successfully Saved", ToastAndroid.SHORT);
+                    clearInputs();
+                    navigation.navigate("My Cards")
+                } else {
+                    Alert.alert("Error!", res.err);
+                }
+
+            }).catch((err) => {
+                ToastAndroid.show("Card Could not be Saved", ToastAndroid.SHORT);
+            })
+        }
+    }
 
 
     return (
@@ -140,7 +190,7 @@ function NewCard({ navigation }) {
                         <Text style={styles.textValue}>Card Type </Text>
                         <Picker style={styles.pickerinput}
                             selectedValue={cardType}
-                            onValueChange={(itemValue) => onChangeCardType(itemValue)}
+                            onValueChange={(itemValue) => { onChangeCardType(itemValue); setCardImage(itemValue); }}
 
                         >
                             <Picker.Item label="Visa" value="Visa" />
@@ -165,19 +215,22 @@ function NewCard({ navigation }) {
                                     size={10}>
                                 </Feather>
                             </View>}
-                        <TextInput style={styles.input}
-                            onChangeText={(val) => { textInputChange(val); (e) => onChangeCardNumber(e) }}
+                        <TextInput style={[styles.input, { borderColor: isActive1 ? 'blue' : 'grey' }]}
+                            onChangeText={(val) => { textInputChange(val); onChangeCardNumber(val) }}
                             value={cardNumber}
                             placeholder="xxxx xxxx xxxx xxxx"
                             keyboardType="numeric"
                             onEndEditing={(e) => textInputChange(e.nativeEvent.text)}
+                            onFocus={() => setActive1(true)}
+                            onBlur={() => setActive1(false)}
                         />
 
-                        {data.isValidNumber ? false :
-                            <Text style={styles.errMsg}>Card must include 16 numbers in correct format</Text>
+                        {
+                            data.isValidNumber ? false :
+                                <Text style={styles.errMsg}>Card must include 16 numbers in correct format</Text>
 
                         }
-                        <Text style={styles.textValue}>Name on Card </Text>
+                        < Text style={styles.textValue}>Name on Card </Text>
                         {data.isValidName && data.checkTextInputChange2 ?
                             <View style={styles.nameValid}>
                                 <Feather
@@ -193,12 +246,14 @@ function NewCard({ navigation }) {
                                     size={10}>
                                 </Feather>
                             </View>}
-                        <TextInput style={styles.input}
-                            onChangeText={(val) => { textInputChange2(val); (val) => onChangeNameOnCard(val) }}
+                        <TextInput style={[styles.input, { borderColor: isActive2 ? 'blue' : 'grey' }]}
+                            onChangeText={(val) => { textInputChange2(val); onChangeNameOnCard(val) }}
                             value={nameOnCard}
                             placeholder="Andrew Wilson"
                             keyboardType="default"
                             onEndEditing={(e) => textInputChange2(e.nativeEvent.text)}
+                            onFocus={() => setActive2(true)}
+                            onBlur={() => setActive2(false)}
                         />
                         {data.isValidName ? false :
                             <Text style={styles.errMsg}>Cannot use characters other than letters</Text>
@@ -206,17 +261,19 @@ function NewCard({ navigation }) {
                         }
 
                         <Text style={styles.textValue}>Expiry Date </Text>
-                        <TextInput style={styles.input}
+                        <TextInput style={[styles.input, { borderColor: isActive3 ? 'blue' : 'grey' }]}
                             onChangeText={onChangeExpiryDate}
                             value={ExpiryDate}
                             placeholder="2021/10/14"
                             keyboardType="decimal-pad"
+                            onFocus={() => setActive3(true)}
+                            onBlur={() => setActive3(false)}
                         />
 
                     </View>
                 </ScrollView>
                 <TouchableHighlight style={styles.submitButton}
-                    onPress={() => navigation.navigate('My Cards')}>
+                    onPress={() => saveCard()}>
                     <Text style={styles.submitText}>Save Card</Text>
                 </TouchableHighlight>
 
@@ -339,7 +396,8 @@ const styles = StyleSheet.create({
         margin: 12,
         padding: 6,
         borderBottomWidth: 1,
-        borderColor: "grey"
+        //borderColor: "grey"
+        fontSize: 16
     },
 
     pickerinput: {

@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, SafeAreaView, Button, Image, ImageBackground, SafeAreaViewBase, Alert, TextInput, TouchableHighlight, TouchableOpacity, ScrollView } from 'react-native';
+import React, { useState,useEffect } from 'react';
+import { StyleSheet, Text, View, SafeAreaView, Button, Image, ImageBackground, SafeAreaViewBase, Alert, TextInput, TouchableHighlight, TouchableOpacity, ScrollView,RefreshControl } from 'react-native';
 import Icon from 'react-native-vector-icons/Entypo';
 import BuildingIcon from 'react-native-vector-icons/FontAwesome5'
 import { RadioButton } from 'react-native-paper';
+import {getDeliveryAddresses} from '../service/addressService';
+
 
 let index = 0;
 
@@ -10,10 +12,82 @@ const setBorderColor = (choice) => {
     index = choice;
 }
 
+const wait = (timeout) => {
+    return new Promise(resolve => setTimeout(resolve, timeout));
+}
+
 function AddressBook({ navigation }) {
 
 
     const [checked, setChecked] = useState('first');
+    const [refreshing, setRefreshing] = React.useState(false);
+    const [keyValue,setKeyValue] =useState("")
+    const [validBoarder,setValidBoarder]=useState(false);
+
+    // const [deliAdd, setDeliAdd] = useState("");
+    const [addresses, setAddresses] = useState([]);
+
+    const onRefresh = React.useCallback(() => {
+        setRefreshing(true);
+        wait(500).then(() => setRefreshing(false));
+        getDeliveryAddresses().then((res) => {
+
+            if (res.ok) {
+                setAddresses(res.data);
+            }
+        }).catch((err) => {
+            alert("error", err);
+        })
+    }, []);
+
+    useEffect(() => {
+        
+        getDeliveryAddresses().then((data) => {
+            setAddresses(data.data)
+            console.log("AddressList",data.data)
+        })
+    }, [])
+
+    function setBorders(userId){
+        console.log("id",userId)
+        setKeyValue(userId);
+        setChecked(userId);
+        setValidBoarder(true);
+        if(true){
+            setBorderColor(0);
+        }
+    }
+
+    function changeValidity(){
+        setValidBoarder(false)
+    }
+
+    const List = () => {
+        return addresses.map((element) => {
+            return (
+                <View style={[styles.listItem, styles.elevation, { borderColor: keyValue === element.userId ? '#F79E1B' : 'white' }]} key={element._id}>
+                            
+                        <View style={styles.horizontal}>
+
+                            <RadioButton
+                                value={element.userId}
+                                color={'#FF3131'}
+                                uncheckedColor={'#FF3131'}
+                                status={checked ===  element.userId ? 'checked' : 'unchecked'}
+                                onPress={() => { setBorders(element.userId)}}
+                            />
+
+                            <Text style={styles.address2}>{element.deliveryAddress}</Text>
+                            <TouchableOpacity
+                                onPress={() => navigation.navigate('Address Form')}>
+                                <Icon style={styles.pencil3} name="pencil" color="#FF3133" size={30} />
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+            )
+        })
+    }
+
 
     return (
 
@@ -22,7 +96,10 @@ function AddressBook({ navigation }) {
 
 
             <View style={styles.contentody} >
-                <ScrollView vertical={true}>
+                <ScrollView vertical={true}
+                 refreshControl={<RefreshControl
+                        refreshing={refreshing}
+                        onRefresh={onRefresh} />}>
 
                     <Text style={styles.textValue}>Select your address or add new Address : </Text>
 
@@ -38,7 +115,7 @@ function AddressBook({ navigation }) {
                                     color={'#FF3131'}
                                     uncheckedColor={'#FF3131'}
                                     status={checked === 'first' ? 'checked' : 'unchecked'}
-                                    onPress={() => { setChecked('first'); setBorderColor(1) }}
+                                    onPress={() => { setChecked('first'); setBorderColor(1);changeValidity() }}
                                 />
                             </Text>
                             <TouchableOpacity
@@ -58,7 +135,7 @@ function AddressBook({ navigation }) {
                                     color={'#FF3131'}
                                     uncheckedColor={'#FF3131'}
                                     status={checked === 'second' ? 'checked' : 'unchecked'}
-                                    onPress={() => { setChecked('second'); setBorderColor(2) }}
+                                    onPress={() => { setChecked('second'); setBorderColor(2); changeValidity() }}
                                 />
                             </Text>
                             <Icon style={styles.home} name="home" size={50} />
@@ -69,7 +146,7 @@ function AddressBook({ navigation }) {
                             </TouchableOpacity>
                         </View>
                     </View>
-                    <View style={[styles.listItem, styles.elevation, , { borderColor: index === 3 ? '#F79E1B' : 'white' }]}>
+                    {/* <View style={[styles.listItem, styles.elevation, , { borderColor: index === 3 ? '#F79E1B' : 'white' }]}>
 
                         <View style={styles.horizontal}>
 
@@ -89,7 +166,8 @@ function AddressBook({ navigation }) {
                                 <Icon style={styles.pencil3} name="pencil" color="#FF3133" size={30} />
                             </TouchableOpacity>
                         </View>
-                    </View>
+                    </View> */}
+                    {List()}
                 </ScrollView>
             </View>
             <TouchableHighlight style={styles.submitButton}

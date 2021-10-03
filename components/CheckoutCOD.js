@@ -4,6 +4,7 @@ import HandIcon from 'react-native-vector-icons/FontAwesome5'
 import VisaIcon from 'react-native-vector-icons/Fontisto'
 
 import { RadioButton } from 'react-native-paper';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 let index = 0;
 
@@ -59,10 +60,12 @@ function CheckoutCOD({ navigation }) {
 
                 <View style={[styles.listItemAddress, styles.elevation]}>
                     <View style={styles.horizontal}>
-                        <View style={{ marginRight: 25 }}>
+                        <View style={{ width: 290 }}>
                             <Text style={styles.text}>3rd floor "Samagam Medura",400,{"\n"}D.R. Wijewardena Mawatha{"\n"}Colombo 10</Text>
                         </View>
-                        <Text style={{ fontSize: 18, color: '#7E7E7E', marginTop: -40 }}>Edit</Text>
+                        <TouchableOpacity onPress={() => { navigation.navigate("Delivery Address Book") }}>
+                            <Text style={{ fontSize: 18, color: '#7E7E7E' }}>Edit</Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
 

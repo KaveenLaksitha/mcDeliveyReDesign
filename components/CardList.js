@@ -1,16 +1,134 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, SafeAreaView, Button, Image, ImageBackground, TextInput, TouchableHighlight, TouchableOpacity, ScrollView } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, View, SafeAreaView, Button, Image, ImageBackground, TextInput, TouchableHighlight, TouchableOpacity, ScrollView, RefreshControl, Alert } from 'react-native';
 import { RadioButton } from 'react-native-paper';
+import { getAllCards, deleteCardPermenantly } from '../service/cardService';
+
 let index = 0;
 
 const setBorderColor = (card) => {
     index = card;
 }
 
+const wait = (timeout) => {
+    return new Promise(resolve => setTimeout(resolve, timeout));
+}
+
 function MyCards({ navigation }) {
 
 
     const [checked, setChecked] = useState('first');
+    const [refreshing, setRefreshing] = React.useState(false);
+    const [keyValue, setKeyValue] = useState("")
+    const [validBoarder, setValidBoarder] = useState(false);
+    const [validDelete, setValidDelete] = useState(false);
+
+    // const [deliAdd, setDeliAdd] = useState("");
+    const [cards, setCards] = useState([]);
+
+    const onRefresh = React.useCallback(() => {
+        setRefreshing(true);
+        wait(500).then(() => setRefreshing(false));
+        getAllCards().then((res) => {
+
+            if (res.ok) {
+                setCards(res.data);
+            }
+        }).catch((err) => {
+            alert("error", err);
+        })
+    }, []);
+
+    useEffect(() => {
+
+        getAllCards().then((data) => {
+            setCards(data.data)
+            console.log("CardsList", data.data)
+        })
+    }, [])
+
+    function setBorders(userId, cardType) {
+        console.log("id", userId)
+        setKeyValue(userId);
+        setChecked(userId);
+        setValidBoarder(true);
+        //setValidDelete(true)
+        if (true) {
+            setBorderColor(0);
+        }
+    }
+
+    function changeValidity() {
+        setValidBoarder(false)
+    }
+
+    function deleteCard(userId) {
+        Alert.alert(
+            "Delete A Card",
+            "Are you sure that you want to delete this card?",
+            [
+                {
+                    text: "Cancel",
+                    onPress: () => console.log("Cancel Pressed"),
+                    style: "cancel"
+                },
+                {
+                    text: "OK", onPress: () => {
+                        deletes(userId)
+
+                    }
+                }
+            ]
+
+
+        )
+
+    }
+
+    function deletes(userId) {
+        if (validBoarder) {
+            setValidDelete(true)
+            if (validDelete) {
+                deleteCardPermenantly(userId).then((res) => {
+                    // Alert.alert("Successful")
+                }).catch((err) => {
+                    // Alert.alert("Unsuccessful")
+                })
+            }
+        }
+    }
+
+
+    const List = () => {
+        return cards.map((element) => {
+            return (
+                <View style={[styles.listItem, styles.elevation, { borderColor: keyValue === element.userId ? '#F79E1B' : 'white' }]} key={element._id}>
+                    <TouchableOpacity onPress={() => { deleteCard(element.userId); console.log("ggg", validBoarder) }}>
+                        <View style={styles.horizontal}>
+
+                            <Text style={styles.cardNo}>{element.cardNumber}</Text>
+
+                            <Text style={styles.default}></Text>
+                            <Image style={styles.visa}
+                                source={{
+                                    uri: element.uri
+                                }}></Image>
+                            <Text style={styles.name}>{element.nameOnCard}</Text>
+                            <Text style={styles.date}>{element.expiryDate}</Text>
+                            <Text style={styles.radio}>
+                                <RadioButton
+                                    value={element.userId}
+                                    color={'#FF3131'}
+                                    uncheckedColor={'#FF3131'}
+                                    status={checked === element.userId ? 'checked' : 'unchecked'}
+                                    onPress={() => { setBorders(element.userId); console.log("ggg", validBoarder) }}
+                                />
+                            </Text>
+                        </View>
+                    </TouchableOpacity>
+                </View>
+            )
+        })
+    }
 
     return (
 
@@ -19,71 +137,12 @@ function MyCards({ navigation }) {
 
 
             <View style={styles.contentody} >
-                <ScrollView vertical={true} >
-
+                <ScrollView vertical={true}
+                    refreshControl={<RefreshControl
+                        refreshing={refreshing}
+                        onRefresh={onRefresh} />}>
                     <Text style={styles.textValue}>Select your card or add new Card : </Text>
-
-                    <View style={[styles.listItem2, styles.elevation, { borderColor: index === 1 ? '#F79E1B' : 'white' }]}>
-                        <View style={styles.horizontal}>
-                            <Text style={styles.cardNo}>XXXX XXXX XXXX XXXX</Text>
-                            <Text style={styles.default}>default</Text>
-                            <Image style={styles.visa}
-                                source={{
-                                    uri: "https://i.ibb.co/PmDYwrP/visa.jpg"
-                                }}></Image>
-                            <Text style={styles.name}>Andrew Wilson</Text>
-                            <Text style={styles.date}>10/24</Text>
-                            <Text style={styles.radio}>
-                                <RadioButton
-                                    value="first"
-                                    color={'#FF3131'}
-                                    uncheckedColor={'#FF3131'}
-                                    status={checked === 'first' ? 'checked' : 'unchecked'}
-                                    onPress={() => { setChecked('first'); setBorderColor(1) }}
-                                />
-                            </Text>
-                        </View>
-                    </View>
-                    <View style={[styles.listItem, styles.elevation, { borderColor: index === 2 ? '#F79E1B' : 'white' }]}>
-                        <View style={styles.horizontal}>
-                            <Text style={styles.cardNo}>XXXX XXXX XXXX XXXX</Text>
-                            <Image style={styles.master}
-                                source={{
-                                    uri: "https://i.ibb.co/0KNQFf0/58482354cef1014c0b5e49c0.png"
-                                }}></Image>
-                            <Text style={styles.name}>Andrew Wilson</Text>
-                            <Text style={styles.date}>10/24</Text>
-                            <Text style={styles.radio}>
-                                <RadioButton
-                                    value="second"
-                                    color={'#FF3131'}
-                                    uncheckedColor={'#FF3131'}
-                                    status={checked === 'second' ? 'checked' : 'unchecked'}
-                                    onPress={() => { setChecked('second'); setBorderColor(2) }}
-                                />
-                            </Text>
-                        </View>
-                    </View>
-                    <View style={[styles.listItem, styles.elevation, { borderColor: index === 3 ? '#F79E1B' : 'white' }]}>
-                        <View style={styles.horizontal}>
-                            <Text style={styles.cardNo}>XXXX XXXX XXXX XXXX</Text>
-                            <Image style={styles.american}
-                                source={{
-                                    uri: "https://i.ibb.co/wzYRpWW/am.png"
-                                }}></Image>
-                            <Text style={styles.name}>Andrew Wilson</Text>
-                            <Text style={styles.date}>10/24</Text>
-                            <Text style={styles.radio}>
-                                <RadioButton
-                                    value="third"
-                                    color={'#FF3131'}
-                                    uncheckedColor={'#FF3131'}
-                                    status={checked === 'third' ? 'checked' : 'unchecked'}
-                                    onPress={() => { setChecked('third'); setBorderColor(3) }}
-                                />
-                            </Text>
-                        </View>
-                    </View>
+                    {List()}
                 </ScrollView>
             </View>
             <TouchableHighlight style={styles.submitButton}
@@ -219,24 +278,24 @@ const styles = StyleSheet.create({
     },
     visa: {
         width: 100,
-        height: 60,
+        height: 80,
         marginTop: 10,
         marginLeft: -60,
     },
 
-    master: {
-        width: 100,
-        height: 78,
-        marginTop: 10,
-        marginLeft: -320,
-    },
+    // master: {
+    //     width: 100,
+    //     height: 78,
+    //     marginTop: 10,
+    //     marginLeft: -320,
+    // },
 
-    american: {
-        width: 100,
-        height: 78,
-        marginTop: 10,
-        marginLeft: -320,
-    },
+    // american: {
+    //     width: 100,
+    //     height: 78,
+    //     marginTop: 10,
+    //     marginLeft: -320,
+    // },
 
     home: {
         width: 50,
@@ -258,10 +317,11 @@ const styles = StyleSheet.create({
         width: 150,
         height: 20,
         marginTop: 45,
-        marginLeft: 20,
+        marginLeft: 15,
         //backgroundColor: 'red',
         textAlign: 'center',
-        fontSize: 16
+        fontSize: 16,
+        fontWeight: "bold"
 
     },
     date: {
