@@ -64,7 +64,7 @@ function StackNavigator() {
             <Stack.Screen name="View Item" component={SingleFoodItem} options={{ headerTitleAlign: 'center' }} />
             <Stack.Screen name="Checkout Take Away" component={CheckoutTK} options={{ headerTitleAlign: 'center' }} />
             <Stack.Screen name="ThankYouTK" component={ThankYou} options={{ headerTitleAlign: 'center' }, { headerShown: false }} />
-            <Stack.Screen name="Mc Fries" component={McFries} options={{ headerTitleAlign: 'center' }, { title: 'Mc French Fries' }} />
+            <Stack.Screen name="Mc Fries" component={McFries} options={{ headerTitleAlign: 'center' }, { title: 'View Food Item' }} />
         </Stack.Navigator>
     )
 }
