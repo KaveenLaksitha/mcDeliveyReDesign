@@ -3,7 +3,7 @@ import Feather from 'react-native-vector-icons/FontAwesome5';
 import { Picker } from '@react-native-picker/picker';
 // import all the components we are going to use
 import { SafeAreaView, Text, View, StyleSheet, TouchableHighlight, Alert, TextInput, ScrollView } from 'react-native';
-
+import { useToast } from 'react-native-styled-toast'
 
 const SecurityEmail = () => {
 
@@ -14,6 +14,8 @@ const SecurityEmail = () => {
     const [isActive1, setActive1] = useState(false);
     const [isActive2, setActive2] = useState(false);
     const [isActive3, setActive3] = useState(false);
+
+    const { toast } = useToast()
 
     const [data, setData] = React.useState({
         contactNo: '',
@@ -144,9 +146,14 @@ const SecurityEmail = () => {
 
     function checkEmails() {
         if (currentEmail == newEmail) {
-            Alert.alert("Current Email and new email are same cannot proceed")
+            toast({
+                message: 'Current Email and New Email are the same cannot proceed!', toastStyles: { bg: '#FFF', borderRadius: 2 },
+                color: '#0A0A0A', iconColor: '#FF3131', iconFamily: 'Entypo', iconName: 'circle-with-cross',
+                closeButtonStyles: { px: 4, bg: 'darkgrey', borderRadius: 0 },
+                closeIconColor: 'white', hideAccent: true
+            })
         } else {
-            Alert.alert("Email changed")
+            toast({ message: 'Emails changed Successfully!' })
         }
     }
 

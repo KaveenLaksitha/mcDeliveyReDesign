@@ -146,27 +146,7 @@ function AddressBook({ navigation }) {
                             </TouchableOpacity>
                         </View>
                     </View>
-                    {/* <View style={[styles.listItem, styles.elevation, , { borderColor: index === 3 ? '#F79E1B' : 'white' }]}>
 
-                        <View style={styles.horizontal}>
-
-                            <RadioButton
-                                value="third"
-                                color={'#FF3131'}
-                                uncheckedColor={'#FF3131'}
-                                status={checked === 'third' ? 'checked' : 'unchecked'}
-                                onPress={() => { setChecked('third'); setBorderColor(3) }}
-                            />
-
-                            <Text style={styles.address2}>No 149/6A, Mirihana Road,
-                                Embuldeniya,
-                                Jayawardhanepura, Kotte</Text>
-                            <TouchableOpacity
-                                onPress={() => navigation.navigate('Address Form')}>
-                                <Icon style={styles.pencil3} name="pencil" color="#FF3133" size={30} />
-                            </TouchableOpacity>
-                        </View>
-                    </View> */}
                     {List()}
                 </ScrollView>
             </View>
