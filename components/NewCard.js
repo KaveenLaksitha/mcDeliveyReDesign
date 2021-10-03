@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Picker } from '@react-native-picker/picker';
 import { StyleSheet, Text, View, SafeAreaView, Image, TextInput, TouchableHighlight, ScrollView, Alert, ToastAndroid, Button } from 'react-native';
-import Feather from 'react-native-vector-icons/FontAwesome5'
+import Feather from 'react-native-vector-icons/FontAwesome5';
+import { useToast } from 'react-native-styled-toast'
 import { createCard } from '../service/cardService';
 import DatePicker from '@react-native-community/datetimepicker';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -21,12 +22,14 @@ function NewCard({ navigation }) {
     const [isActive2, setActive2] = useState(false);
     const [isActive3, setActive3] = useState(false);
 
-    const [uri, setImageUri] = useState(" ");
+    const [uri, setImageUri] = useState("https://i.ibb.co/PmDYwrP/visa.jpg");
 
     const [date, setDate] = useState(new Date(1598051730000));
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
-    const [text, setText] = useState('Empty');
+
+    const { toast } = useToast()
+
 
     const onChange = (event, selectedDate) => {
         const currentDate = selectedDate || date;
@@ -154,6 +157,18 @@ function NewCard({ navigation }) {
         onChangeExpiryDate(" ");
     }
 
+
+    const showPositiveToast = () => {
+        toast({ message: 'Card Successfully Saved!' })
+
+    };
+
+
+    const showNegativeToast = () => {
+        toast({ message: 'Card could not be Saved!' })
+
+    };
+
     const saveCard = () => {
         console.log("cardUri", uri);
         console.log(cardType + nameOnCard + cardNumber + ExpiryDate)
@@ -172,15 +187,16 @@ function NewCard({ navigation }) {
 
             createCard(newCard).then((res) => {
                 if (res.ok) {
-                    ToastAndroid.show("Card Successfully Saved", ToastAndroid.SHORT);
-                    clearInputs();
+                    //ToastAndroid.show("Card Successfully Saved", ToastAndroid.SHORT);
+                    // clearInputs();
+                    showPositiveToast();
                     navigation.navigate("My Cards")
                 } else {
                     Alert.alert("Error!", res.err);
                 }
 
             }).catch((err) => {
-                ToastAndroid.show("Card Could not be Saved", ToastAndroid.SHORT);
+                showNegativeToast()
             })
         }
     }
@@ -195,7 +211,7 @@ function NewCard({ navigation }) {
                     <View style={[styles.cardDisplay, styles.shadow]}>
                         <Image style={styles.visa}
                             source={{
-                                uri: "https://i.ibb.co/PmDYwrP/visa.jpg"
+                                uri: uri
                             }}></Image>
 
                         <TextInput style={styles.cardNo}
@@ -210,7 +226,11 @@ function NewCard({ navigation }) {
                             editable={false}
                         ></TextInput>
                         <Text style={styles.validThru}>Valid Thru</Text>
-                        <Text style={styles.date}>10/24</Text>
+                        <TextInput style={styles.date}
+                            placeholder="10/2020"
+                            value={ExpiryDate}
+                            editable={false}>
+                        </TextInput>
                     </View>
 
                     <View style={[styles.cardInsert, styles.shadowguestUser]}>
@@ -287,37 +307,37 @@ function NewCard({ navigation }) {
                             <Text style={styles.errMsg}>Cannot use characters other than letters</Text>
 
                         }
-
-                        <Text style={styles.textValue}>Expiry Date </Text>
-                        <TextInput style={[styles.input, { borderColor: isActive3 ? 'blue' : 'grey' }, { color: 'black' }]}
-                            onChangeText={onChangeExpiryDate}
-                            value={ExpiryDate}
-                            //placeholder="2021/10/14"
-                            //keyboardType="decimal-pad"
-                            editable={false}
-                            onFocus={() => setActive3(true)}
-                            onBlur={() => setActive3(false)}
-                            onPress={showDatepicker}
-                        />
-
-                        <Feather style={styles.calender}
-                            name="calendar-day"
-                            color="blue"
-                            size={20}
-                            onPress={showDatepicker}
-                        />
-
-                        {show && (
-                            <DatePicker
-                                testID="dateTimePicker"
-                                value={date}
-                                mode={mode}
-                                is24Hour={false}
-                                display="default"
-                                onChange={onChange}
+                        <View>
+                            <Text style={styles.textValue}>Expiry Date </Text>
+                            <TextInput style={[styles.input, { borderColor: isActive3 ? 'blue' : 'grey' }, { color: 'black' }]}
+                                onChangeText={onChangeExpiryDate}
+                                value={ExpiryDate}
+                                //placeholder="2021/10/14"
+                                //keyboardType="decimal-pad"
+                                editable={false}
+                                onFocus={() => setActive3(true)}
+                                onBlur={() => setActive3(false)}
+                                onPress={showDatepicker}
                             />
-                        )}
 
+                            <Feather style={styles.calender}
+                                name="calendar-day"
+                                color="blue"
+                                size={20}
+                                onPress={showDatepicker}
+                            />
+
+                            {show && (
+                                <DatePicker
+                                    testID="dateTimePicker"
+                                    value={date}
+                                    mode={mode}
+                                    is24Hour={false}
+                                    display="default"
+                                    onChange={onChange}
+                                />
+                            )}
+                        </View>
                     </View>
                 </ScrollView>
                 <TouchableHighlight style={styles.submitButton}
@@ -382,16 +402,16 @@ const styles = StyleSheet.create({
     },
 
     visa: {
-        width: 110,
-        height: 60,
+        width: 130,
+        height: 70,
         marginTop: 0,
         marginLeft: 10,
     },
 
     cardNo: {
         position: "absolute",
-        marginTop: 70,
-        marginLeft: 65,
+        marginTop: 80,
+        marginLeft: 75,
         fontSize: 20,
         fontWeight: 'bold',
         width: 250,
@@ -435,6 +455,7 @@ const styles = StyleSheet.create({
         marginLeft: 10,
         fontSize: 16,
         color: "black",
+        fontWeight: "bold"
     },
 
     input: {
@@ -513,8 +534,11 @@ const styles = StyleSheet.create({
     },
     calender: {
         position: "absolute",
-        marginTop: 280,
-        marginLeft: 300
+        marginTop: 20,
+        marginLeft: 300,
+        // backgroundColor: "blue",
+        width: 40,
+        height: 40
     }
 
 });
