@@ -69,6 +69,7 @@ router.post("/addRegister", async (req, res) => {
 
     } catch (err) {
         console.log("error", err)
+        return res.status(500).send({ status: "User Already Register to MC Delivery App" })
     }
 })
 
@@ -84,17 +85,18 @@ router.get("/getRegister", async (req, res) => {
 
 });
 
-router.get("/get/:un/:pass", async (req, res) => {
-    let UN = req.params.un;//username taken from the frontend login form
+router.get("/get/:email/:pass", async (req, res) => {
+    let EM = req.params.email;//username taken from the frontend login form
     let pass = req.params.pass;//password taken from the frontend login form
 
-    try {
-        const response = await Register.findOne({username: UN, password: pass});
-        return res.status(200).send({ status: "Success", data: response });
-    }catch (error) {
-        console.log("Something went wrong while connecting to DB");
-        return { ok: false };
-    }
+     const user = await Register.findOne({ email: EM, password: pass })
+        .then((user) => {
+            console.log("dataaaaaaa", user)
+            res.status(200).send({ status: "User fetched", register: user })
+        }).catch(() => {
+            console.log(err.message);
+            res.status(500).send({ status: "Error with get user", error: err.message });
+        })
 })
 
 

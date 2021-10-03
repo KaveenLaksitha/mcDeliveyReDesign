@@ -1,10 +1,30 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View, SafeAreaView, Button, Image, SafeAreaViewBase, Alert, TextInput , TouchableHighlight} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, View, SafeAreaView, ToastAndroid, Image, SafeAreaViewBase, Alert, TextInput , TouchableHighlight} from 'react-native';
 
 export default function ResetpasswordEmail({navigation}) {
 
-  const [textInputValue, setTextInputValue] = React.useState('');
+  const [email, setEmail] = useState("");
+
+  
+  function sendData(e){
+    if(email !=""){
+        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if(re.test(email)){
+          Alert.alert("Please verify your email address")
+          navigation.navigate('Login');
+        }else{
+          ToastAndroid.show(
+            'Invalid Email Address', ToastAndroid.SHORT
+          );
+        }
+
+    }else{
+      ToastAndroid.show(
+        'Please fill all the field', ToastAndroid.SHORT
+      );
+    }
+  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -42,14 +62,12 @@ export default function ResetpasswordEmail({navigation}) {
              <Text style={styles.password}>Email Address</Text>
           </View>
               <TextInput  style={styles.inputpassword}
-                 onChangeText={text => setTextInputValue(text)}
-                 value={textInputValue}
-               placeholder="abc@gmail.com"
-               pattern = '/[a-zA-Z0-9]+[\.]?([a-zA-Z0-9]+)?[\@][a-z]{3,9}[\.][a-z]{2,5}/g'
+                  onChangeText={(e) => {setEmail(e)}}
+                  placeholder="abc@gmail.com"
               ></TextInput>
               
           <TouchableHighlight style={styles.submitbutton}
-              onPress={() => Alert.alert('Login Successfully')}>
+               onPress={sendData}>
               <Text style={styles.submittext}>Submit</Text>
           </TouchableHighlight>
           <TouchableHighlight style={styles.resetbutton}

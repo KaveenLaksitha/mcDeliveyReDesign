@@ -1,8 +1,21 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View, SafeAreaView, Button, Image, SafeAreaViewBase, Alert, TextInput , TouchableHighlight} from 'react-native';
+import React, {useState} from 'react';
+import { StyleSheet, Text, View, SafeAreaView, ToastAndroid, Image, SafeAreaViewBase, Alert, TextInput , TouchableHighlight} from 'react-native';
 
 export default function ResetpasswordMobile({navigation}) {
+
+  const [contactno, setContactno] = useState("");
+  function sendData(e){
+  var phone = /^(?=.*\d).{10,}$/;
+  if(phone.test(contactno)){
+        Alert.alert("Please verify your phone number!")
+        navigation.navigate('Login');
+  }else{
+    ToastAndroid.show(
+      'Invalid Phone Number', ToastAndroid.SHORT
+    );
+  }
+  }
   return (
     <SafeAreaView style={styles.container}>
      <StatusBar hidden/>  
@@ -39,10 +52,12 @@ export default function ResetpasswordMobile({navigation}) {
              <Text style={styles.password}>Mobile Number</Text>
           </View>
               <TextInput  style={styles.inputpassword} 
-                 keyboardType={'numeric'}
+                  keyboardType={'numeric'}
+                  onChangeText={(e) => {setContactno(e)}}
+                  required
               ></TextInput>
           <TouchableHighlight style={styles.submitbutton}
-              onPress={() => Alert.alert('Login Successfully')}>
+             onPress={sendData}>
               <Text style={styles.submittext}>Submit</Text>
           </TouchableHighlight>
           <TouchableHighlight style={styles.resetbutton}

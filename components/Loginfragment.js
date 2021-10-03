@@ -20,13 +20,7 @@ function Loginfragment() {
         }
     };
 
-    // function setColor(num) {
-    //     if (num == 1) {
-    //         cindex = 1
-    //     } else {
-    //         cindex = 2;
-    //     }
-    // }
+ 
 
     return (
         <SafeAreaView style={styles.container}>
@@ -38,14 +32,14 @@ function Loginfragment() {
                             uri: "https://i.ibb.co/N1zyVSy/mcWhite.png"
                         }}
                     />
-                    <View style={[styles.underlinelogin, { borderColor: cindex === 1 ? 'white' : '#FFC300', }]}>
+                    <View style={[styles.underlinelogin, { borderColor: cindex === 1 ? '#FF3133' : '#FFC300', }]}>
                         <TouchableOpacity
                             onPress={() => { setIndex(1) }}>
                             <Text style={styles.login}>Login</Text>
                         </TouchableOpacity>
                         {/*To set the SecondScreen*/}
                     </View>
-                    <View style={[styles.underlineregister, { borderColor: cindex === 2 ? 'white' : '#FFC300', }]}>
+                    <View style={[styles.underlineregister, { borderColor: cindex === 2 ? '#FF3133' : '#FFC300', }]}>
                         <TouchableOpacity
                             onPress={() => { setIndex(2) }}>
                             <Text style={styles.reg}>I'am New</Text>
@@ -111,7 +105,7 @@ const styles = StyleSheet.create({
     underlineregister: {
         borderBottomWidth: 3,
         marginLeft: 273,
-        marginTop: -28,
+        marginTop: -29,
         width: 90,
 
     },

@@ -1,12 +1,65 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, SafeAreaView, Button, Image, SafeAreaViewBase, Alert, TextInput, TouchableHighlight, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, ToastAndroid, Image, SafeAreaViewBase, Alert, TextInput, TouchableHighlight, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import {addRegister} from '../service/registerService'
+import axios from "axios";
 
 const Login = () => {
 
   const navigation = useNavigation();
 
-  const [textInputValue, setTextInputValue] = React.useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [register , setRegister] =useState([]);
+
+
+  function sendData(e){
+    if(email !="" && password != ""){
+      var passw = /^(?=.*\d)(?=.*[a-z]).{6,10}$/;
+      if(passw.test(password) ){
+        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if(re.test(email)){
+          // axios.get(`http://10.0.2.2:4000/register/get/${email}/${password}`).then((response) => {
+          //   console.log(response.data);
+          //   setRegister(response.data);
+          //   if (response.data === null) {
+          //     ToastAndroid.show(
+          //       'User not available', ToastAndroid.SHORT
+          //     );
+          //   } else {
+          //     ToastAndroid.show(
+          //       'User available', ToastAndroid.SHORT
+          //     );             
+          //       if (response.data.email == email) {
+          //         navigation.navigate('Home');
+          //       }
+          //   }
+          //  }).catch((err) => {
+          //   ToastAndroid.show(
+          //     'Invalid Email Address', ToastAndroid.SHORT
+          //   );
+
+          //  })
+          Alert.alert("Welcom to MC Delivery Home")
+          navigation.navigate('Home');
+        }else{
+          ToastAndroid.show(
+            'Invalid Email Address', ToastAndroid.SHORT
+          );
+        }
+
+      }else{
+        ToastAndroid.show(
+          'Password not match', ToastAndroid.SHORT
+        );
+      }
+
+    }else{
+      ToastAndroid.show(
+        'Please fill all the field', ToastAndroid.SHORT
+      );
+    }
+  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -22,10 +75,9 @@ const Login = () => {
           </View>
 
           <TextInput style={styles.inputemail} 
-            onChangeText={text => setTextInputValue(text)}
-            value={textInputValue}
-          placeholder="abc@gmail.com"
-          pattern = '/[a-zA-Z0-9]+[\.]?([a-zA-Z0-9]+)?[\@][a-z]{3,9}[\.][a-z]{2,5}/g'
+            onChangeText={(e) => {setEmail(e)}}
+            placeholder="abc@gmail.com"
+            pattern ={[ /[a-zA-Z0-9]+[\.]?([a-zA-Z0-9]+)?[\@][a-z]{3,9}[\.][a-z]{2,5}/g]}
           ></TextInput>
 
           <View style={styles.passworddiv}>
@@ -36,6 +88,7 @@ const Login = () => {
              secureTextEntry={true} 
              maxLength={10}
              minLength= {6}
+             onChangeText={(e) => {setPassword(e)}}
           ></TextInput>
 
           <View style={styles.forgetdiv}>
@@ -44,9 +97,8 @@ const Login = () => {
 
           </View>
 
-          <TouchableHighlight style={styles.loginbutton}
-            onPress={() => Alert.alert('Login Successfully')}>
-
+          <TouchableHighlight underlayColor='none' style={styles.loginbutton}
+           onPress={sendData}>
             <Text style={styles.logintext}>Login</Text>
 
           </TouchableHighlight>
