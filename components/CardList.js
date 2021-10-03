@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, SafeAreaView, Button, Image, ImageBackground, TextInput, TouchableHighlight, TouchableOpacity, ScrollView, RefreshControl, Alert } from 'react-native';
 import { RadioButton } from 'react-native-paper';
 import { getAllCards, deleteCardPermenantly } from '../service/cardService';
+import AntDesignIcon from 'react-native-vector-icons/AntDesign'
 
 let index = 0;
 
@@ -63,6 +64,7 @@ function MyCards({ navigation }) {
 
     function deleteCard(userId) {
         Alert.alert(
+            // <AntDesignIcon name="delete" size={20} color="red"></AntDesignIcon>,
             "Delete A Card",
             "Are you sure that you want to delete this card?",
             [
@@ -178,7 +180,7 @@ const styles = StyleSheet.create({
         width: 320,
         padding: 2,
         marginLeft: 40,
-        fontSize: 16,
+        fontSize: 18,
         color: "black",
     },
     radio: {

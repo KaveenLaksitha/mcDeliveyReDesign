@@ -142,7 +142,7 @@ export default function AddressForm({ navigation }) {
                             <Picker.Item style={{ fontSize: 16, color: "#8B0000", fontWeight: "bold-italic" }} label="Ambuldeniya" value="Ambuldeniya" />
                             <Picker.Item style={{ fontSize: 16, color: "#8B0000", fontWeight: "bold-italic" }} label="Angulana" value="Angulana" />
                             <Picker.Item style={{ fontSize: 16, color: "#8B0000", fontWeight: "bold-italic" }} label="Bambalapitiya" value="Bambalapitiya" />
-                            <Picker.Item style={{ fontSize: 16, color: "#8B0000", fontWeight: "bold-italic" }} label="Baththaramulla" value="Baththaramulla" />
+                            <Picker.Item style={{ fontSize: 16, color: "#8B0000", fontWeight: "bold-italic" }} label="Battaramulla" value="Baththaramulla" />
                             <Picker.Item style={{ fontSize: 16, color: "#8B0000", fontWeight: "bold-italic" }} label="Colombo" value="Colombo" />
                             <Picker.Item style={{ fontSize: 16, color: "#8B0000", fontWeight: "bold-italic" }} label="Colombo 11" value="Colombo 11" />
                             <Picker.Item style={{ fontSize: 16, color: "#8B0000", fontWeight: "bold-italic" }} label="Colombo 01" value="Colombo 01" />
@@ -297,7 +297,7 @@ const styles = StyleSheet.create({
         marginTop: -10,
         marginLeft: 40,
         width: 300,
-        //height: 38,
+        fontSize: 14,
         margin: 12,
         padding: 6,
         borderBottomWidth: 1,
@@ -381,6 +381,7 @@ const styles = StyleSheet.create({
         width: 60,
         borderBottomWidth: 1,
         borderColor: "grey",
+        fontSize: 14
 
     },
     apN: {
@@ -392,6 +393,8 @@ const styles = StyleSheet.create({
         width: 190,
         borderBottomWidth: 1,
         borderColor: "grey",
+        fontSize: 14
+
 
     },
     textValueApN: {

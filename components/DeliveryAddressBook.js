@@ -1,9 +1,9 @@
-import React, { useState,useEffect } from 'react';
-import { StyleSheet, Text, View, SafeAreaView, Button, Image, ImageBackground, SafeAreaViewBase, Alert, TextInput, TouchableHighlight, TouchableOpacity, ScrollView,RefreshControl } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, View, SafeAreaView, Button, Image, ImageBackground, SafeAreaViewBase, Alert, TextInput, TouchableHighlight, TouchableOpacity, ScrollView, RefreshControl } from 'react-native';
 import Icon from 'react-native-vector-icons/Entypo';
 import BuildingIcon from 'react-native-vector-icons/FontAwesome5'
 import { RadioButton } from 'react-native-paper';
-import {getDeliveryAddresses} from '../service/addressService';
+import { getDeliveryAddresses } from '../service/addressService';
 
 
 let index = 0;
@@ -21,8 +21,8 @@ function AddressBook({ navigation }) {
 
     const [checked, setChecked] = useState('first');
     const [refreshing, setRefreshing] = React.useState(false);
-    const [keyValue,setKeyValue] =useState("")
-    const [validBoarder,setValidBoarder]=useState(false);
+    const [keyValue, setKeyValue] = useState("")
+    const [validBoarder, setValidBoarder] = useState(false);
 
     // const [deliAdd, setDeliAdd] = useState("");
     const [addresses, setAddresses] = useState([]);
@@ -41,24 +41,24 @@ function AddressBook({ navigation }) {
     }, []);
 
     useEffect(() => {
-        
+
         getDeliveryAddresses().then((data) => {
             setAddresses(data.data)
-            console.log("AddressList",data.data)
+            console.log("AddressList", data.data)
         })
     }, [])
 
-    function setBorders(userId){
-        console.log("id",userId)
+    function setBorders(userId) {
+        console.log("id", userId)
         setKeyValue(userId);
         setChecked(userId);
         setValidBoarder(true);
-        if(true){
+        if (true) {
             setBorderColor(0);
         }
     }
 
-    function changeValidity(){
+    function changeValidity() {
         setValidBoarder(false)
     }
 
@@ -66,24 +66,24 @@ function AddressBook({ navigation }) {
         return addresses.map((element) => {
             return (
                 <View style={[styles.listItem, styles.elevation, { borderColor: keyValue === element.userId ? '#F79E1B' : 'white' }]} key={element._id}>
-                            
-                        <View style={styles.horizontal}>
 
-                            <RadioButton
-                                value={element.userId}
-                                color={'#FF3131'}
-                                uncheckedColor={'#FF3131'}
-                                status={checked ===  element.userId ? 'checked' : 'unchecked'}
-                                onPress={() => { setBorders(element.userId)}}
-                            />
+                    <View style={styles.horizontal}>
 
-                            <Text style={styles.address2}>{element.deliveryAddress}</Text>
-                            <TouchableOpacity
-                                onPress={() => navigation.navigate('Address Form')}>
-                                <Icon style={styles.pencil3} name="pencil" color="#FF3133" size={30} />
-                            </TouchableOpacity>
-                        </View>
+                        <RadioButton
+                            value={element.userId}
+                            color={'#FF3131'}
+                            uncheckedColor={'#FF3131'}
+                            status={checked === element.userId ? 'checked' : 'unchecked'}
+                            onPress={() => { setBorders(element.userId) }}
+                        />
+
+                        <Text style={styles.address2}>{element.deliveryAddress}</Text>
+                        <TouchableOpacity
+                            onPress={() => navigation.navigate('Address Form')}>
+                            <Icon style={styles.pencil3} name="pencil" color="#FF3133" size={30} />
+                        </TouchableOpacity>
                     </View>
+                </View>
             )
         })
     }
@@ -97,11 +97,11 @@ function AddressBook({ navigation }) {
 
             <View style={styles.contentody} >
                 <ScrollView vertical={true}
-                 refreshControl={<RefreshControl
+                    refreshControl={<RefreshControl
                         refreshing={refreshing}
                         onRefresh={onRefresh} />}>
 
-                    <Text style={styles.textValue}>Select your address or add new Address : </Text>
+                    <Text style={styles.textValue}>Select Your Address OR Add An Address : </Text>
 
                     <View style={[styles.listItem3, styles.elevation, { borderColor: index === 1 ? '#F79E1B' : 'white' }]}>
                         <View style={styles.horizontal}>
@@ -115,7 +115,7 @@ function AddressBook({ navigation }) {
                                     color={'#FF3131'}
                                     uncheckedColor={'#FF3131'}
                                     status={checked === 'first' ? 'checked' : 'unchecked'}
-                                    onPress={() => { setChecked('first'); setBorderColor(1);changeValidity() }}
+                                    onPress={() => { setChecked('first'); setBorderColor(1); changeValidity() }}
                                 />
                             </Text>
                             <TouchableOpacity
@@ -343,7 +343,7 @@ const styles = StyleSheet.create({
         width: 250,
         padding: 2,
         marginLeft: 40,
-        fontSize: 16,
+        fontSize: 18,
         color: "black",
     },
 

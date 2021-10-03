@@ -4,14 +4,9 @@ import HandIcon from 'react-native-vector-icons/FontAwesome5'
 import VisaIcon from 'react-native-vector-icons/Fontisto'
 import { RadioButton } from 'react-native-paper';
 
-<<<<<<< HEAD
 import { useToast } from 'react-native-styled-toast'
 
 let index = 1;
-=======
-
-let index = 0;
->>>>>>> a116dfc0e5e4896529d5036536b8bb0e550e14ef
 
 const setBorderColor = (choice) => {
     index = choice;
