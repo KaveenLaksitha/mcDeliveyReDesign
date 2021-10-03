@@ -58,9 +58,7 @@ export default function SingleFoodItem({ navigation, route }) {
             name, num, price
         }
         addToCart(payload)
-        // navigation.navigate('Cart', {
-        //     name, num, price
-        // })
+     
     }
 
 
