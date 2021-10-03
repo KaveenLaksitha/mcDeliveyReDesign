@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Picker } from '@react-native-picker/picker';
 import { StyleSheet, Text, View, SafeAreaView, Button, ImageBackground, ScrollView, Alert, TextInput, TouchableHighlight, ToastAndroid } from 'react-native';
 import { createAddress } from '../service/addressService';
+import { useToast } from 'react-native-styled-toast'
 
 export default function AddressForm({ navigation }) {
     const [deliveryAddress, onChangeDeliveryAddres] = React.useState(" ");
@@ -28,6 +29,8 @@ export default function AddressForm({ navigation }) {
     const [isActive5, setActive5] = useState(false);
     const [isActive6, setActive6] = useState(false);
     const [isActive7, setActive7] = useState(false);
+
+    const { toast } = useToast()
 
     function resetAll() {
         ToastAndroid.show("Resetting all the fields !", ToastAndroid.SHORT);
@@ -68,18 +71,19 @@ export default function AddressForm({ navigation }) {
     const saveDeliveryAddress = () => {
         console.log(deliveryAddress + city + locationType + landMark + instruct)
         if (deliveryAddress === " " && city === "Colombo" && locationType === "Home" && landMark === " " && instruct === " ") {
-            ToastAndroid.show("Please fill all the fields before submitting", ToastAndroid.SHORT)
+            toast({ message: 'Please fill all the fields before submitting!' })
+            //ToastAndroid.show("Please fill all the fields before submitting", ToastAndroid.SHORT)
 
         } else if (deliveryAddress === " ") {
-            ToastAndroid.show("Please fill delivery address field", ToastAndroid.SHORT)
+            toast({ message: 'Please fill delivery address field!' })
         } else if (city === " ") {
-            ToastAndroid.show("Please choose a city", ToastAndroid.SHORT)
+            toast({ message: 'Please choose a City!' })
         } else if (locationType === " ") {
-            ToastAndroid.show("Please choose location type", ToastAndroid.SHORT)
+            toast({ message: 'Please choose a location type!' })
         } else if (landMark === " ") {
-            ToastAndroid.show("Please insert a landmark ", ToastAndroid.SHORT)
+            toast({ message: 'Please insert a specific landmark!' })
         } else if (instruct === " ") {
-            ToastAndroid.show("Please add delivery instructions", ToastAndroid.SHORT)
+            toast({ message: 'Please add delivery instructions!' })
         } else {
             console.log(deliveryAddress + city + locationType + floor + apartmentNo)
             const newAddress = {
