@@ -85,7 +85,12 @@ export default function FeedBack({ navigation }) {
         console.log(orderId + reviewOn + suggestion + complaint + rate)
 
         if (orderId === " " || suggestion === " " || complaint === " ") {
-            ToastAndroid.show("Please fill all the fields", ToastAndroid.SHORT);
+            toast({
+                message: 'Make sure you filled all fileds!', toastStyles: { bg: '#FFF', borderRadius: 2 },
+                color: '#0A0A0A', iconColor: '#FF3131', iconFamily: 'Entypo', iconName: 'circle-with-cross',
+                closeButtonStyles: { px: 4, bg: 'darkgrey', borderRadius: 0 },
+                closeIconColor: 'white', hideAccent: true
+            })
         } else {
 
             const newFeedBack = {
@@ -102,12 +107,19 @@ export default function FeedBack({ navigation }) {
                     showToast();
                     clearInputs();
                 } else {
-                    Alert.alert("FeedBack could not be saved", res.err)
+                    //toast({ message: 'FeedBack Could Not Save!' + " " + res.err })
+                    Alert.alert("FeedBack Could Not be Saved", res.err);
                 }
 
                 //navigation.navigate('draftList');
             }).catch((err) => {
-                Alert.alert("FeedBack could not be saved", err);
+                //Alert.alert("FeedBack could not be saved", err);
+                toast({
+                    message: 'FeedBack Could Not Save!', toastStyles: { bg: '#FFF', borderRadius: 2 },
+                    color: '#0A0A0A', iconColor: '#FF3131', iconFamily: 'Entypo', iconName: 'circle-with-cross',
+                    closeButtonStyles: { px: 4, bg: 'darkgrey', borderRadius: 0 },
+                    closeIconColor: 'white', hideAccent: true
+                })
             })
         }
     }

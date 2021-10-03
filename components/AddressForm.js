@@ -33,7 +33,7 @@ export default function AddressForm({ navigation }) {
     const { toast } = useToast()
 
     function resetAll() {
-        ToastAndroid.show("Resetting all the fields !", ToastAndroid.SHORT);
+        toast({ message: 'Successfully Reset All Values !' })
         onChangeDeliveryAddres("");
         onChangeCity("Colombo");
         onChangeLocationType("Home");
@@ -71,19 +71,47 @@ export default function AddressForm({ navigation }) {
     const saveDeliveryAddress = () => {
         console.log(deliveryAddress + city + locationType + landMark + instruct)
         if (deliveryAddress === " " && city === "Colombo" && locationType === "Home" && landMark === " " && instruct === " ") {
-            toast({ message: 'Please fill all the fields before submitting!' })
-            //ToastAndroid.show("Please fill all the fields before submitting", ToastAndroid.SHORT)
-
+            toast({
+                message: 'Please fill all the fields before submitting!', toastStyles: { bg: '#FFF', borderRadius: 2 },
+                color: '#0A0A0A', iconColor: '#FF3131', iconFamily: 'Entypo', iconName: 'circle-with-cross',
+                closeButtonStyles: { px: 4, bg: 'darkgrey', borderRadius: 0 },
+                closeIconColor: 'white', hideAccent: true
+            })
         } else if (deliveryAddress === " ") {
-            toast({ message: 'Please fill delivery address field!' })
+            toast({
+                message: 'Please fill delivery address field!', toastStyles: { bg: '#FFF', borderRadius: 2 },
+                color: '#0A0A0A', iconColor: '#FF3131', iconFamily: 'Entypo', iconName: 'circle-with-cross',
+                closeButtonStyles: { px: 4, bg: 'darkgrey', borderRadius: 0 },
+                closeIconColor: 'white', hideAccent: true
+            })
         } else if (city === " ") {
-            toast({ message: 'Please choose a City!' })
+            toast({
+                message: 'Please choose a City!', toastStyles: { bg: '#FFF', borderRadius: 2 },
+                color: '#0A0A0A', iconColor: '#FF3131', iconFamily: 'Entypo', iconName: 'circle-with-cross',
+                closeButtonStyles: { px: 4, bg: 'darkgrey', borderRadius: 0 },
+                closeIconColor: 'white', hideAccent: true
+            })
         } else if (locationType === " ") {
-            toast({ message: 'Please choose a location type!' })
+            toast({
+                message: 'Please choose a location type!', toastStyles: { bg: '#FFF', borderRadius: 2 },
+                color: '#0A0A0A', iconColor: '#FF3131', iconFamily: 'Entypo', iconName: 'circle-with-cross',
+                closeButtonStyles: { px: 4, bg: 'darkgrey', borderRadius: 0 },
+                closeIconColor: 'white', hideAccent: true
+            })
         } else if (landMark === " ") {
-            toast({ message: 'Please insert a specific landmark!' })
+            toast({
+                message: 'Please insert a specific landmark!', toastStyles: { bg: '#FFF', borderRadius: 2 },
+                color: '#0A0A0A', iconColor: '#FF3131', iconFamily: 'Entypo', iconName: 'circle-with-cross',
+                closeButtonStyles: { px: 4, bg: 'darkgrey', borderRadius: 0 },
+                closeIconColor: 'white', hideAccent: true
+            })
         } else if (instruct === " ") {
-            toast({ message: 'Please add delivery instructions!' })
+            toast({
+                message: 'Please add delivery instructions!', toastStyles: { bg: '#FFF', borderRadius: 2 },
+                color: '#0A0A0A', iconColor: '#FF3131', iconFamily: 'Entypo', iconName: 'circle-with-cross',
+                closeButtonStyles: { px: 4, bg: 'darkgrey', borderRadius: 0 },
+                closeIconColor: 'white', hideAccent: true
+            })
         } else {
             console.log(deliveryAddress + city + locationType + floor + apartmentNo)
             const newAddress = {
@@ -102,7 +130,7 @@ export default function AddressForm({ navigation }) {
             createAddress(newAddress).then((res) => {
                 console.log("responseeeeeeeeeee", res)
                 if (res.ok) {
-                    Alert.alert("Address Successfully saved");
+                    toast({ message: 'Delivery Address Added Successfully!' })
                     navigation.navigate("Delivery Address Book");
                 } else {
                     Alert.alert("Error!", res.err);
