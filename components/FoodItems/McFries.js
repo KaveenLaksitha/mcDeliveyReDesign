@@ -14,7 +14,7 @@ import { set } from 'react-native-reanimated';
 let count = 0;
 export default function SingleFoodItem({ navigation, route }) {
 
-    const [image, setImage] = useState();
+    const [image, setImage] = useState(null);
     const [name, setName] = useState("");
     const [price, setPrice] = useState("");
     const [index, setIndex] = useState(0);
