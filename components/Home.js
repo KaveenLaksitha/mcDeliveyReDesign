@@ -1,13 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, Image, StyleSheet, ScrollView, RefreshControl, ToastAndroid } from "react-native";
 
 function Home({ navigation }) {
 
   const [refreshState, setRefreshState] = useState(false)
+  const [time, setTime] = useState()
+
+  var today = new Date();
+
+  useEffect(() => {
+    setTime(today.getHours() + ":" + today.getMinutes())
+  }, [])
 
   const refresh = () => {
     setRefreshState(true);
     ToastAndroid.show("Refreshing...", ToastAndroid.SHORT);
+    setTime(today.getHours() + ":" + today.getMinutes())
     setTimeout(function () { setRefreshState(false) }, 2000)
   }
 
@@ -30,7 +38,7 @@ function Home({ navigation }) {
         />
       </ScrollView>
       <View style={[styles.dateTime, styles.elevation]}>
-        <Text>Here's info as at HH:MM PM, Today</Text>
+        <Text>Here's info as at {time} PM, Today</Text>
       </View>
       <View style={{ marginLeft: 20, marginRight: 20, marginTop: 10, marginBottom: 20 }}>
         <View>

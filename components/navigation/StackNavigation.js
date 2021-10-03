@@ -37,8 +37,8 @@ const Stack = createNativeStackNavigator();
 function StackNavigator() {
     return (
         <Stack.Navigator>
-            <Stack.Screen name="Login" component={Loginfragment} options={{ headerTitleAlign: 'center', headerShown: false }} />
-            <Stack.Screen name="Home" component={Home} options={{ headerTitleAlign: 'center' }} />
+            {/* <Stack.Screen name="Login" component={Loginfragment} options={{ headerTitleAlign: 'center', headerShown: false }} /> */}
+            <Stack.Screen name="Home" component={Home} options={{ title: 'Welcome back user!' }} />
             <Stack.Screen name="All Food Categories" component={TopTabNavigation} options={{ headerTitleAlign: 'center' }} />
             <Stack.Screen name="Favourites" component={Favourites} options={{ headerTitleAlign: 'center' }} />
             <Stack.Screen name="FoodMenu" component={FoodMenu} options={{ headerTitleAlign: 'center' }} />
