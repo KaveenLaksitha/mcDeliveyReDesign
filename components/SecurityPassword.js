@@ -161,6 +161,14 @@ const SecurityPassword = () => {
     function checkPasswords() {
         if (newPwds === rePwd) {
             toast({ message: 'Passwords Match and are successfully changed!' })
+        } else if (!data.isValidRpwd || !data.isValidNpwd || !data.isValidCpwd) {
+            toast({
+                message: 'Make sure all inputs are given with correct format!', toastStyles: { bg: '#FFF', borderRadius: 2 },
+                color: '#0A0A0A', iconColor: '#FF3131', iconFamily: 'Entypo', iconName: 'circle-with-cross',
+                closeButtonStyles: { px: 4, bg: 'darkgrey', borderRadius: 0 },
+                closeIconColor: 'white', hideAccent: true
+            })
+
         } else {
             toast({
                 message: 'Passwords did not Match so cannot proceed!', toastStyles: { bg: '#FFF', borderRadius: 2 },

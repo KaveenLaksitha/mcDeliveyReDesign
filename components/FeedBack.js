@@ -91,7 +91,15 @@ export default function FeedBack({ navigation }) {
                 closeButtonStyles: { px: 4, bg: 'darkgrey', borderRadius: 0 },
                 closeIconColor: 'white', hideAccent: true
             })
-        } else {
+        } else if (!data.isValidOrderId) {
+            toast({
+                message: 'Make sure you inserted correct order Id!', toastStyles: { bg: '#FFF', borderRadius: 2 },
+                color: '#0A0A0A', iconColor: '#FF3131', iconFamily: 'Entypo', iconName: 'circle-with-cross',
+                closeButtonStyles: { px: 4, bg: 'darkgrey', borderRadius: 0 },
+                closeIconColor: 'white', hideAccent: true
+            })
+        }
+        else {
 
             const newFeedBack = {
                 orderId,

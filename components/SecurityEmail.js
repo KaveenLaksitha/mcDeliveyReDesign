@@ -152,7 +152,15 @@ const SecurityEmail = () => {
                 closeButtonStyles: { px: 4, bg: 'darkgrey', borderRadius: 0 },
                 closeIconColor: 'white', hideAccent: true
             })
-        } else {
+        } else if (!data.isValidNumber || !data.isValidCurrEmail || !data.isValidNewEmail) {
+            toast({
+                message: 'Make sure all inputs are given with correct format!', toastStyles: { bg: '#FFF', borderRadius: 2 },
+                color: '#0A0A0A', iconColor: '#FF3131', iconFamily: 'Entypo', iconName: 'circle-with-cross',
+                closeButtonStyles: { px: 4, bg: 'darkgrey', borderRadius: 0 },
+                closeIconColor: 'white', hideAccent: true
+            })
+        }
+        else {
             toast({ message: 'Emails changed Successfully!' })
         }
     }
@@ -299,7 +307,8 @@ const styles = StyleSheet.create({
         fontStyle: 'italic',
         padding: 6,
         borderBottomWidth: 1,
-        borderColor: "grey"
+        borderColor: "grey",
+        fontSize: 16
     },
 
     email: {
@@ -312,7 +321,8 @@ const styles = StyleSheet.create({
         fontStyle: 'italic',
         padding: 6,
         borderBottomWidth: 1,
-        borderColor: "grey"
+        borderColor: "grey",
+        fontSize: 16
     },
 
     newEmail: {
@@ -325,7 +335,8 @@ const styles = StyleSheet.create({
         fontStyle: 'italic',
         padding: 6,
         borderBottomWidth: 1,
-        borderColor: "grey"
+        borderColor: "grey",
+        fontSize: 16
     },
 
     submitButton: {
