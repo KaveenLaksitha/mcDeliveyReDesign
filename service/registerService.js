@@ -15,17 +15,17 @@ export const addRegister = async (payload) => {
     }
 }
 
-// //for retrive the all records
-// export const getEmailPassword = async () => {
-//     try {
-//         const response = await axios.get(`${HOST}/register/get/:email/:pass`);
-//         return {
-//             ok: true,
-//             data: response.data.data,
-//         };
-//     } catch (error) {
-//         return {
-//             ok: false,
-//         };
-//     }
-// };
+//for retrive the all records
+export const getEmailPassword = async () => {
+    try {
+        const response = await axios.get(`${HOST}/register/get/:email/:pass`);
+        return {
+            ok: true,
+            data: response.data.data,
+        };
+    } catch (error) {
+        return {
+            ok: false,
+        };
+    }
+};
