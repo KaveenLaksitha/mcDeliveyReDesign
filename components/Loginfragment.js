@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, SafeAreaView, Button, Image, SafeAreaViewBase, 
 import Login from './Login';
 import NewUser from './NewUser';
 
-var cindex = 1;
+var cindex = 0;
 
 function Loginfragment() {
 

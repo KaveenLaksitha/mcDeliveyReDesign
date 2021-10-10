@@ -4,17 +4,62 @@ import HandIcon from 'react-native-vector-icons/FontAwesome5'
 import VisaIcon from 'react-native-vector-icons/Fontisto'
 
 import { RadioButton } from 'react-native-paper';
+import { useToast } from 'react-native-styled-toast'
 
-let index = 0;
+let index = 1;
 
 const setBorderColor = (choice) => {
     index = choice;
 }
 
-function CheckoutTK({ navigation }) {
+function CheckoutTK({ navigation, route }) {
 
     const [checked, setChecked] = useState('first');
-    // const [index, setIndex] = useState(0);
+    const [input, setInput] = useState("")
+    const [address, setAddress] = useState("")
+
+    const { toast } = useToast()
+
+    function calculateDiscount() {
+
+        if (input.length > 0) {
+            // setDiscount(300)
+            console.log("input", input.length);
+        } else {
+            toast({
+                message: 'promo code can\'t be empty!',
+                toastStyles: {
+                    borderColor: '#FF3131',
+                },
+                iconFamily: 'Entypo',
+                iconName: 'info',
+                iconColor: 'red',
+                hideAccent: true,
+                hideCloseIcon: true
+            })
+            // Alert.alert("please enter something")
+        }
+    }
+
+
+    const sendData = () => {
+        if(address == ""){
+            toast({
+                message: 'Branch address can\'t be empty!',
+                toastStyles: {
+                    borderColor: '#FF3131',
+                },
+                iconFamily: 'Entypo',
+                iconName: 'info',
+                iconColor: 'red',
+                hideAccent: true,
+                hideCloseIcon: true
+            })
+
+        }else{
+            navigation.navigate('ThankYouTK');
+        }
+    }
 
     return (
         <SafeAreaView>
@@ -40,7 +85,7 @@ function CheckoutTK({ navigation }) {
                 <View style={[styles.listItem, styles.elevation, { borderColor: index === 2 ? '#F79E1B' : 'white' }]}>
                     <View style={styles.horizontal}>
                         <HandIcon name="hand-holding-usd" color='#F79E18' size={40} />
-                        <View style={{ marginLeft: 30, marginRight: 90 }}>
+                        <View style={{ marginLeft: 30, marginRight: 120 }}>
                             <Text style={styles.text}>Pay at Outlet</Text>
 
                         </View>
@@ -54,12 +99,14 @@ function CheckoutTK({ navigation }) {
                     </View>
                 </View>
 
-                <Text style={styles.header2}>Delivery Address</Text>
+                <Text style={styles.header2}>Select the outlet</Text>
 
                 <View style={[styles.listItemAddress, styles.elevation]}>
                     <View style={styles.horizontal}>
                         <View style={{ marginRight: 25 }}>
-                            <Text style={styles.text}>McDonald's Kollupitiya</Text>
+                            <TextInput style={styles.text} placeholder="McDonald's Kollupitiya"
+                            onChangeText={(e) => {setAddress(e)}}
+                            ></TextInput>
                         </View>
                         <Text style={{ fontSize: 18, color: '#7E7E7E', marginTop: 0, marginLeft: 90 }}>Edit</Text>
                     </View>
@@ -69,10 +116,10 @@ function CheckoutTK({ navigation }) {
                 <View style={styles.horizontal}>
                     <View style={[styles.promoInput, styles.elevation]}>
                         <TextInput style={styles.text}
-                            placeholder="Code" />
+                            placeholder="Code" onChangeText={(e) => { setInput(e) }} />
                     </View>
 
-                    <TouchableHighlight>
+                    <TouchableHighlight underlayColor='none' onPress={() => calculateDiscount()}>
                         <View style={[styles.buttonEnter, styles.elevation]}>
                             <Text style={{ fontSize: 17, fontWeight: 'bold', color: 'black' }}>Enter</Text>
                         </View>
@@ -85,7 +132,7 @@ function CheckoutTK({ navigation }) {
                         Items
                     </Text>
                     <Text style={styles.textRight}>
-                        Rs.3000.00
+                    Rs.{route.params.price}.00
                     </Text>
                 </View>
                 <View style={styles.horizontal}>
@@ -93,10 +140,10 @@ function CheckoutTK({ navigation }) {
                         Total cost
                     </Text>
                     <Text style={[styles.textRight, { fontWeight: 'bold' }]}>
-                        Rs.3300.00
+                    Rs.{route.params.price}.00
                     </Text>
                 </View>
-                <TouchableHighlight underlayColor='none' onPress={() => navigation.navigate("ThankYouTK")}>
+                <TouchableHighlight underlayColor='none' onPress={sendData}>
                     <View style={[styles.buttonConfirm, styles.elevation]}>
                         <Text style={{ fontSize: 20, color: 'white' }}>Place Order</Text>
                         <HandIcon name="arrow-right" color='white' size={20} style={{ marginLeft: 30 }} />

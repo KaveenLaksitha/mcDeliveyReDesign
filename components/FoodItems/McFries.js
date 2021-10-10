@@ -78,7 +78,7 @@ export default function SingleFoodItem({ navigation, route }) {
         const payload = {
             name, num, calculatedPrice
         }
-        // addToCart(payload)
+        addToCart(payload)
         showToast();
     }
 
