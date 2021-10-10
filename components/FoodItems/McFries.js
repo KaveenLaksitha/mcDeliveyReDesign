@@ -7,11 +7,14 @@ import { Picker } from '@react-native-picker/picker';
 import { useToast } from 'react-native-styled-toast'
 import { addToCart } from '../../service/cartService';
 import { addToFav } from "../../service/favService";
+import { set } from 'react-native-reanimated';
+
+
 
 let count = 0;
 export default function SingleFoodItem({ navigation, route }) {
 
-    const [image, setImage] = useState();
+    const [image, setImage] = useState(null);
     const [name, setName] = useState("");
     const [price, setPrice] = useState("");
     const [index, setIndex] = useState(0);
@@ -27,6 +30,7 @@ export default function SingleFoodItem({ navigation, route }) {
         setName(route.params.name);
         setImage(route.params.img);
         setPrice(route.params.price);
+
 
     }, [route.params])
 
@@ -60,6 +64,7 @@ export default function SingleFoodItem({ navigation, route }) {
         count++;
         if (count === 1) {
             addToFavaourite()
+
         }
 
         if (count % 2 == 1) {
@@ -82,17 +87,27 @@ export default function SingleFoodItem({ navigation, route }) {
         showToast();
     }
 
+
+    const showToastFav = () => {
+        toast({ message: 'Added To Your Favourites 👌✌!' })
+
+
+    };
+
     function addToFavaourite() {
         const payload = {
             name, num, price, image
         }
+
         addToFav(payload)
+        showToastFav();
     }
 
 
     return (
 
         <View style={{ flex: 1 }}>
+
 
             <View style={styles.image} >
 
@@ -144,6 +159,7 @@ export default function SingleFoodItem({ navigation, route }) {
                     onPress={() => { addToItemCart() }}
                 >
                     <View style={[styles.buttonRed, styles.elevation]}>
+
                         <Text style={{ fontSize: 18, color: 'white' }}>Add to Cart - Rs.{calculatedPrice}.00</Text>
                     </View>
                 </TouchableHighlight>

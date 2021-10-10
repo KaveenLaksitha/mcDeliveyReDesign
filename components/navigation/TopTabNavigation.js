@@ -52,9 +52,9 @@ function TopTabNavigation({ route }) {
             }}
         >
 
-            <TopTab.Screen name="AlaCarte" component={AlaCarte} />
+            <TopTab.Screen name="AlaCarte" component={AlaCarte} options={{ headerTitleAlign: 'center' }, { title: 'AlaCarte & Value Meals' }} />
             <TopTab.Screen name="Desserts" component={Desserts} />
-            <TopTab.Screen name="Salads" component={Salads} />
+            <TopTab.Screen name="Salads" component={Salads} options={{ headerTitleAlign: 'center' }, { title: 'Snacks/Slides' }} />
             <TopTab.Screen name="Beverages" component={Beverages} />
             <TopTab.Screen name="HappyMeals" component={HappyMeals} />
             <TopTab.Screen name="Promotions & Bundle Meals" component={BundleMeals} />

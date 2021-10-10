@@ -12,11 +12,11 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 function NewCard({ navigation }) {
 
     const [cardType, onChangeCardType] = useState("Visa");
-    const [cardNumber, onChangeCardNumber] = useState();
+    const [cardNumber, onChangeCardNumber] = useState(" ");
     const [dcardNumber, onChangeDCardNumber] = useState();
-    const [nameOnCard, onChangeNameOnCard] = useState();
+    const [nameOnCard, onChangeNameOnCard] = useState(" ");
     const [dnameOnCard, onChangeDNameOnCard] = useState();
-    const [ExpiryDate, onChangeExpiryDate] = useState();
+    const [ExpiryDate, onChangeExpiryDate] = useState(" ");
     const [dExpiryDate, onChangeDExpiryDate] = useState();
     const [isActive1, setActive1] = useState(false);
     const [isActive2, setActive2] = useState(false);
@@ -163,17 +163,44 @@ function NewCard({ navigation }) {
 
     };
 
-
-    const showNegativeToast = () => {
-        toast({ message: 'Card could not be Saved!' })
-
-    };
-
     const saveCard = () => {
         console.log("cardUri", uri);
         console.log(cardType + nameOnCard + cardNumber + ExpiryDate)
-        if (cardType === " " || nameOnCard === " " || cardNumber === " " || ExpiryDate === " " || uri === " ") {
-            ToastAndroid.show("Please fill all the fields before submitting", ToastAndroid.SHORT)
+        if (cardType === " " && nameOnCard === " " && cardNumber === " " && ExpiryDate === " " && uri === " ") {
+            toast({
+                message: 'Please fill all the fields before submitting!', toastStyles: { bg: '#FFF', borderRadius: 2 },
+                color: '#0A0A0A', iconColor: '#FF3131', iconFamily: 'Entypo', iconName: 'circle-with-cross',
+                closeButtonStyles: { px: 4, bg: 'darkgrey', borderRadius: 0 },
+                closeIconColor: 'white', hideAccent: true
+            })
+        } else if (cardType === " ") {
+            toast({
+                message: 'Please choose a card type!', toastStyles: { bg: '#FFF', borderRadius: 2 },
+                color: '#0A0A0A', iconColor: '#FF3131', iconFamily: 'Entypo', iconName: 'circle-with-cross',
+                closeButtonStyles: { px: 4, bg: 'darkgrey', borderRadius: 0 },
+                closeIconColor: 'white', hideAccent: true
+            })
+        } else if (cardNumber === " ") {
+            toast({
+                message: 'Please insert card number!', toastStyles: { bg: '#FFF', borderRadius: 2 },
+                color: '#0A0A0A', iconColor: '#FF3131', iconFamily: 'Entypo', iconName: 'circle-with-cross',
+                closeButtonStyles: { px: 4, bg: 'darkgrey', borderRadius: 0 },
+                closeIconColor: 'white', hideAccent: true
+            })
+        } else if (nameOnCard === " ") {
+            toast({
+                message: 'Please enter name on Card!', toastStyles: { bg: '#FFF', borderRadius: 2 },
+                color: '#0A0A0A', iconColor: '#FF3131', iconFamily: 'Entypo', iconName: 'circle-with-cross',
+                closeButtonStyles: { px: 4, bg: 'darkgrey', borderRadius: 0 },
+                closeIconColor: 'white', hideAccent: true
+            })
+        } else if (ExpiryDate === " ") {
+            toast({
+                message: 'Please add expiring date!', toastStyles: { bg: '#FFF', borderRadius: 2 },
+                color: '#0A0A0A', iconColor: '#FF3131', iconFamily: 'Entypo', iconName: 'circle-with-cross',
+                closeButtonStyles: { px: 4, bg: 'darkgrey', borderRadius: 0 },
+                closeIconColor: 'white', hideAccent: true
+            })
         } else {
 
             const newCard = {
@@ -196,7 +223,12 @@ function NewCard({ navigation }) {
                 }
 
             }).catch((err) => {
-                showNegativeToast()
+                toast({
+                    message: 'Card could not be saved!', toastStyles: { bg: '#FFF', borderRadius: 2 },
+                    color: '#0A0A0A', iconColor: '#FF3131', iconFamily: 'Entypo', iconName: 'circle-with-cross',
+                    closeButtonStyles: { px: 4, bg: 'darkgrey', borderRadius: 0 },
+                    closeIconColor: 'white', hideAccent: true
+                })
             })
         }
     }
@@ -446,7 +478,8 @@ const styles = StyleSheet.create({
         marginTop: 140,
         marginLeft: 275,
         fontSize: 14,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        color: "black",
     },
     textValue: {
         marginTop: 8,
