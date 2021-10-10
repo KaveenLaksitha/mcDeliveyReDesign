@@ -89,7 +89,7 @@ export default function SingleFoodItem({ navigation, route }) {
 
 
     const showToastFav = () => {
-        toast({ message: 'Added To Your Favourites!' })
+        toast({ message: 'Added To Your Favourites ✌👌!' })
 
 
     };
