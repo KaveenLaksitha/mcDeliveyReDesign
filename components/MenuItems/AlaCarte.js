@@ -10,7 +10,7 @@ function AlaCarte({ navigation }) {
 
     const [FoodData, setData] = useState([]);
 
-    const [img, setImg] = useState('');
+    const [img, setImg] = useState(null);
     const [name, setName] = useState('');
     const [price, setPrice] = useState('');
     const [state, setState] = useState('');

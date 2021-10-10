@@ -62,7 +62,7 @@ export default function FoodMenu({ navigation }) {
               <Image style={styles.img1} source={{ uri: "https://i.ibb.co/4R9ZLcx/mak-tpai-Poi-AMMU-unsplash.jpg" }}>
 
               </Image>
-              <Text style={styles.textcat3} >SALADS</Text>
+              <Text style={styles.textcat3} >SNACKS/SIDES</Text>
 
 
             </View>
@@ -101,7 +101,7 @@ export default function FoodMenu({ navigation }) {
 
             <View style={styles.cat1}>
 
-              <Image style={styles.img1} source={{ uri: "https://i.ibb.co/MspD0M5/natalie-toombs-Kw-Ca-IGKdlps-unsplash.jpg" }}>
+              <Image style={[styles.img1, styles.grad]} source={{ uri: "https://i.ibb.co/MspD0M5/natalie-toombs-Kw-Ca-IGKdlps-unsplash.jpg" }}>
 
               </Image>
               <Text style={styles.textcat3} >BEVERAGES</Text>
@@ -127,7 +127,7 @@ export default function FoodMenu({ navigation }) {
               <Image style={styles.img1} source={{ uri: "https://i.ibb.co/7Jb39z5/brett-jordan-zee1ge-Zy6-H0-unsplash.jpg" }}>
 
               </Image>
-              <Text style={styles.textcat4} > HAPPY MEALS </Text>
+              <Text style={[styles.textcat4, styles.elevation]} > HAPPY MEALS </Text>
 
             </View>
           </TouchableHighlight>
@@ -244,6 +244,7 @@ const styles = StyleSheet.create({
     // marginTop: 2,
     // marginRight: 5,
     // marginLeft: 5,
+
     width: 190,
     height: 140,
     borderRadius: 10,
@@ -252,7 +253,14 @@ const styles = StyleSheet.create({
     // borderRadius: 10,
   },
 
+  grad: {
+    backgroundColor: 'black',
+  },
+
   textcat1: {
+    textShadowColor: 'rgba(0, 0, 0, 1)',
+    textShadowOffset: { width: -1, height: 1 },
+    textShadowRadius: 10,
 
     marginTop: -90,
     textAlign: "center",
@@ -263,6 +271,10 @@ const styles = StyleSheet.create({
 
   textcat2: {
 
+    textShadowColor: 'rgba(0, 0, 0, 1)',
+    textShadowOffset: { width: -1, height: 1 },
+    textShadowRadius: 10,
+
     marginTop: 0,
     textAlign: "center",
     color: "white",
@@ -271,6 +283,9 @@ const styles = StyleSheet.create({
   },
 
   textcat3: {
+    textShadowColor: 'rgba(0, 0, 0, 1)',
+    textShadowOffset: { width: -1, height: 1 },
+    textShadowRadius: 10,
     marginTop: -80,
     textAlign: "center",
     color: "white",
@@ -279,12 +294,16 @@ const styles = StyleSheet.create({
   },
 
   textcat4: {
+    textShadowColor: 'rgba(0, 0, 0, 1)',
+    textShadowOffset: { width: -1, height: 1 },
+    textShadowRadius: 10,
     marginTop: -80,
     // marginLeft:25,
     textAlign: "center",
     color: "white",
     fontWeight: "bold",
     fontSize: 18,
+
   },
 
 
@@ -305,6 +324,10 @@ const styles = StyleSheet.create({
     marginLeft: 5,
 
 
+  },
+  elevation: {
+    shadowColor: "#52006A",
+    elevation: 5,
   },
 });
 
