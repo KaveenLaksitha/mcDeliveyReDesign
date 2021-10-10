@@ -473,7 +473,8 @@ const styles = StyleSheet.create({
         padding: 6,
         fontSize: 14,
         color: "black",
-        fontStyle: 'italic'
+        fontStyle: 'italic',
+        fontWeight: 'bold'
     },
 
 
@@ -527,7 +528,8 @@ const styles = StyleSheet.create({
         marginLeft: 35,
         fontSize: 14,
         color: "black",
-        fontStyle: 'italic'
+        fontStyle: 'italic',
+        fontWeight: 'bold'
     },
 
     inputs: {

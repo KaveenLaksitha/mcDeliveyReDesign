@@ -1,14 +1,18 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useState} from 'react';
+import { useToast } from 'react-native-styled-toast'
 import { StyleSheet, Text, View, SafeAreaView, ToastAndroid, Image, SafeAreaViewBase, Alert, TextInput , TouchableHighlight} from 'react-native';
 
 export default function ResetpasswordMobile({navigation}) {
 
   const [contactno, setContactno] = useState("");
+
+  const { toast } = useToast()
+
   function sendData(e){
   var phone = /^(?=.*\d).{10,}$/;
   if(phone.test(contactno)){
-        Alert.alert("Please verify your phone number!")
+        toast({ message: 'Please verify your phone number!' }) 
         navigation.navigate('Login');
   }else{
     ToastAndroid.show(
@@ -56,11 +60,11 @@ export default function ResetpasswordMobile({navigation}) {
                   onChangeText={(e) => {setContactno(e)}}
                   required
               ></TextInput>
-          <TouchableHighlight style={styles.submitbutton}
+          <TouchableHighlight style={styles.submitbutton} underlayColor='none'
              onPress={sendData}>
               <Text style={styles.submittext}>Submit</Text>
           </TouchableHighlight>
-          <TouchableHighlight style={styles.resetbutton}
+          <TouchableHighlight style={styles.resetbutton} underlayColor='none'
               onPress={() => navigation.navigate("Reset Password Using Email")}>
               <Text style={styles.resettext}>Reset Using  Email</Text>
           </TouchableHighlight>

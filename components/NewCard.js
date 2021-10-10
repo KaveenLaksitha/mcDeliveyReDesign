@@ -164,6 +164,7 @@ function NewCard({ navigation }) {
     };
 
     const saveCard = () => {
+        setShow(false)
         console.log("cardUri", uri);
         console.log(cardType + nameOnCard + cardNumber + ExpiryDate)
         if (cardType === " " && nameOnCard === " " && cardNumber === " " && ExpiryDate === " " && uri === " ") {
@@ -197,6 +198,13 @@ function NewCard({ navigation }) {
         } else if (ExpiryDate === " ") {
             toast({
                 message: 'Please add expiring date!', toastStyles: { bg: '#FFF', borderRadius: 2 },
+                color: '#0A0A0A', iconColor: '#FF3131', iconFamily: 'Entypo', iconName: 'circle-with-cross',
+                closeButtonStyles: { px: 4, bg: 'darkgrey', borderRadius: 0 },
+                closeIconColor: 'white', hideAccent: true
+            })
+        } else if (!data.isValidNumber || !data.isValidName) {
+            toast({
+                message: 'Please make sure you inserted data in correct format!', toastStyles: { bg: '#FFF', borderRadius: 2 },
                 color: '#0A0A0A', iconColor: '#FF3131', iconFamily: 'Entypo', iconName: 'circle-with-cross',
                 closeButtonStyles: { px: 4, bg: 'darkgrey', borderRadius: 0 },
                 closeIconColor: 'white', hideAccent: true
@@ -571,7 +579,8 @@ const styles = StyleSheet.create({
         marginLeft: 300,
         // backgroundColor: "blue",
         width: 40,
-        height: 40
+        height: 40,
+        color:"black"
     }
 
 });

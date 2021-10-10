@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 // import all the components we are going to use
 import Feather from 'react-native-vector-icons/FontAwesome5';
 import { SafeAreaView, Text, View, StyleSheet, TouchableHighlight, Alert, TextInput, ScrollView, TouchableOpacity } from 'react-native';
-
+import { useToast } from 'react-native-styled-toast'
 
 const SecurityPassword = () => {
 
@@ -16,6 +16,8 @@ const SecurityPassword = () => {
     const [isActive1, setActive1] = useState(false);
     const [isActive2, setActive2] = useState(false);
     const [isActive3, setActive3] = useState(false);
+
+    const { toast } = useToast()
 
     const [data, setData] = React.useState({
         currentPwd: '',
@@ -158,7 +160,22 @@ const SecurityPassword = () => {
 
     function checkPasswords() {
         if (newPwds === rePwd) {
-            Alert.alert("Passwords match")
+            toast({ message: 'Passwords Match and are successfully changed!' })
+        } else if (!data.isValidRpwd || !data.isValidNpwd || !data.isValidCpwd) {
+            toast({
+                message: 'Make sure all inputs are given with correct format!', toastStyles: { bg: '#FFF', borderRadius: 2 },
+                color: '#0A0A0A', iconColor: '#FF3131', iconFamily: 'Entypo', iconName: 'circle-with-cross',
+                closeButtonStyles: { px: 4, bg: 'darkgrey', borderRadius: 0 },
+                closeIconColor: 'white', hideAccent: true
+            })
+
+        } else {
+            toast({
+                message: 'Passwords did not Match so cannot proceed!', toastStyles: { bg: '#FFF', borderRadius: 2 },
+                color: '#0A0A0A', iconColor: '#FF3131', iconFamily: 'Entypo', iconName: 'circle-with-cross',
+                closeButtonStyles: { px: 4, bg: 'darkgrey', borderRadius: 0 },
+                closeIconColor: 'white', hideAccent: true
+            })
         }
     }
 

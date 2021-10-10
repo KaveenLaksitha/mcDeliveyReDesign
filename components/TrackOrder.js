@@ -1,7 +1,7 @@
 import React from 'react'
 import MapView from 'react-native-maps';
-import { StyleSheet, Text, View, Dimensions } from 'react-native';
-
+import { StyleSheet, Text, View, Dimensions, TouchableHighlight } from 'react-native';
+import * as Linking from 'expo-linking';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 function TrackOrder() {
@@ -22,12 +22,16 @@ function TrackOrder() {
                         <Icon name="delivery-dining" color='#FF3131' size={30} />
                     </View>
                     <Text style={{ marginRight: 30 }}><Text style={styles.text}>Delivery Person</Text>{"\n"}Est. Delivery Time : 20 mins</Text>
-                    <View style={styles.circleSmall}>
-                        <Icon name="call" color='#FF3131' size={20} />
-                    </View>
-                    <View style={styles.circleSmall}>
-                        <Icon name="message" color='#FF3131' size={20} />
-                    </View>
+                    <TouchableHighlight underlayColor='none' onPress={() => { Linking.openURL('tel: 123456 ') }}>
+                        <View style={styles.circleSmall}>
+                            <Icon name="call" color='#FF3131' size={20} />
+                        </View>
+                    </TouchableHighlight>
+                    <TouchableHighlight underlayColor='none' onPress={() => { Linking.openURL('sms: 123456 ') }}>
+                        <View style={styles.circleSmall}>
+                            <Icon name="message" color='#FF3131' size={20} />
+                        </View>
+                    </TouchableHighlight>
                 </View>
                 <View style={styles.vertical}>
                     <View style={styles.c01} />
@@ -92,8 +96,8 @@ const styles = StyleSheet.create({
         width: Dimensions.get('window').width,
         height: 350,
         paddingTop: 10,
-        paddingLeft: 30,
-        paddingRight: 30,
+        paddingLeft: 25,
+        paddingRight: 25,
     },
     horizontal: {
         flexDirection: "row",
@@ -106,7 +110,7 @@ const styles = StyleSheet.create({
         width: 'auto',
         borderRadius: 50,
         position: 'absolute',
-        marginLeft: 42,
+        marginLeft: 40,
         marginTop: 100
     },
     c01: {

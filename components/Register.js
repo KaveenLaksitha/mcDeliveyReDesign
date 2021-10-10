@@ -1,9 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useState} from 'react';
-import { StyleSheet, Text, View, SafeAreaView, ToastAndroid, ImageBackground, Alert, TextInput , TouchableHighlight, CheckBox} from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView,ScrollView, ToastAndroid, ImageBackground, Alert, TextInput , TouchableHighlight, CheckBox} from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import {addRegister} from '../service/registerService'
-//import DateTimePicker from 'react-native-modal-datetime-picker';
+import DatePicker from '@react-native-community/datetimepicker';
+import { useToast } from 'react-native-styled-toast'
+import Feather from 'react-native-vector-icons/FontAwesome5';
 
 
 export default function Register({navigation}) {
@@ -11,7 +13,7 @@ export default function Register({navigation}) {
   const [salutation, setSalutation] = useState("");
   const [name, setName] = useState("");
   const [contactno, setContactno] = useState("");
-  const [dateofbirth, setDateofbirth] = useState("");
+  const [dateofbirth, setDateofbirth] = useState();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmpassword, setConfirmPassword] = useState("");
@@ -20,33 +22,87 @@ export default function Register({navigation}) {
   const [isSelected, setSelection] = useState(false);
   const [isSelected2, setSelection2] = useState(false);
 
-  function sendData(e){
-    const newRegister = {
-      salutation,
-      name,
-      contactno,
-      dateofbirth,
-      email,
-      password,
-      confirmpassword
-    }
-    if(salutation != "" && name != "" && contactno != "" && dateofbirth != "" && email != "" && password != "" && confirmpassword != ""){
+  const [date, setDate] = useState(new Date(1598051730000));
+  const [mode, setMode] = useState('date');
+  const [show, setShow] = useState(false);
+
+  const { toast } = useToast();
+
+  const onChange = (event, selectedDate) => {
+        const currentDate = selectedDate || date;
+        setShow(Platform.OS === 'android');
+        setDate(currentDate);
+
+        let tempDate = new Date(currentDate);
+        let fDate =  (tempDate.getDate() + 1) + '/' + (tempDate.getMonth() + 1) + '/' + tempDate.getFullYear();
+        setDateofbirth(fDate);
+        console.log("date coming", fDate)
+
+    };
+
+     const showMode = (currentMode) => {
+        setShow(true);
+        setMode(currentMode);
+    };
+
+    const showDatepicker = () => {
+        showMode('date');
+    };
+
+
+  const sendData = () => {
+    console.log("date coming", dateofbirth)
+
+    if(salutation != "" && name != "" && contactno != "" && email != "" && password != "" && confirmpassword != ""){
+
       if(isSelected != "" && isSelected2 !=""){
+
         var phone = /^(?=.*\d).{10,}$/;
+
         if(phone.test(contactno)){
+
           if(password == confirmpassword){
+
             var passw = /^(?=.*\d)(?=.*[a-z]).{6,10}$/;
+
             if(password.length>5 && password.length<11 && passw.test(password) ){
+
               var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
               if(re.test(email)){
+
+                const newRegister = {
+                salutation,
+                name,
+                contactno,
+                dateofbirth,
+                email,
+                password,
+                confirmpassword
+                }
+
                 addRegister(newRegister).then((response) => {
+
                   console.log("email check",response)
+
                   if (response.ok) {
-                      Alert.alert("Welcom to MC Delivery Home Pag!")
-                      navigation.navigate('Home');
+                    
+                    toast({ message: 'Welcome to the MC delivery App !' })
+                   
+                   navigation.navigate('Home');
                   }
                   else {
-                      Alert.alert("User Already in this System")
+                    toast({
+                      message: 'User Already in this System',
+                      toastStyles: {
+                          borderColor: '#FF3131',
+                      },
+                      iconFamily: 'Entypo',
+                      iconName: 'info',
+                      iconColor: 'red',
+                      hideAccent: true,
+                      hideCloseIcon: true
+                  })
                   }
               })
           
@@ -73,7 +129,7 @@ export default function Register({navigation}) {
 
         }else{
           ToastAndroid.show(
-            'Invalid Phon Number', ToastAndroid.SHORT
+            'Invalid Phone Number', ToastAndroid.SHORT
           );
 
         }
@@ -95,7 +151,8 @@ export default function Register({navigation}) {
 
   return (
     <SafeAreaView style={styles.container}>
-    <StatusBar hidden/>  
+    <StatusBar hidden/> 
+    <ScrollView vertical={true}> 
      <View>
         <View style={styles.bodycontent}>
           <Text style={styles.salutationText}>Salutation</Text>
@@ -120,7 +177,33 @@ export default function Register({navigation}) {
           ></TextInput>
 
           <Text style={styles.dobText}>Date of Birth</Text>
-          <TextInput style={styles.dob} onChangeText={(e) => {setDateofbirth(e)}} required></TextInput>
+          <TextInput style={styles.dob} 
+          onChangeText={setDateofbirth}
+                                value={dateofbirth}
+                                //placeholder="2021/10/14"
+                                //keyboardType="decimal-pad"
+                                editable={false}
+                                // onFocus={() => setActive3(true)}
+                                // onBlur={() => setActive3(false)}
+                                onPress={showDatepicker}>
+          </TextInput>
+              <Feather style={styles.calender}
+                                name="calendar-day"
+                                color="#FF3133"
+                                size={20}
+                                onPress={showDatepicker}
+                            />
+
+                            {show && (
+                                <DatePicker
+                                    testID="dateTimePicker"
+                                    value={date}
+                                    mode={mode}
+                                    is24Hour={false}
+                                    display="default"
+                                    onChange={onChange}
+                                />
+                            )}
 
           <Text style={styles.emailText}>Email address</Text>
           <TextInput style={styles.email}
@@ -135,11 +218,6 @@ export default function Register({navigation}) {
              secureTextEntry={true} 
              maxLength={10}
              minLength= {6}
-            //  pattern = {[
-            //   '^.{8,10}$', // min 6 chars max 10
-            //   '(?=.*\\d)', // number required
-            //   '(?=.*[a-z])', // uppercase letter
-            // ]}
              onChangeText={(e) => {setPassword(e)}}
              required
           ></TextInput>
@@ -149,11 +227,6 @@ export default function Register({navigation}) {
              secureTextEntry={true} 
              maxLength={10}
              minLength= {6}
-            //  pattern = {[
-            //   '^.{8,10}$', // min 6 chars max 10
-            //   '(?=.*\\d)', // number required
-            //   '(?=.*[a-z])', // uppercase letter
-            // ]}
              onChangeText={(e) => {setConfirmPassword(e)}}
              required
           ></TextInput>
@@ -174,7 +247,7 @@ export default function Register({navigation}) {
           </View>
 
           <TouchableHighlight underlayColor='none' style={styles.resetbutton}
-              onPress={sendData}>
+              onPress={() => sendData()}>
               <Text style={styles.resettext}>Register</Text>
           </TouchableHighlight>        
         </View> 
@@ -184,7 +257,8 @@ export default function Register({navigation}) {
         }} style={styles.image}>
 
 </ImageBackground>
-     </View>           
+     </View>  
+      </ScrollView>         
     </SafeAreaView>
   );
 }
@@ -400,6 +474,14 @@ resetbutton: {
 
  underline2: {
    textDecorationLine: 'underline',
- }
+ },
+   calender: {
+        position: "absolute",
+        marginTop: 160,
+        marginLeft: 300,
+        // backgroundColor: "blue",
+        width: 40,
+        height: 40
+    }
 
 });
