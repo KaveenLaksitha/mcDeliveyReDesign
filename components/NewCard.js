@@ -579,7 +579,8 @@ const styles = StyleSheet.create({
         marginLeft: 300,
         // backgroundColor: "blue",
         width: 40,
-        height: 40
+        height: 40,
+        color:"black"
     }
 
 });

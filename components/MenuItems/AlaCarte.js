@@ -22,10 +22,10 @@ function AlaCarte({ navigation }) {
     const onRefresh = React.useCallback(() => {
         setRefreshing(true);
         wait(500).then(() => setRefreshing(false));
-        getAllFav().then((res) => {
+        getAllFood(1).then((res) => {
 
             if (res.ok) {
-                setFavData(res.data);
+                setData(res.data);
             }
         }).catch((err) => {
             alert("error", err);
