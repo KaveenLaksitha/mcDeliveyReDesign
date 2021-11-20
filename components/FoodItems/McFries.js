@@ -132,7 +132,7 @@ export default function SingleFoodItem({ navigation, route }) {
                         </View>
                     </TouchableOpacity>
                 </View>
-                <Text style={styles.des}>McDonald's World Famous Fries® We use specially selected potatoes to make our long and thin, Crispy French Fries. Made simple with sunflower oil and our unique crispy coating</Text>
+                <Text style={styles.des}>McDonald's ® We use specially selected ingrediebts to make Fresh Food Items To your door step. Made simple with sunflower oil and our unique crispy coating</Text>
                 <View style={[styles.picker, styles.elevation]}>
                     <Picker
                         selectedValue={selectedSize}
@@ -140,6 +140,7 @@ export default function SingleFoodItem({ navigation, route }) {
                             setSelectedSize(itemValue)
                         }>
                         <Picker.Item label="Regular" value="Regular" />
+                        <Picker.Item label="Medium" value="Large" />
                         <Picker.Item label="Large" value="Large" />
 
 
